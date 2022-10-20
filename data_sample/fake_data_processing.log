@@ -1,90 +1,448 @@
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|Current FME version: FME 2022.0.0.0 (20220428 - Build 22337 - WIN64)
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|FME_HOME is 'C:\app\FMEDesktop-22337-win-x64\'
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|FME Home Edition (node locked-crc)
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|Serial Number: 95KTTUJV9Q4KQUWWCDPV
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|Temporary License: 230 days left.
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|Machine host name is: ENACIT-B121422
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|OS Locale Name     : fr_CH
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|OS Locale Encoding : windows-1252
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|Process Encoding   : UTF-8
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|FME Configuration: FME_BASE is 'no'
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|FME Configuration: FME_MF_DIR is 'C:\projects\LASUR-rhytmic-mobility-habits\data_sample/'
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|FME Configuration: FME_MF_NAME is 'fake_data_processing.fmw'
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|FME Configuration: FME_PRODUCT_NAME is 'FME(R) 2022.0.0.0'
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|Operating System: Microsoft Windows 10 64-bit  (Build 19044)
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|FME Platform: WIN64
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|System Status: 28.56 GB of disk space available in the FME temporary folder (C:\Users\longcham\AppData\Local\Temp\wbrun_1663913258543_15340\fmetmp_1)
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|System Status: 31.73 GB of physical memory available
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|System Status: 126.90 GB of virtual memory available
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|START - ProcessID: 22440, peak process memory usage: 51244 kB, current process memory usage: 51236 kB
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|FME Configuration: Command line arguments are `C:\app\FMEDesktop-22337-win-x64\fme.exe' `C:/projects/LASUR-rhytmic-mobility-habits/data_sample\wb-xlate-1663913351292_15340' `LOG_STANDARDOUT' `YES' `LOG_TIMINGS' `YES' `LogCountServerName' `54759' `LOG_STANDARDOUT' `No' `WORKBENCH_LOG_SERVER' `54716'
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|FME Configuration: Connection Storage: 'C:\Users\longcham\AppData\Roaming\Safe Software\FME\'
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|Shared folders for formats are : C:\app\FMEDesktop-22337-win-x64\datasources;C:\Users\longcham\Documents\FME\Formats
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|Shared folders for transformers are : C:\Users\longcham\AppData\Roaming\Safe Software\FME\Packages\22337-win64\transformers;C:\app\FMEDesktop-22337-win-x64\transformers;C:\Users\longcham\AppData\Roaming\Safe Software\FME\FME Store\Transformers
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|Shared folders for coordinate systems are : C:\Users\longcham\Documents\FME\CoordinateSystems
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|Shared folders for coordinate system exceptions are : C:\Users\longcham\Documents\FME\CoordinateSystemExceptions
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|Shared folders for coordinate system grid overrides are : C:\Users\longcham\Documents\FME\CoordinateSystemGridOverrides
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|Shared folders for CS-MAP transformation exceptions are : C:\Users\longcham\Documents\FME\CsmapTransformationExceptions
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|Shared folders for transformer categories are : C:\Users\longcham\Documents\FME\TransformerCategories
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|FME Configuration: Reader Keyword is `MULTI_READER'
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|FME Configuration: Writer Keyword is `NULL_DEST'
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|FME Configuration: Writer Group Definition Keyword is `NULL_DEST_DEF'
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|FME Configuration: Reader type is `MULTI_READER'
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|FME Configuration: Writer type is `NULL'
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|FME Configuration: No destination coordinate system set
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|FME Configuration: Current working folder is `C:\projects\LASUR-rhytmic-mobility-habits\data_sample'
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|FME Configuration: Temporary folder is `C:\Users\longcham\AppData\Local\Temp\wbrun_1663913258543_15340\fmetmp_1', set from environment variable `FME_TEMP'
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|FME Configuration: Cache folder is 'C:\Users\longcham\AppData\Local\Temp'
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|FME Configuration: FME_HOME is `C:\app\FMEDesktop-22337-win-x64\'
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|FME Configuration: Start freeing memory when the process exceeds 95.18 GB
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|FME Configuration: Stop freeing memory when the process is below 71.38 GB
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|Creating writer for format: NULL (Nothing)
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|Trying to find a DYNAMIC plugin for writer named `NULL'
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|Loaded module 'NULL' from file 'C:\app\FMEDesktop-22337-win-x64\plugins/NULL.dll'
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|FME API version of module 'NULL' matches current internal version (4.0 20220317)
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|Creating reader for format: 
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|MULTI_READER(MULTI_READER): Will fail with first member reader failure
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|Using Multi Reader with keyword `MULTI_READER' to read multiple datasets
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|Loaded module 'LogCount_func' from file 'C:\app\FMEDesktop-22337-win-x64\plugins/LogCount_func.dll'
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|FME API version of module 'LogCount_func' matches current internal version (4.0 20220317)
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|Loaded module 'H3IndexerFactory' from file 'C:\app\FMEDesktop-22337-win-x64\plugins/H3IndexerFactory.dll'
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|FME API version of module 'H3IndexerFactory' matches current internal version (4.0 20220317)
-2022-09-23 08:09:12|   0.0|  0.0|INFORM|Emptying factory pipeline
-2022-09-23 08:09:12|   0.0|  0.0|STATS |Router and Unexpected Input Remover (RoutingFactory): Tested 0 input feature(s), wrote 0 output feature(s): 0 matched merge filters, 0 were routed to output, 0 could not be routed.
-2022-09-23 08:09:12|   0.0|  0.0|STATS |Unexpected Input Remover Nuker (TeeFactory): Cloned 0 input feature(s) into 0 output feature(s)
-2022-09-23 08:09:12|   0.0|  0.0|STATS |swissBOUNDARIES3D_1_3_TLM_HOHEITSGEBIET_SHAPEFILE_1 Splitter (TeeFactory): Cloned 0 input feature(s) into 0 output feature(s)
-2022-09-23 08:09:12|   0.0|  0.0|STATS |access_5th_amenity_GEOJSON_1 Splitter (TeeFactory): Cloned 0 input feature(s) into 0 output feature(s)
-2022-09-23 08:09:12|   0.0|  0.0|STATS |access_5th_transit_GEOJSON_2 Splitter (TeeFactory): Cloned 0 input feature(s) into 0 output feature(s)
-2022-09-23 08:09:12|   0.0|  0.0|STATS |Restoring 79403 feature(s) from FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-bGKjiJ\Main_Junction -1 24 fo 0 Output  0  cdcf5a7fc3e72d569129a5858d28b24eb05338f7.ffs'
-2022-09-23 08:09:12|   0.1|  0.1|STATS |Storing feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-bGKjiJ\Main_H3HexagonalIndexer -1 23 fo 0 OUTPUT  0  ad82feaeb4ae711687abcbf6d5aee0d334973831.ffsupdating'
-2022-09-23 08:09:14|   2.6|  2.5|INFORM|Junction_Output_-1_32_Player (RecorderFactory): Played back 79403 feature(s) from file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-bGKjiJ\Main_Junction -1 24 fo 0 Output  0  cdcf5a7fc3e72d569129a5858d28b24eb05338f7.ffs'
-2022-09-23 08:09:14|   2.6|  0.0|STATS |Stored 79403 feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-bGKjiJ\Main_H3HexagonalIndexer -1 23 fo 0 OUTPUT  0  ad82feaeb4ae711687abcbf6d5aee0d334973831.ffsupdating'
-2022-09-23 08:09:14|   2.6|  0.0|INFORM|Saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-bGKjiJ\Main_H3HexagonalIndexer -1 23 fo 0 OUTPUT  0  ad82feaeb4ae711687abcbf6d5aee0d334973831.fsi'
-2022-09-23 08:09:14|   2.6|  0.0|INFORM|Finished saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-bGKjiJ\Main_H3HexagonalIndexer -1 23 fo 0 OUTPUT  0  ad82feaeb4ae711687abcbf6d5aee0d334973831.fsi'
-2022-09-23 08:09:14|   2.6|  0.0|STATS |H3HexagonalIndexer_OUTPUT Feature Counter -1 2147614743 (TeeFactory): Cloned 79403 input feature(s) into 0 output feature(s)
-2022-09-23 08:09:14|   2.6|  0.0|STATS |H3HexagonalIndexer_<REJECTED> Feature Counter -1 2147680279 (TeeFactory): Cloned 0 input feature(s) into 0 output feature(s)
-2022-09-23 08:09:14|   2.6|  0.0|STATS |H3HexagonalIndexer_<Rejected> (TeeFactory): Cloned 0 input feature(s) into 0 output feature(s)
-2022-09-23 08:09:14|   2.6|  0.0|STATS |Destination Feature Type Routing Correlator (RoutingFactory): Tested 0 input feature(s), wrote 0 output feature(s): 0 matched merge filters, 0 were routed to output, 0 could not be routed.
-2022-09-23 08:09:14|   2.6|  0.0|STATS |Final Output Nuker (TeeFactory): Cloned 0 input feature(s) into 0 output feature(s)
-2022-09-23 08:09:14|   2.6|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-2022-09-23 08:09:14|   2.6|  0.0|STATS |                            Features Read Summary
-2022-09-23 08:09:14|   2.6|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-2022-09-23 08:09:14|   2.6|  0.0|STATS |==============================================================================
-2022-09-23 08:09:14|   2.6|  0.0|STATS |Total Features Read                                                          0
-2022-09-23 08:09:14|   2.6|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-2022-09-23 08:09:14|   2.6|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-2022-09-23 08:09:14|   2.6|  0.0|STATS |                           Features Written Summary
-2022-09-23 08:09:14|   2.6|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-2022-09-23 08:09:14|   2.6|  0.0|STATS |==============================================================================
-2022-09-23 08:09:14|   2.6|  0.0|STATS |Total Features Written                                                       0
-2022-09-23 08:09:14|   2.6|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-2022-09-23 08:09:14|   2.6|  0.0|WARN  |-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-
-2022-09-23 08:09:14|   2.6|  0.0|WARN  |-~                                                                             ~-
-2022-09-23 08:09:14|   2.6|  0.0|WARN  |-~    Feature caches have been recorded at every stage of the translation.     ~-
-2022-09-23 08:09:14|   2.6|  0.0|WARN  |-~                      To inspect the recorded features,                      ~-
-2022-09-23 08:09:14|   2.6|  0.0|WARN  |-~              click the feature cache icons next to the ports.               ~-
-2022-09-23 08:09:14|   2.6|  0.0|WARN  |-~                                                                             ~-
-2022-09-23 08:09:14|   2.6|  0.0|WARN  |-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-
-2022-09-23 08:09:14|   2.6|  0.0|INFORM|Translation was SUCCESSFUL with 7 warning(s) (0 feature(s) output)
-2022-09-23 08:09:14|   2.6|  0.0|INFORM|FME Session Duration: 2.8 seconds. (CPU: 2.3s user, 0.3s system)
-2022-09-23 08:09:14|   2.6|  0.0|INFORM|END - ProcessID: 22440, peak process memory usage: 104516 kB, current process memory usage: 101628 kB
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|Current FME version: FME 2022.0.0.0 (20220428 - Build 22337 - WIN64)
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|FME_HOME is 'C:\app\FMEDesktop-22337-win-x64\'
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|FME Home Edition (node locked-crc)
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|Serial Number: 95KTTUJV9Q4KQUWWCDPV
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|Temporary License: 203 days left.
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|Machine host name is: ENACIT-B121422
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|OS Locale Name     : fr_CH
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|OS Locale Encoding : windows-1252
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|Process Encoding   : UTF-8
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|FME Configuration: FME_BASE is 'no'
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|FME Configuration: FME_MF_DIR is 'C:\projects\LASUR-rhytmic-mobility-habits\data_sample/'
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|FME Configuration: FME_MF_NAME is 'fake_data_processing.fmw'
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|FME Configuration: FME_PRODUCT_NAME is 'FME(R) 2022.0.0.0'
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|Operating System: Microsoft Windows 10 64-bit  (Build 19044)
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|FME Platform: WIN64
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|System Status: 28.05 GB of disk space available in the FME temporary folder (C:\Users\longcham\AppData\Local\Temp\wbrun_1666254897592_12384\fmetmp_9)
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|System Status: 31.73 GB of physical memory available
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|System Status: 126.90 GB of virtual memory available
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|START - ProcessID: 4988, peak process memory usage: 52264 kB, current process memory usage: 52264 kB
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|FME Configuration: Command line arguments are `C:\app\FMEDesktop-22337-win-x64\fme.exe' `C:/projects/LASUR-rhytmic-mobility-habits/data_sample\wb-xlate-1666255689089_12384' `LOG_STANDARDOUT' `YES' `LOG_TIMINGS' `YES' `LogCountServerName' `63260' `LOG_STANDARDOUT' `No' `WORKBENCH_LOG_SERVER' `63258'
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|FME Configuration: Connection Storage: 'C:\Users\longcham\AppData\Roaming\Safe Software\FME\'
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|Shared folders for formats are : C:\app\FMEDesktop-22337-win-x64\datasources;C:\Users\longcham\Documents\FME\Formats
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|Shared folders for transformers are : C:\Users\longcham\AppData\Roaming\Safe Software\FME\Packages\22337-win64\transformers;C:\app\FMEDesktop-22337-win-x64\transformers;C:\Users\longcham\AppData\Roaming\Safe Software\FME\FME Store\Transformers
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|Shared folders for coordinate systems are : C:\Users\longcham\Documents\FME\CoordinateSystems
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|Shared folders for coordinate system exceptions are : C:\Users\longcham\Documents\FME\CoordinateSystemExceptions
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|Shared folders for coordinate system grid overrides are : C:\Users\longcham\Documents\FME\CoordinateSystemGridOverrides
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|Shared folders for CS-MAP transformation exceptions are : C:\Users\longcham\Documents\FME\CsmapTransformationExceptions
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|Shared folders for transformer categories are : C:\Users\longcham\Documents\FME\TransformerCategories
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|FME Configuration: Reader Keyword is `MULTI_READER'
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|FME Configuration: Writer Keyword is `NULL_DEST'
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|FME Configuration: Writer Group Definition Keyword is `NULL_DEST_DEF'
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|FME Configuration: Reader type is `MULTI_READER'
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|FME Configuration: Writer type is `NULL'
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|FME Configuration: No destination coordinate system set
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|FME Configuration: Current working folder is `C:\projects\LASUR-rhytmic-mobility-habits\data_sample'
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|FME Configuration: Temporary folder is `C:\Users\longcham\AppData\Local\Temp\wbrun_1666254897592_12384\fmetmp_9', set from environment variable `FME_TEMP'
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|FME Configuration: Cache folder is 'C:\Users\longcham\AppData\Local\Temp'
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|FME Configuration: FME_HOME is `C:\app\FMEDesktop-22337-win-x64\'
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|FME Configuration: Start freeing memory when the process exceeds 95.18 GB
+2022-10-20 10:48:10|   0.0|  0.0|INFORM|FME Configuration: Stop freeing memory when the process is below 71.38 GB
+2022-10-20 10:48:10|   0.1|  0.1|INFORM|Creating writer for format: NULL (Nothing)
+2022-10-20 10:48:10|   0.1|  0.0|INFORM|Trying to find a DYNAMIC plugin for writer named `NULL'
+2022-10-20 10:48:10|   0.1|  0.0|INFORM|Loaded module 'NULL' from file 'C:\app\FMEDesktop-22337-win-x64\plugins/NULL.dll'
+2022-10-20 10:48:10|   0.1|  0.0|INFORM|FME API version of module 'NULL' matches current internal version (4.0 20220317)
+2022-10-20 10:48:10|   0.1|  0.0|INFORM|Creating reader for format: 
+2022-10-20 10:48:10|   0.1|  0.0|INFORM|MULTI_READER(MULTI_READER): Will fail with first member reader failure
+2022-10-20 10:48:10|   0.1|  0.0|INFORM|Using Multi Reader with keyword `MULTI_READER' to read multiple datasets
+2022-10-20 10:48:10|   0.1|  0.0|INFORM|Loaded module 'LogCount_func' from file 'C:\app\FMEDesktop-22337-win-x64\plugins/LogCount_func.dll'
+2022-10-20 10:48:10|   0.1|  0.0|INFORM|FME API version of module 'LogCount_func' matches current internal version (4.0 20220317)
+2022-10-20 10:48:10|   0.1|  0.0|INFORM|Loaded module 'CounterFactory' from file 'C:\app\FMEDesktop-22337-win-x64\plugins/CounterFactory.dll'
+2022-10-20 10:48:10|   0.1|  0.0|INFORM|FME API version of module 'CounterFactory' matches current internal version (4.0 20220317)
+2022-10-20 10:48:10|   0.1|  0.0|INFORM|Emptying factory pipeline
+2022-10-20 10:48:10|   0.1|  0.0|STATS |Router and Unexpected Input Remover (RoutingFactory): Tested 0 input feature(s), wrote 0 output feature(s): 0 matched merge filters, 0 were routed to output, 0 could not be routed.
+2022-10-20 10:48:10|   0.1|  0.0|STATS |Unexpected Input Remover Nuker (TeeFactory): Cloned 0 input feature(s) into 0 output feature(s)
+2022-10-20 10:48:10|   0.1|  0.0|STATS |access_5th_amenity_GEOJSON_1 Splitter (TeeFactory): Cloned 0 input feature(s) into 0 output feature(s)
+2022-10-20 10:48:10|   0.1|  0.0|STATS |access_5th_amenity_GEOJSON_1 Feature Counter -1 54 (TeeFactory): Cloned 0 input feature(s) into 0 output feature(s)
+2022-10-20 10:48:10|   0.1|  0.0|STATS |access_5th_transit_GEOJSON_2 Splitter (TeeFactory): Cloned 0 input feature(s) into 0 output feature(s)
+2022-10-20 10:48:10|   0.1|  0.0|STATS |swissBOUNDARIES3D_1_3_TLM_HOHEITSGEBIET_SHAPEFILE_1 Splitter (TeeFactory): Cloned 0 input feature(s) into 0 output feature(s)
+2022-10-20 10:48:10|   0.1|  0.0|STATS |Restoring 475 feature(s) from FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_access_5th_transit -1 20 -1  0  02febd825d7acf3cbc88f308ee27a22c244846a4.ffs'
+2022-10-20 10:48:10|   0.1|  0.0|STATS |Storing feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_AttributeRenamer_2 -1 57 fo 0 OUTPUT  0  0c2cbcdb5184ccb2660149c049ef2fa70160dfb6.ffsupdating'
+2022-10-20 10:48:10|   0.2|  0.1|STATS |Restoring 78928 feature(s) from FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_RandomNumberGenerator -1 12 fo 0 OUTPUT  0  da8e585312d10df076eb1d30348acbb3cdb1d301.ffs'
+2022-10-20 10:48:10|   0.2|  0.0|STATS |Storing feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_RandomNumberGenerator_2 -1 14 fo 0 OUTPUT  1  c3fcf0f7aa679b110b854735d8b505b58e425414.ffsupdating'
+2022-10-20 10:48:10|   0.3|  0.1|STATS |Restoring 475 feature(s) from FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_access_5th_amenity -1 5 -1  0  11a0adb562f1a34bc658e3564a06a2f4825e725a.ffs'
+2022-10-20 10:48:10|   0.3|  0.0|STATS |Storing feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_AttributeRenamer -1 53 fo 0 OUTPUT  0  d21f746f0c940efe2d35c3ab6458a7053ffede4a.ffsupdating'
+2022-10-20 10:48:10|   0.3|  0.0|STATS |Storing feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_Junction -1 24 fo 0 Output  0  cc61fa139130d50df0833778d6e2c3ef3d1d5836.ffsupdating'
+2022-10-20 10:48:10|   0.3|  0.0|STATS |Storing feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_Counter -1 33 fo 0 OUTPUT  0  de51228d83f70db6cec790f68305382bada8b6df.ffsupdating'
+2022-10-20 10:48:10|   0.3|  0.0|INFORM|Creating writer for format: 
+2022-10-20 10:48:10|   0.3|  0.0|INFORM|Using MultiWriter with keyword `FeatureWriter_6' to output data (ID_ATTRIBUTE is `multi_writer_id')
+2022-10-20 10:48:10|   0.3|  0.0|INFORM|MULTI_WRITER: Output will be zipped
+2022-10-20 10:48:10|   0.3|  0.0|INFORM|Creating writer for format: TopoJSON (Topology JavaScript Object Notation)
+2022-10-20 10:48:10|   0.3|  0.0|INFORM|Trying to find a DYNAMIC plugin for writer named `TOPOJSON'
+2022-10-20 10:48:10|   0.3|  0.0|INFORM|Loaded module 'TOPOJSON' from file 'C:\app\FMEDesktop-22337-win-x64\plugins/TOPOJSON.dll'
+2022-10-20 10:48:10|   0.3|  0.0|INFORM|FME API version of module 'TOPOJSON' matches current internal version (4.0 20220317)
+2022-10-20 10:48:10|   0.3|  0.0|INFORM|FME Configuration: No destination coordinate system set
+2022-10-20 10:48:10|   0.3|  0.0|INFORM|Writer `FeatureWriter_6_0' of type `TOPOJSON' using group definition keyword `FeatureWriter_6_0_DEF'
+2022-10-20 10:48:10|   0.3|  0.0|INFORM|FME Configuration: Destination coordinate system set to input coordinate system `LL84'
+2022-10-20 10:48:10|   0.3|  0.0|INFORM|TopoJSON Writer: Opening the TOPOJSON writer with destination dataset 'C:\Users\longcham\AppData\Local\Temp\wbrun_1666254897592_12384\fmetmp_9\_auto_zip_dataset_1666255690751_4988\access_5th_amenity_fake_data_switzerland.topojson'
+2022-10-20 10:48:10|   0.3|  0.0|INFORM|FME Configuration: Using FME Reprojection Engine
+2022-10-20 10:48:10|   0.4|  0.1|INFORM|Creating writer for format: 
+2022-10-20 10:48:10|   0.4|  0.0|INFORM|Using MultiWriter with keyword `FeatureWriter_5' to output data (ID_ATTRIBUTE is `multi_writer_id')
+2022-10-20 10:48:10|   0.4|  0.0|INFORM|MULTI_WRITER: Output will be zipped
+2022-10-20 10:48:10|   0.4|  0.0|INFORM|Creating writer for format: GeoJSON (Geographic JavaScript Object Notation)
+2022-10-20 10:48:10|   0.4|  0.0|INFORM|Trying to find a DYNAMIC plugin for writer named `GEOJSON'
+2022-10-20 10:48:10|   0.4|  0.0|INFORM|Loaded module 'GEOJSON' from file 'C:\app\FMEDesktop-22337-win-x64\plugins/JSON.dll'
+2022-10-20 10:48:10|   0.4|  0.0|INFORM|FME API version of module 'JSON' matches current internal version (4.0 20220317)
+2022-10-20 10:48:10|   0.4|  0.0|INFORM|FME Configuration: No destination coordinate system set
+2022-10-20 10:48:10|   0.4|  0.0|INFORM|Writer `FeatureWriter_5_0' of type `GEOJSON' using group definition keyword `FeatureWriter_5_0_DEF'
+2022-10-20 10:48:10|   0.4|  0.0|INFORM|GeoJSON Writer: All features not in WGS84 will be reprojected to WGS84
+2022-10-20 10:48:10|   0.4|  0.0|INFORM|Opening the GEOJSON writer with destination dataset 'C:\Users\longcham\AppData\Local\Temp\wbrun_1666254897592_12384\fmetmp_9\_auto_zip_dataset_1666255690787_4988\access_5th_amenity_fake_data_switzerland.geojson'
+2022-10-20 10:48:10|   0.4|  0.0|INFORM|FME Configuration: Destination coordinate system set to input coordinate system `LL84'
+2022-10-20 10:48:10|   0.4|  0.0|INFORM|access_5th_amenity_GEOJSON_1_-1_54_Player (RecorderFactory): Played back 475 feature(s) from file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_access_5th_amenity -1 5 -1  0  11a0adb562f1a34bc658e3564a06a2f4825e725a.ffs'
+2022-10-20 10:48:10|   0.4|  0.0|STATS |Storing feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_Junction_2 -1 28 fo 0 Output  0  b9369bf23161cdd1dfaae2d77a57356b6ec7add4.ffsupdating'
+2022-10-20 10:48:10|   0.5|  0.1|INFORM|Creating writer for format: 
+2022-10-20 10:48:10|   0.5|  0.0|INFORM|Using MultiWriter with keyword `FeatureWriter_2' to output data (ID_ATTRIBUTE is `multi_writer_id')
+2022-10-20 10:48:10|   0.5|  0.0|INFORM|MULTI_WRITER: Output will be zipped
+2022-10-20 10:48:10|   0.5|  0.0|INFORM|Creating writer for format: GeoJSON (Geographic JavaScript Object Notation)
+2022-10-20 10:48:10|   0.5|  0.0|INFORM|Trying to find a DYNAMIC plugin for writer named `GEOJSON'
+2022-10-20 10:48:10|   0.5|  0.0|INFORM|FME Configuration: No destination coordinate system set
+2022-10-20 10:48:10|   0.5|  0.0|INFORM|Writer `FeatureWriter_2_0' of type `GEOJSON' using group definition keyword `FeatureWriter_2_0_DEF'
+2022-10-20 10:48:10|   0.5|  0.0|INFORM|GeoJSON Writer: All features not in WGS84 will be reprojected to WGS84
+2022-10-20 10:48:10|   0.5|  0.0|INFORM|Opening the GEOJSON writer with destination dataset 'C:\Users\longcham\AppData\Local\Temp\wbrun_1666254897592_12384\fmetmp_9\_auto_zip_dataset_1666255690915_4988\access_5th_transit_fake_data_switzerland.geojson'
+2022-10-20 10:48:10|   0.5|  0.0|INFORM|FME Configuration: Destination coordinate system set to input coordinate system `EPSG:4326'
+2022-10-20 10:48:10|   0.5|  0.0|INFORM|Creating writer for format: 
+2022-10-20 10:48:10|   0.5|  0.0|INFORM|Using MultiWriter with keyword `FeatureWriter_4' to output data (ID_ATTRIBUTE is `multi_writer_id')
+2022-10-20 10:48:10|   0.5|  0.0|INFORM|MULTI_WRITER: Output will be zipped
+2022-10-20 10:48:10|   0.5|  0.0|INFORM|Creating writer for format: TopoJSON (Topology JavaScript Object Notation)
+2022-10-20 10:48:10|   0.5|  0.0|INFORM|Trying to find a DYNAMIC plugin for writer named `TOPOJSON'
+2022-10-20 10:48:10|   0.5|  0.0|INFORM|FME Configuration: No destination coordinate system set
+2022-10-20 10:48:10|   0.5|  0.0|INFORM|Writer `FeatureWriter_4_0' of type `TOPOJSON' using group definition keyword `FeatureWriter_4_0_DEF'
+2022-10-20 10:48:10|   0.6|  0.1|INFORM|FME Configuration: Destination coordinate system set to input coordinate system `EPSG:4326'
+2022-10-20 10:48:10|   0.6|  0.0|INFORM|TopoJSON Writer: Opening the TOPOJSON writer with destination dataset 'C:\Users\longcham\AppData\Local\Temp\wbrun_1666254897592_12384\fmetmp_9\_auto_zip_dataset_1666255690919_4988\access_5th_transit_fake_data_switzerland.topojson'
+2022-10-20 10:48:10|   0.6|  0.0|STATS |Storing feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_Counter_2 -1 47 fo 0 OUTPUT  0  4b9c5dafde4a1e5be529e5a762ac4e0c76be5992.ffsupdating'
+2022-10-20 10:48:15|   5.3|  4.7|INFORM|RandomNumberGenerator_OUTPUT_-1_15_Player (RecorderFactory): Playing back feature 11500
+2022-10-20 10:48:20|  10.3|  5.0|INFORM|RandomNumberGenerator_OUTPUT_-1_15_Player (RecorderFactory): Playing back feature 23500
+2022-10-20 10:48:25|  15.4|  5.1|INFORM|RandomNumberGenerator_OUTPUT_-1_15_Player (RecorderFactory): Playing back feature 36000
+2022-10-20 10:48:31|  20.5|  5.1|INFORM|RandomNumberGenerator_OUTPUT_-1_15_Player (RecorderFactory): Playing back feature 48000
+2022-10-20 10:48:36|  25.6|  5.1|INFORM|RandomNumberGenerator_OUTPUT_-1_15_Player (RecorderFactory): Playing back feature 60000
+2022-10-20 10:48:41|  30.6|  5.0|INFORM|RandomNumberGenerator_OUTPUT_-1_15_Player (RecorderFactory): Playing back feature 71500
+2022-10-20 10:48:44|  34.2|  3.6|INFORM|RandomNumberGenerator_OUTPUT_-1_15_Player (RecorderFactory): Played back 78928 feature(s) from file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_RandomNumberGenerator -1 12 fo 0 OUTPUT  0  da8e585312d10df076eb1d30348acbb3cdb1d301.ffs'
+2022-10-20 10:48:44|  34.3|  0.1|INFORM|access_5th_transit_GEOJSON_2_-1_58_Player (RecorderFactory): Played back 475 feature(s) from file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_access_5th_transit -1 20 -1  0  02febd825d7acf3cbc88f308ee27a22c244846a4.ffs'
+2022-10-20 10:48:44|  34.3|  0.0|STATS |AttributeRenamer_2_OUTPUT Feature Counter -1 59 (TeeFactory): Cloned 475 input feature(s) into 475 output feature(s)
+2022-10-20 10:48:44|  34.3|  0.0|STATS |RandomNumberGenerator_2_MinRejecter (TestFactory): Tested 78928 input feature(s) -- 78928 feature(s) passed and 0 feature(s) failed
+2022-10-20 10:48:44|  34.3|  0.0|STATS |RandomNumberGenerator_2_MaxRejecter (TestFactory): Tested 78928 input feature(s) -- 78928 feature(s) passed and 0 feature(s) failed
+2022-10-20 10:48:44|  34.3|  0.0|STATS |RandomNumberGenerator_2_PlacesRejecter (TestFactory): Tested 78928 input feature(s) -- 78928 feature(s) passed and 0 feature(s) failed
+2022-10-20 10:48:44|  34.3|  0.0|STATS |RandomNumberGenerator_2_RandomNumberGenerator (TeeFactory): Cloned 78928 input feature(s) into 78928 output feature(s)
+2022-10-20 10:48:44|  34.3|  0.0|STATS |RandomNumberGenerator_2 OUTPUT Splitter (TeeFactory): Cloned 78928 input feature(s) into 157856 output feature(s)
+2022-10-20 10:48:44|  34.3|  0.0|STATS |RandomNumberGenerator_2_OUTPUT_0_HtK9Ah08A0U= Feature Counter -1 55 (TeeFactory): Cloned 78928 input feature(s) into 78928 output feature(s)
+2022-10-20 10:48:44|  34.3|  0.0|STATS |RandomNumberGenerator_2_OUTPUT_1_Wx19+qc5Xuk= Feature Counter -1 30 (TeeFactory): Cloned 78928 input feature(s) into 78928 output feature(s)
+2022-10-20 10:48:44|  34.3|  0.0|STATS |AttributeRenamer_OUTPUT Feature Counter -1 56 (TeeFactory): Cloned 79403 input feature(s) into 79403 output feature(s)
+2022-10-20 10:48:44|  34.3|  0.0|STATS |Junction (TeeFactory): Cloned 79403 input feature(s) into 79403 output feature(s)
+2022-10-20 10:48:44|  34.3|  0.0|STATS |Junction Output Splitter (TeeFactory): Cloned 79403 input feature(s) into 238209 output feature(s)
+2022-10-20 10:48:44|  34.3|  0.0|STATS |Junction_Output_0_sH9l3UTsGrw= Feature Counter -1 40 (TeeFactory): Cloned 79403 input feature(s) into 79403 output feature(s)
+2022-10-20 10:48:44|  34.3|  0.0|STATS |Junction_Output_1_/QQSbUuR6ZI= Feature Counter -1 43 (TeeFactory): Cloned 79403 input feature(s) into 79403 output feature(s)
+2022-10-20 10:48:44|  34.3|  0.0|STATS |Junction_Output_2_VzwNptf57aI= Feature Counter -1 44 (TeeFactory): Cloned 79403 input feature(s) into 79403 output feature(s)
+2022-10-20 10:48:44|  34.3|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:48:44|  34.3|  0.0|STATS |                        `CountFactory' Domain Summary
+2022-10-20 10:48:44|  34.3|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:48:44|  34.3|  0.0|STATS |counter                                                                 158806
+2022-10-20 10:48:44|  34.3|  0.0|STATS |==============================================================================
+2022-10-20 10:48:44|  34.3|  0.0|STATS |Total features counted:                                                 158806
+2022-10-20 10:48:44|  34.3|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:48:44|  34.3|  0.0|STATS |Counter_OUTPUT Feature Counter -1 41 (TeeFactory): Cloned 79403 input feature(s) into 79403 output feature(s)
+2022-10-20 10:48:44|  34.3|  0.0|STATS |Storing feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_Aggregator -1 36 fo 0 AGGREGATE  0  4f345902387893c5ea07e88f016604630011e6b3.ffsupdating'
+2022-10-20 10:48:44|  34.3|  0.0|STATS |Storing feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_AttributeRemover -1 60 fo 0 OUTPUT  0  69aec8d3905560d6c30f2e3b3dbd94c42e8f35b6.ffsupdating'
+2022-10-20 10:48:44|  34.4|  0.1|INFORM|Creating writer for format: 
+2022-10-20 10:48:44|  34.4|  0.0|INFORM|Using MultiWriter with keyword `FeatureWriter' to output data (ID_ATTRIBUTE is `multi_writer_id')
+2022-10-20 10:48:44|  34.4|  0.0|INFORM|MULTI_WRITER: Output will be zipped
+2022-10-20 10:48:44|  34.4|  0.0|INFORM|Creating writer for format: GeoJSON (Geographic JavaScript Object Notation)
+2022-10-20 10:48:44|  34.4|  0.0|INFORM|Trying to find a DYNAMIC plugin for writer named `GEOJSON'
+2022-10-20 10:48:44|  34.4|  0.0|INFORM|FME Configuration: No destination coordinate system set
+2022-10-20 10:48:44|  34.4|  0.0|INFORM|Writer `FeatureWriter_0' of type `GEOJSON' using group definition keyword `FeatureWriter_0_DEF'
+2022-10-20 10:48:44|  34.4|  0.0|INFORM|GeoJSON Writer: All features not in WGS84 will be reprojected to WGS84
+2022-10-20 10:48:44|  34.4|  0.0|INFORM|Opening the GEOJSON writer with destination dataset 'C:\Users\longcham\AppData\Local\Temp\wbrun_1666254897592_12384\fmetmp_9\_auto_zip_dataset_1666255724895_4988\access_5th_amenity_fake_data_switzerland_multi_parts.geojson'
+2022-10-20 10:48:44|  34.4|  0.0|INFORM|FME Configuration: Destination coordinate system set to input coordinate system `LL84'
+2022-10-20 10:48:44|  34.4|  0.0|INFORM|Creating writer for format: 
+2022-10-20 10:48:44|  34.4|  0.0|INFORM|Using MultiWriter with keyword `FeatureWriter_3' to output data (ID_ATTRIBUTE is `multi_writer_id')
+2022-10-20 10:48:44|  34.4|  0.0|INFORM|MULTI_WRITER: Output will be zipped
+2022-10-20 10:48:44|  34.4|  0.0|INFORM|Creating writer for format: TopoJSON (Topology JavaScript Object Notation)
+2022-10-20 10:48:44|  34.4|  0.0|INFORM|Trying to find a DYNAMIC plugin for writer named `TOPOJSON'
+2022-10-20 10:48:44|  34.4|  0.0|INFORM|FME Configuration: No destination coordinate system set
+2022-10-20 10:48:44|  34.4|  0.0|INFORM|Writer `FeatureWriter_3_0' of type `TOPOJSON' using group definition keyword `FeatureWriter_3_0_DEF'
+2022-10-20 10:48:44|  34.4|  0.0|INFORM|FME Configuration: Destination coordinate system set to input coordinate system `LL84'
+2022-10-20 10:48:44|  34.4|  0.0|INFORM|TopoJSON Writer: Opening the TOPOJSON writer with destination dataset 'C:\Users\longcham\AppData\Local\Temp\wbrun_1666254897592_12384\fmetmp_9\_auto_zip_dataset_1666255724899_4988\access_5th_amenity_fake_data_switzerland_multi_parts.topojson'
+2022-10-20 10:48:44|  34.5|  0.1|INFORM|Aggregator (AggregateFactory): Finished processing group 500 / 79403
+2022-10-20 10:48:45|  34.8|  0.3|INFORM|Aggregator (AggregateFactory): 3.14% complete
+2022-10-20 10:48:50|  39.5|  4.7|INFORM|Aggregator (AggregateFactory): Finished processing group 35000 / 79403
+2022-10-20 10:48:50|  40.0|  0.5|INFORM|Aggregator (AggregateFactory): 47.22% complete
+2022-10-20 10:48:55|  44.5|  4.5|INFORM|Aggregator (AggregateFactory): Finished processing group 68000 / 79403
+2022-10-20 10:48:55|  45.2|  0.7|INFORM|Aggregator (AggregateFactory): 91.3% complete
+2022-10-20 10:48:56|  46.3|  1.1|INFORM|Aggregator (AggregateFactory): Finished processing group 79403 / 79403
+2022-10-20 10:48:56|  46.3|  0.0|INFORM|Aggregator (AggregateFactory): 100% complete
+2022-10-20 10:48:56|  46.3|  0.0|STATS |Aggregator (AggregateFactory): Combined 79403 input feature(s) into 79403 output feature(s), including 0 singleton(s)
+2022-10-20 10:48:56|  46.3|  0.0|STATS |Aggregator_AGGREGATE Feature Counter -1 61 (TeeFactory): Cloned 79403 input feature(s) into 79403 output feature(s)
+2022-10-20 10:48:56|  46.3|  0.0|STATS |AttributeRemover (TeeFactory): Cloned 79403 input feature(s) into 79403 output feature(s)
+2022-10-20 10:48:56|  46.3|  0.0|STATS |AttributeRemover OUTPUT Splitter (TeeFactory): Cloned 79403 input feature(s) into 158806 output feature(s)
+2022-10-20 10:48:56|  46.3|  0.0|STATS |AttributeRemover_OUTPUT_0_KgEqTnnsDj0= Feature Counter -1 62 (TeeFactory): Cloned 79403 input feature(s) into 79403 output feature(s)
+2022-10-20 10:48:56|  46.3|  0.0|STATS |AttributeRemover_OUTPUT_1_Uawi2isjKi0= Feature Counter -1 63 (TeeFactory): Cloned 79403 input feature(s) into 79403 output feature(s)
+2022-10-20 10:49:01|  51.4|  5.1|INFORM|Closing the GEOJSON writer
+2022-10-20 10:49:01|  51.4|  0.0|INFORM|=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:49:01|  51.4|  0.0|INFORM|Feature output statistics for `GEOJSON' writer using keyword `FeatureWriter_0':
+2022-10-20 10:49:01|  51.4|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:49:01|  51.4|  0.0|STATS |                               Features Written
+2022-10-20 10:49:01|  51.4|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:49:01|  51.4|  0.0|STATS |access_5th_amenity                                                       79403
+2022-10-20 10:49:01|  51.4|  0.0|STATS |==============================================================================
+2022-10-20 10:49:01|  51.4|  0.0|STATS |Total Features Written                                                   79403
+2022-10-20 10:49:01|  51.4|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:49:01|  51.4|  0.0|INFORM|MULTI_WRITER: multi_writer_id `FeatureWriter_0': Zipping contents of temporary dataset `C:\Users\longcham\AppData\Local\Temp\wbrun_1666254897592_12384\fmetmp_9\_auto_zip_dataset_1666255724895_4988' into output zip file `C:\projects\LASUR-rhytmic-mobility-habits\data_sample\access_5th_amenity_fake_data_switzerland__multi_parts.zip'
+2022-10-20 10:49:05|  54.9|  3.5|INFORM|MULTI_WRITER: multi_writer_id `FeatureWriter_0': Finished updating output zip file `C:\projects\LASUR-rhytmic-mobility-habits\data_sample\access_5th_amenity_fake_data_switzerland__multi_parts.zip'
+2022-10-20 10:49:05|  54.9|  0.0|STATS |Storing feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter -1 16 fo 0 SUMMARY  0  3362ced5ce205559740cd08c97aecde520e27076.ffsupdating'
+2022-10-20 10:49:05|  54.9|  0.0|STATS |FeatureWriter_SUMMARY Feature Counter -1 2147614736 (TeeFactory): Cloned 1 input feature(s) into 0 output feature(s)
+2022-10-20 10:49:06|  55.7|  0.8|INFORM|TOPOLOGY_PIPELINE::TopologyBuilder (TopologyFactory): Computing topology with an automatic tolerance of 9.561690861898985e-14
+2022-10-20 10:49:11|  60.7|  5.0|INFORM|Performing low-level intersection at phase #1... 19.68% done
+2022-10-20 10:49:12|  61.7|  1.0|INFORM|Completed 1220000 segments of intersection processing
+2022-10-20 10:49:14|  64.3|  2.6|INFORM|Performing low-level intersection at phase #1... 100% done
+2022-10-20 10:49:14|  64.3|  0.0|INFORM|Completed intersection processing, phase #2. 1788 new nodes were generated among 83826 intermediate lines
+2022-10-20 10:49:14|  64.3|  0.0|INFORM|Finish splitting 83827 lines into 85088 intermediate lines for phase 2
+2022-10-20 10:49:22|  71.7|  7.4|INFORM|Arc/Poly Topology Model calculating the universe polygon which is made up of 3573 border segments
+2022-10-20 10:49:24|  74.1|  2.4|INFORM|Arc/Poly Topology Model completed calculation of the universe polygon
+2022-10-20 10:49:30|  79.8|  5.7|INFORM|=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:49:30|  79.8|  0.0|INFORM|Feature output statistics for `TOPOJSON' writer using keyword `FeatureWriter_3_0':
+2022-10-20 10:49:30|  79.8|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:49:30|  79.8|  0.0|STATS |                               Features Written
+2022-10-20 10:49:30|  79.8|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:49:30|  79.8|  0.0|STATS |access_5th_amenity (access_5th_amenity)                                  79403
+2022-10-20 10:49:30|  79.8|  0.0|STATS |==============================================================================
+2022-10-20 10:49:30|  79.8|  0.0|STATS |Total Features Written                                                   79403
+2022-10-20 10:49:30|  79.8|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:49:30|  79.8|  0.0|INFORM|MULTI_WRITER: multi_writer_id `FeatureWriter_3_0': Zipping contents of temporary dataset `C:\Users\longcham\AppData\Local\Temp\wbrun_1666254897592_12384\fmetmp_9\_auto_zip_dataset_1666255724899_4988' into output zip file `C:\projects\LASUR-rhytmic-mobility-habits\data_sample\access_5th_amenity_fake_data_switzerland_topojson_multi_parts.zip'
+2022-10-20 10:49:31|  80.8|  1.0|INFORM|MULTI_WRITER: multi_writer_id `FeatureWriter_3_0': Finished updating output zip file `C:\projects\LASUR-rhytmic-mobility-habits\data_sample\access_5th_amenity_fake_data_switzerland_topojson_multi_parts.zip'
+2022-10-20 10:49:31|  80.8|  0.0|STATS |Storing feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter_3 -1 32 fo 0 SUMMARY  0  c2f2961e79cfa3074693862dc25b18040dfd237a.ffsupdating'
+2022-10-20 10:49:31|  80.8|  0.0|STATS |FeatureWriter_3_SUMMARY Feature Counter -1 2147614752 (TeeFactory): Cloned 1 input feature(s) into 0 output feature(s)
+2022-10-20 10:49:32|  81.5|  0.7|INFORM|TOPOLOGY_PIPELINE::TopologyBuilder (TopologyFactory): Computing topology with an automatic tolerance of 9.561690861898985e-14
+2022-10-20 10:49:37|  86.6|  5.1|INFORM|Performing low-level intersection at phase #1... 19.92% done
+2022-10-20 10:49:38|  87.5|  0.9|INFORM|Completed 1220000 segments of intersection processing
+2022-10-20 10:49:40|  90.0|  2.5|INFORM|Performing low-level intersection at phase #1... 100% done
+2022-10-20 10:49:40|  90.0|  0.0|INFORM|Completed intersection processing, phase #2. 1748 new nodes were generated among 83826 intermediate lines
+2022-10-20 10:49:40|  90.0|  0.0|INFORM|Finish splitting 83827 lines into 85088 intermediate lines for phase 2
+2022-10-20 10:49:47|  96.7|  6.7|INFORM|Arc/Poly Topology Model calculating the universe polygon which is made up of 3573 border segments
+2022-10-20 10:49:49|  99.1|  2.4|INFORM|Arc/Poly Topology Model completed calculation of the universe polygon
+2022-10-20 10:49:55| 104.5|  5.4|INFORM|=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:49:55| 104.5|  0.0|INFORM|Feature output statistics for `TOPOJSON' writer using keyword `FeatureWriter_6_0':
+2022-10-20 10:49:55| 104.5|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:49:55| 104.5|  0.0|STATS |                               Features Written
+2022-10-20 10:49:55| 104.5|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:49:55| 104.5|  0.0|STATS |access_5th_amenity (access_5th_amenity)                                  79403
+2022-10-20 10:49:55| 104.5|  0.0|STATS |==============================================================================
+2022-10-20 10:49:55| 104.5|  0.0|STATS |Total Features Written                                                   79403
+2022-10-20 10:49:55| 104.5|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:49:55| 104.5|  0.0|INFORM|MULTI_WRITER: multi_writer_id `FeatureWriter_6_0': Zipping contents of temporary dataset `C:\Users\longcham\AppData\Local\Temp\wbrun_1666254897592_12384\fmetmp_9\_auto_zip_dataset_1666255690751_4988' into output zip file `C:\projects\LASUR-rhytmic-mobility-habits\data_sample\access_5th_amenity_fake_data_switzerland_topojson.zip'
+2022-10-20 10:49:56| 105.6|  1.1|INFORM|MULTI_WRITER: multi_writer_id `FeatureWriter_6_0': Finished updating output zip file `C:\projects\LASUR-rhytmic-mobility-habits\data_sample\access_5th_amenity_fake_data_switzerland_topojson.zip'
+2022-10-20 10:49:56| 105.6|  0.0|STATS |Storing feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter_6 -1 42 fo 0 SUMMARY  0  ab065cc36b01d69b0129cdcffbe9abb82c08a17d.ffsupdating'
+2022-10-20 10:49:56| 105.6|  0.0|STATS |FeatureWriter_6_SUMMARY Feature Counter -1 2147614762 (TeeFactory): Cloned 1 input feature(s) into 0 output feature(s)
+2022-10-20 10:50:00| 110.3|  4.7|INFORM|Closing the GEOJSON writer
+2022-10-20 10:50:00| 110.3|  0.0|INFORM|=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:50:00| 110.3|  0.0|INFORM|Feature output statistics for `GEOJSON' writer using keyword `FeatureWriter_5_0':
+2022-10-20 10:50:00| 110.3|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:50:00| 110.3|  0.0|STATS |                               Features Written
+2022-10-20 10:50:00| 110.3|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:50:00| 110.3|  0.0|STATS |access_5th_amenity                                                       79403
+2022-10-20 10:50:00| 110.3|  0.0|STATS |==============================================================================
+2022-10-20 10:50:00| 110.3|  0.0|STATS |Total Features Written                                                   79403
+2022-10-20 10:50:00| 110.3|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:50:00| 110.3|  0.0|INFORM|MULTI_WRITER: multi_writer_id `FeatureWriter_5_0': Zipping contents of temporary dataset `C:\Users\longcham\AppData\Local\Temp\wbrun_1666254897592_12384\fmetmp_9\_auto_zip_dataset_1666255690787_4988' into output zip file `C:\projects\LASUR-rhytmic-mobility-habits\data_sample\access_5th_amenity_fake_data_switzerland.zip'
+2022-10-20 10:50:03| 113.4|  3.1|INFORM|MULTI_WRITER: multi_writer_id `FeatureWriter_5_0': Finished updating output zip file `C:\projects\LASUR-rhytmic-mobility-habits\data_sample\access_5th_amenity_fake_data_switzerland.zip'
+2022-10-20 10:50:03| 113.4|  0.0|STATS |Storing feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter_5 -1 37 fo 0 SUMMARY  0  cb52b4524e278bef5245fab27eb604751077b810.ffsupdating'
+2022-10-20 10:50:03| 113.4|  0.0|STATS |FeatureWriter_5_SUMMARY Feature Counter -1 2147614757 (TeeFactory): Cloned 1 input feature(s) into 0 output feature(s)
+2022-10-20 10:50:03| 113.4|  0.0|STATS |Junction_2 (TeeFactory): Cloned 79403 input feature(s) into 79403 output feature(s)
+2022-10-20 10:50:03| 113.4|  0.0|STATS |Junction_2 Output Splitter (TeeFactory): Cloned 79403 input feature(s) into 238209 output feature(s)
+2022-10-20 10:50:03| 113.4|  0.0|STATS |Junction_2_Output_0_tvGfyYWUJeA= Feature Counter -1 31 (TeeFactory): Cloned 79403 input feature(s) into 79403 output feature(s)
+2022-10-20 10:50:03| 113.4|  0.0|STATS |Junction_2_Output_1_8yJTK7wdGRQ= Feature Counter -1 35 (TeeFactory): Cloned 79403 input feature(s) into 79403 output feature(s)
+2022-10-20 10:50:03| 113.4|  0.0|STATS |Junction_2_Output_2_YUQ6I6Jdn0k= Feature Counter -1 50 (TeeFactory): Cloned 79403 input feature(s) into 79403 output feature(s)
+2022-10-20 10:50:08| 117.9|  4.5|INFORM|Closing the GEOJSON writer
+2022-10-20 10:50:08| 117.9|  0.0|INFORM|=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:50:08| 117.9|  0.0|INFORM|Feature output statistics for `GEOJSON' writer using keyword `FeatureWriter_2_0':
+2022-10-20 10:50:08| 117.9|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:50:08| 117.9|  0.0|STATS |                               Features Written
+2022-10-20 10:50:08| 117.9|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:50:08| 117.9|  0.0|STATS |access_5th_transit                                                       79403
+2022-10-20 10:50:08| 117.9|  0.0|STATS |==============================================================================
+2022-10-20 10:50:08| 117.9|  0.0|STATS |Total Features Written                                                   79403
+2022-10-20 10:50:08| 117.9|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:50:08| 117.9|  0.0|INFORM|MULTI_WRITER: multi_writer_id `FeatureWriter_2_0': Zipping contents of temporary dataset `C:\Users\longcham\AppData\Local\Temp\wbrun_1666254897592_12384\fmetmp_9\_auto_zip_dataset_1666255690915_4988' into output zip file `C:\projects\LASUR-rhytmic-mobility-habits\data_sample\access_5th_transit_fake_data_switzerland.zip'
+2022-10-20 10:50:11| 120.9|  3.0|INFORM|MULTI_WRITER: multi_writer_id `FeatureWriter_2_0': Finished updating output zip file `C:\projects\LASUR-rhytmic-mobility-habits\data_sample\access_5th_transit_fake_data_switzerland.zip'
+2022-10-20 10:50:11| 120.9|  0.0|STATS |Storing feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter_2 -1 19 fo 0 SUMMARY  0  ee109848d4b324bf86a804d00b90153e16383a26.ffsupdating'
+2022-10-20 10:50:11| 120.9|  0.0|STATS |FeatureWriter_2_SUMMARY Feature Counter -1 2147614739 (TeeFactory): Cloned 1 input feature(s) into 0 output feature(s)
+2022-10-20 10:50:12| 121.6|  0.7|INFORM|TOPOLOGY_PIPELINE::TopologyBuilder (TopologyFactory): Computing topology with an automatic tolerance of 9.561690861898985e-14
+2022-10-20 10:50:17| 126.6|  5.0|INFORM|Performing low-level intersection at phase #1... 19.32% done
+2022-10-20 10:50:18| 127.6|  1.0|INFORM|Completed 1220000 segments of intersection processing
+2022-10-20 10:50:20| 130.1|  2.5|INFORM|Performing low-level intersection at phase #1... 100% done
+2022-10-20 10:50:20| 130.1|  0.0|INFORM|Completed intersection processing, phase #2. 1748 new nodes were generated among 83826 intermediate lines
+2022-10-20 10:50:20| 130.1|  0.0|INFORM|Finish splitting 83827 lines into 85088 intermediate lines for phase 2
+2022-10-20 10:50:28| 137.5|  7.4|INFORM|Arc/Poly Topology Model calculating the universe polygon which is made up of 3573 border segments
+2022-10-20 10:50:30| 140.2|  2.7|INFORM|Arc/Poly Topology Model completed calculation of the universe polygon
+2022-10-20 10:50:37| 146.4|  6.2|INFORM|=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:50:37| 146.4|  0.0|INFORM|Feature output statistics for `TOPOJSON' writer using keyword `FeatureWriter_4_0':
+2022-10-20 10:50:37| 146.4|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:50:37| 146.4|  0.0|STATS |                               Features Written
+2022-10-20 10:50:37| 146.4|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:50:37| 146.4|  0.0|STATS |access_5th_transit (access_5th_transit)                                  79403
+2022-10-20 10:50:37| 146.4|  0.0|STATS |==============================================================================
+2022-10-20 10:50:37| 146.4|  0.0|STATS |Total Features Written                                                   79403
+2022-10-20 10:50:37| 146.4|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:50:37| 146.4|  0.0|INFORM|MULTI_WRITER: multi_writer_id `FeatureWriter_4_0': Zipping contents of temporary dataset `C:\Users\longcham\AppData\Local\Temp\wbrun_1666254897592_12384\fmetmp_9\_auto_zip_dataset_1666255690919_4988' into output zip file `C:\projects\LASUR-rhytmic-mobility-habits\data_sample\access_5th_transit_fake_data_switzerland_topojson.zip'
+2022-10-20 10:50:38| 147.5|  1.1|INFORM|MULTI_WRITER: multi_writer_id `FeatureWriter_4_0': Finished updating output zip file `C:\projects\LASUR-rhytmic-mobility-habits\data_sample\access_5th_transit_fake_data_switzerland_topojson.zip'
+2022-10-20 10:50:38| 147.5|  0.0|STATS |Storing feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter_4 -1 34 fo 0 SUMMARY  0  6fe3f2962ad965a15f9a2c471bc721d4727af62d.ffsupdating'
+2022-10-20 10:50:38| 147.5|  0.0|STATS |FeatureWriter_4_SUMMARY Feature Counter -1 2147614754 (TeeFactory): Cloned 1 input feature(s) into 0 output feature(s)
+2022-10-20 10:50:38| 147.5|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:50:38| 147.5|  0.0|STATS |                        `CountFactory' Domain Summary
+2022-10-20 10:50:38| 147.5|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:50:38| 147.5|  0.0|STATS |counter                                                                 158806
+2022-10-20 10:50:38| 147.5|  0.0|STATS |==============================================================================
+2022-10-20 10:50:38| 147.5|  0.0|STATS |Total features counted:                                                 158806
+2022-10-20 10:50:38| 147.5|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:50:38| 147.5|  0.0|STATS |Counter_2_OUTPUT Feature Counter -1 48 (TeeFactory): Cloned 79403 input feature(s) into 79403 output feature(s)
+2022-10-20 10:50:38| 147.5|  0.0|STATS |Storing feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_Aggregator_2 -1 46 fo 0 AGGREGATE  0  a8dedfc32705f3624e247f4c91c31c94c1dde3cc.ffsupdating'
+2022-10-20 10:50:38| 147.5|  0.0|STATS |Storing feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_AttributeRemover_2 -1 64 fo 0 OUTPUT  0  f5e1fe74abd72c834d98a61145d2ac414025e95a.ffsupdating'
+2022-10-20 10:50:38| 147.6|  0.1|INFORM|Creating writer for format: 
+2022-10-20 10:50:38| 147.6|  0.0|INFORM|Using MultiWriter with keyword `FeatureWriter_8' to output data (ID_ATTRIBUTE is `multi_writer_id')
+2022-10-20 10:50:38| 147.6|  0.0|INFORM|MULTI_WRITER: Output will be zipped
+2022-10-20 10:50:38| 147.6|  0.0|INFORM|Creating writer for format: TopoJSON (Topology JavaScript Object Notation)
+2022-10-20 10:50:38| 147.6|  0.0|INFORM|Trying to find a DYNAMIC plugin for writer named `TOPOJSON'
+2022-10-20 10:50:38| 147.6|  0.0|INFORM|FME Configuration: No destination coordinate system set
+2022-10-20 10:50:38| 147.6|  0.0|INFORM|Writer `FeatureWriter_8_0' of type `TOPOJSON' using group definition keyword `FeatureWriter_8_0_DEF'
+2022-10-20 10:50:38| 147.6|  0.0|INFORM|FME Configuration: Destination coordinate system set to input coordinate system `EPSG:4326'
+2022-10-20 10:50:38| 147.6|  0.0|INFORM|TopoJSON Writer: Opening the TOPOJSON writer with destination dataset 'C:\Users\longcham\AppData\Local\Temp\wbrun_1666254897592_12384\fmetmp_9\_auto_zip_dataset_1666255838275_4988\access_5th_transit_fake_data_switzerland_multi_parts.topojson'
+2022-10-20 10:50:38| 147.6|  0.0|INFORM|Creating writer for format: 
+2022-10-20 10:50:38| 147.6|  0.0|INFORM|Using MultiWriter with keyword `FeatureWriter_7' to output data (ID_ATTRIBUTE is `multi_writer_id')
+2022-10-20 10:50:38| 147.6|  0.0|INFORM|MULTI_WRITER: Output will be zipped
+2022-10-20 10:50:38| 147.6|  0.0|INFORM|Creating writer for format: GeoJSON (Geographic JavaScript Object Notation)
+2022-10-20 10:50:38| 147.6|  0.0|INFORM|Trying to find a DYNAMIC plugin for writer named `GEOJSON'
+2022-10-20 10:50:38| 147.6|  0.0|INFORM|FME Configuration: No destination coordinate system set
+2022-10-20 10:50:38| 147.6|  0.0|INFORM|Writer `FeatureWriter_7_0' of type `GEOJSON' using group definition keyword `FeatureWriter_7_0_DEF'
+2022-10-20 10:50:38| 147.6|  0.0|INFORM|GeoJSON Writer: All features not in WGS84 will be reprojected to WGS84
+2022-10-20 10:50:38| 147.6|  0.0|INFORM|Opening the GEOJSON writer with destination dataset 'C:\Users\longcham\AppData\Local\Temp\wbrun_1666254897592_12384\fmetmp_9\_auto_zip_dataset_1666255838279_4988\access_5th_transit_fake_data_switzerland_multi_parts.geojson'
+2022-10-20 10:50:38| 147.6|  0.0|INFORM|FME Configuration: Destination coordinate system set to input coordinate system `EPSG:4326'
+2022-10-20 10:50:38| 147.6|  0.0|INFORM|Aggregator_2 (AggregateFactory): Finished processing group 500 / 79403
+2022-10-20 10:50:38| 147.9|  0.3|INFORM|Aggregator_2 (AggregateFactory): 3.14% complete
+2022-10-20 10:50:43| 152.6|  4.7|INFORM|Aggregator_2 (AggregateFactory): Finished processing group 35000 / 79403
+2022-10-20 10:50:43| 153.1|  0.5|INFORM|Aggregator_2 (AggregateFactory): 47.22% complete
+2022-10-20 10:50:48| 157.7|  4.6|INFORM|Aggregator_2 (AggregateFactory): Finished processing group 68500 / 79403
+2022-10-20 10:50:49| 158.3|  0.6|INFORM|Aggregator_2 (AggregateFactory): 91.3% complete
+2022-10-20 10:50:50| 159.8|  1.5|INFORM|Aggregator_2 (AggregateFactory): Finished processing group 79403 / 79403
+2022-10-20 10:50:50| 159.8|  0.0|INFORM|Aggregator_2 (AggregateFactory): 100% complete
+2022-10-20 10:50:50| 159.8|  0.0|STATS |Aggregator_2 (AggregateFactory): Combined 79403 input feature(s) into 79403 output feature(s), including 0 singleton(s)
+2022-10-20 10:50:50| 159.8|  0.0|STATS |Aggregator_2_AGGREGATE Feature Counter -1 65 (TeeFactory): Cloned 79403 input feature(s) into 79403 output feature(s)
+2022-10-20 10:50:50| 159.8|  0.0|STATS |AttributeRemover_2 (TeeFactory): Cloned 79403 input feature(s) into 79403 output feature(s)
+2022-10-20 10:50:50| 159.8|  0.0|STATS |AttributeRemover_2 OUTPUT Splitter (TeeFactory): Cloned 79403 input feature(s) into 158806 output feature(s)
+2022-10-20 10:50:50| 159.8|  0.0|STATS |AttributeRemover_2_OUTPUT_0_iNGlrgK260E= Feature Counter -1 66 (TeeFactory): Cloned 79403 input feature(s) into 79403 output feature(s)
+2022-10-20 10:50:50| 159.8|  0.0|STATS |AttributeRemover_2_OUTPUT_1_fKCmDr4zCWY= Feature Counter -1 67 (TeeFactory): Cloned 79403 input feature(s) into 79403 output feature(s)
+2022-10-20 10:50:51| 160.5|  0.7|INFORM|TOPOLOGY_PIPELINE::TopologyBuilder (TopologyFactory): Computing topology with an automatic tolerance of 9.561690861898985e-14
+2022-10-20 10:50:56| 165.6|  5.1|INFORM|Performing low-level intersection at phase #1... 18.84% done
+2022-10-20 10:50:57| 166.7|  1.1|INFORM|Completed 1220000 segments of intersection processing
+2022-10-20 10:51:00| 169.7|  3.0|INFORM|Performing low-level intersection at phase #1... 100% done
+2022-10-20 10:51:00| 169.7|  0.0|INFORM|Completed intersection processing, phase #2. 1792 new nodes were generated among 83826 intermediate lines
+2022-10-20 10:51:00| 169.7|  0.0|INFORM|Finish splitting 83827 lines into 85088 intermediate lines for phase 2
+2022-10-20 10:51:09| 178.4|  8.7|INFORM|Arc/Poly Topology Model completed 65.77% of intermediate processing
+2022-10-20 10:51:11| 180.1|  1.7|INFORM|Arc/Poly Topology Model completed 100% of intermediate processing
+2022-10-20 10:51:11| 180.9|  0.8|INFORM|Arc/Poly Topology Model calculating the universe polygon which is made up of 3573 border segments
+2022-10-20 10:51:14| 183.3|  2.4|INFORM|Arc/Poly Topology Model completed calculation of the universe polygon
+2022-10-20 10:51:21| 190.1|  6.8|INFORM|=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:51:21| 190.1|  0.0|INFORM|Feature output statistics for `TOPOJSON' writer using keyword `FeatureWriter_8_0':
+2022-10-20 10:51:21| 190.1|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:51:21| 190.1|  0.0|STATS |                               Features Written
+2022-10-20 10:51:21| 190.1|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:51:21| 190.1|  0.0|STATS |access_5th_transit (access_5th_transit)                                  79403
+2022-10-20 10:51:21| 190.1|  0.0|STATS |==============================================================================
+2022-10-20 10:51:21| 190.1|  0.0|STATS |Total Features Written                                                   79403
+2022-10-20 10:51:21| 190.1|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:51:21| 190.2|  0.1|INFORM|MULTI_WRITER: multi_writer_id `FeatureWriter_8_0': Zipping contents of temporary dataset `C:\Users\longcham\AppData\Local\Temp\wbrun_1666254897592_12384\fmetmp_9\_auto_zip_dataset_1666255838275_4988' into output zip file `C:\projects\LASUR-rhytmic-mobility-habits\data_sample\access_5th_transit_fake_data_switzerland_topojson_multi_parts.zip'
+2022-10-20 10:51:22| 191.2|  1.0|INFORM|MULTI_WRITER: multi_writer_id `FeatureWriter_8_0': Finished updating output zip file `C:\projects\LASUR-rhytmic-mobility-habits\data_sample\access_5th_transit_fake_data_switzerland_topojson_multi_parts.zip'
+2022-10-20 10:51:22| 191.2|  0.0|STATS |Storing feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter_8 -1 49 fo 0 SUMMARY  0  3fca3f7cf31df466c886424631aad6607d718069.ffsupdating'
+2022-10-20 10:51:22| 191.2|  0.0|STATS |FeatureWriter_8_SUMMARY Feature Counter -1 2147614769 (TeeFactory): Cloned 1 input feature(s) into 0 output feature(s)
+2022-10-20 10:51:27| 196.1|  4.9|INFORM|Closing the GEOJSON writer
+2022-10-20 10:51:27| 196.1|  0.0|INFORM|=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:51:27| 196.1|  0.0|INFORM|Feature output statistics for `GEOJSON' writer using keyword `FeatureWriter_7_0':
+2022-10-20 10:51:27| 196.1|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:51:27| 196.1|  0.0|STATS |                               Features Written
+2022-10-20 10:51:27| 196.1|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:51:27| 196.1|  0.0|STATS |access_5th_transit                                                       79403
+2022-10-20 10:51:27| 196.1|  0.0|STATS |==============================================================================
+2022-10-20 10:51:27| 196.1|  0.0|STATS |Total Features Written                                                   79403
+2022-10-20 10:51:27| 196.1|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:51:27| 196.1|  0.0|INFORM|MULTI_WRITER: multi_writer_id `FeatureWriter_7_0': Zipping contents of temporary dataset `C:\Users\longcham\AppData\Local\Temp\wbrun_1666254897592_12384\fmetmp_9\_auto_zip_dataset_1666255838279_4988' into output zip file `C:\projects\LASUR-rhytmic-mobility-habits\data_sample\access_5th_transit_fake_data_switzerland_multi_parts.zip'
+2022-10-20 10:51:30| 199.6|  3.5|INFORM|MULTI_WRITER: multi_writer_id `FeatureWriter_7_0': Finished updating output zip file `C:\projects\LASUR-rhytmic-mobility-habits\data_sample\access_5th_transit_fake_data_switzerland_multi_parts.zip'
+2022-10-20 10:51:30| 199.6|  0.0|STATS |Storing feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter_7 -1 45 fo 0 SUMMARY  0  4f5ce9dfe98fca38dbf3b7e0b7b92b0105e88208.ffsupdating'
+2022-10-20 10:51:30| 199.6|  0.0|STATS |Stored 78928 feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_RandomNumberGenerator_2 -1 14 fo 0 OUTPUT  1  c3fcf0f7aa679b110b854735d8b505b58e425414.ffsupdating'
+2022-10-20 10:51:30| 199.6|  0.0|INFORM|Saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_RandomNumberGenerator_2 -1 14 fo 0 OUTPUT  1  c3fcf0f7aa679b110b854735d8b505b58e425414.fsi'
+2022-10-20 10:51:30| 199.7|  0.1|INFORM|Finished saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_RandomNumberGenerator_2 -1 14 fo 0 OUTPUT  1  c3fcf0f7aa679b110b854735d8b505b58e425414.fsi'
+2022-10-20 10:51:30| 199.7|  0.0|STATS |Stored 475 feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_AttributeRenamer_2 -1 57 fo 0 OUTPUT  0  0c2cbcdb5184ccb2660149c049ef2fa70160dfb6.ffsupdating'
+2022-10-20 10:51:30| 199.7|  0.0|INFORM|Saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_AttributeRenamer_2 -1 57 fo 0 OUTPUT  0  0c2cbcdb5184ccb2660149c049ef2fa70160dfb6.fsi'
+2022-10-20 10:51:30| 199.7|  0.0|INFORM|Finished saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_AttributeRenamer_2 -1 57 fo 0 OUTPUT  0  0c2cbcdb5184ccb2660149c049ef2fa70160dfb6.fsi'
+2022-10-20 10:51:30| 199.7|  0.0|STATS |Stored 79403 feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_Aggregator -1 36 fo 0 AGGREGATE  0  4f345902387893c5ea07e88f016604630011e6b3.ffsupdating'
+2022-10-20 10:51:30| 199.7|  0.0|INFORM|Saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_Aggregator -1 36 fo 0 AGGREGATE  0  4f345902387893c5ea07e88f016604630011e6b3.fsi'
+2022-10-20 10:51:30| 199.7|  0.0|INFORM|Finished saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_Aggregator -1 36 fo 0 AGGREGATE  0  4f345902387893c5ea07e88f016604630011e6b3.fsi'
+2022-10-20 10:51:30| 199.7|  0.0|STATS |Stored 1 feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter_8 -1 49 fo 0 SUMMARY  0  3fca3f7cf31df466c886424631aad6607d718069.ffsupdating'
+2022-10-20 10:51:30| 199.7|  0.0|INFORM|Saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter_8 -1 49 fo 0 SUMMARY  0  3fca3f7cf31df466c886424631aad6607d718069.fsi'
+2022-10-20 10:51:30| 199.7|  0.0|INFORM|Finished saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter_8 -1 49 fo 0 SUMMARY  0  3fca3f7cf31df466c886424631aad6607d718069.fsi'
+2022-10-20 10:51:30| 199.7|  0.0|STATS |Stored 79403 feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_Counter_2 -1 47 fo 0 OUTPUT  0  4b9c5dafde4a1e5be529e5a762ac4e0c76be5992.ffsupdating'
+2022-10-20 10:51:30| 199.7|  0.0|INFORM|Saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_Counter_2 -1 47 fo 0 OUTPUT  0  4b9c5dafde4a1e5be529e5a762ac4e0c76be5992.fsi'
+2022-10-20 10:51:30| 199.7|  0.0|INFORM|Finished saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_Counter_2 -1 47 fo 0 OUTPUT  0  4b9c5dafde4a1e5be529e5a762ac4e0c76be5992.fsi'
+2022-10-20 10:51:30| 199.7|  0.0|STATS |Stored 79403 feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_AttributeRenamer -1 53 fo 0 OUTPUT  0  d21f746f0c940efe2d35c3ab6458a7053ffede4a.ffsupdating'
+2022-10-20 10:51:30| 199.7|  0.0|INFORM|Saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_AttributeRenamer -1 53 fo 0 OUTPUT  0  d21f746f0c940efe2d35c3ab6458a7053ffede4a.fsi'
+2022-10-20 10:51:30| 199.8|  0.1|INFORM|Finished saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_AttributeRenamer -1 53 fo 0 OUTPUT  0  d21f746f0c940efe2d35c3ab6458a7053ffede4a.fsi'
+2022-10-20 10:51:30| 199.8|  0.0|STATS |Stored 79403 feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_Junction_2 -1 28 fo 0 Output  0  b9369bf23161cdd1dfaae2d77a57356b6ec7add4.ffsupdating'
+2022-10-20 10:51:30| 199.8|  0.0|INFORM|Saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_Junction_2 -1 28 fo 0 Output  0  b9369bf23161cdd1dfaae2d77a57356b6ec7add4.fsi'
+2022-10-20 10:51:30| 199.8|  0.0|INFORM|Finished saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_Junction_2 -1 28 fo 0 Output  0  b9369bf23161cdd1dfaae2d77a57356b6ec7add4.fsi'
+2022-10-20 10:51:30| 199.8|  0.0|STATS |Stored 79403 feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_Junction -1 24 fo 0 Output  0  cc61fa139130d50df0833778d6e2c3ef3d1d5836.ffsupdating'
+2022-10-20 10:51:30| 199.8|  0.0|INFORM|Saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_Junction -1 24 fo 0 Output  0  cc61fa139130d50df0833778d6e2c3ef3d1d5836.fsi'
+2022-10-20 10:51:30| 199.8|  0.0|INFORM|Finished saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_Junction -1 24 fo 0 Output  0  cc61fa139130d50df0833778d6e2c3ef3d1d5836.fsi'
+2022-10-20 10:51:30| 199.8|  0.0|STATS |Stored 79403 feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_Counter -1 33 fo 0 OUTPUT  0  de51228d83f70db6cec790f68305382bada8b6df.ffsupdating'
+2022-10-20 10:51:30| 199.8|  0.0|INFORM|Saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_Counter -1 33 fo 0 OUTPUT  0  de51228d83f70db6cec790f68305382bada8b6df.fsi'
+2022-10-20 10:51:30| 199.8|  0.0|INFORM|Finished saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_Counter -1 33 fo 0 OUTPUT  0  de51228d83f70db6cec790f68305382bada8b6df.fsi'
+2022-10-20 10:51:30| 199.8|  0.0|STATS |Stored 79403 feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_AttributeRemover -1 60 fo 0 OUTPUT  0  69aec8d3905560d6c30f2e3b3dbd94c42e8f35b6.ffsupdating'
+2022-10-20 10:51:30| 199.8|  0.0|INFORM|Saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_AttributeRemover -1 60 fo 0 OUTPUT  0  69aec8d3905560d6c30f2e3b3dbd94c42e8f35b6.fsi'
+2022-10-20 10:51:30| 199.9|  0.1|INFORM|Finished saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_AttributeRemover -1 60 fo 0 OUTPUT  0  69aec8d3905560d6c30f2e3b3dbd94c42e8f35b6.fsi'
+2022-10-20 10:51:30| 199.9|  0.0|STATS |Stored 1 feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter -1 16 fo 0 SUMMARY  0  3362ced5ce205559740cd08c97aecde520e27076.ffsupdating'
+2022-10-20 10:51:30| 199.9|  0.0|INFORM|Saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter -1 16 fo 0 SUMMARY  0  3362ced5ce205559740cd08c97aecde520e27076.fsi'
+2022-10-20 10:51:30| 199.9|  0.0|INFORM|Finished saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter -1 16 fo 0 SUMMARY  0  3362ced5ce205559740cd08c97aecde520e27076.fsi'
+2022-10-20 10:51:30| 199.9|  0.0|STATS |Stored 1 feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter_3 -1 32 fo 0 SUMMARY  0  c2f2961e79cfa3074693862dc25b18040dfd237a.ffsupdating'
+2022-10-20 10:51:30| 199.9|  0.0|INFORM|Saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter_3 -1 32 fo 0 SUMMARY  0  c2f2961e79cfa3074693862dc25b18040dfd237a.fsi'
+2022-10-20 10:51:30| 199.9|  0.0|INFORM|Finished saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter_3 -1 32 fo 0 SUMMARY  0  c2f2961e79cfa3074693862dc25b18040dfd237a.fsi'
+2022-10-20 10:51:30| 199.9|  0.0|STATS |Stored 1 feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter_6 -1 42 fo 0 SUMMARY  0  ab065cc36b01d69b0129cdcffbe9abb82c08a17d.ffsupdating'
+2022-10-20 10:51:30| 199.9|  0.0|INFORM|Saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter_6 -1 42 fo 0 SUMMARY  0  ab065cc36b01d69b0129cdcffbe9abb82c08a17d.fsi'
+2022-10-20 10:51:30| 199.9|  0.0|INFORM|Finished saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter_6 -1 42 fo 0 SUMMARY  0  ab065cc36b01d69b0129cdcffbe9abb82c08a17d.fsi'
+2022-10-20 10:51:30| 199.9|  0.0|STATS |Stored 1 feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter_5 -1 37 fo 0 SUMMARY  0  cb52b4524e278bef5245fab27eb604751077b810.ffsupdating'
+2022-10-20 10:51:30| 199.9|  0.0|INFORM|Saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter_5 -1 37 fo 0 SUMMARY  0  cb52b4524e278bef5245fab27eb604751077b810.fsi'
+2022-10-20 10:51:30| 199.9|  0.0|INFORM|Finished saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter_5 -1 37 fo 0 SUMMARY  0  cb52b4524e278bef5245fab27eb604751077b810.fsi'
+2022-10-20 10:51:30| 199.9|  0.0|STATS |Stored 1 feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter_2 -1 19 fo 0 SUMMARY  0  ee109848d4b324bf86a804d00b90153e16383a26.ffsupdating'
+2022-10-20 10:51:30| 199.9|  0.0|INFORM|Saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter_2 -1 19 fo 0 SUMMARY  0  ee109848d4b324bf86a804d00b90153e16383a26.fsi'
+2022-10-20 10:51:30| 199.9|  0.0|INFORM|Finished saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter_2 -1 19 fo 0 SUMMARY  0  ee109848d4b324bf86a804d00b90153e16383a26.fsi'
+2022-10-20 10:51:30| 199.9|  0.0|STATS |Stored 1 feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter_4 -1 34 fo 0 SUMMARY  0  6fe3f2962ad965a15f9a2c471bc721d4727af62d.ffsupdating'
+2022-10-20 10:51:30| 199.9|  0.0|INFORM|Saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter_4 -1 34 fo 0 SUMMARY  0  6fe3f2962ad965a15f9a2c471bc721d4727af62d.fsi'
+2022-10-20 10:51:30| 199.9|  0.0|INFORM|Finished saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter_4 -1 34 fo 0 SUMMARY  0  6fe3f2962ad965a15f9a2c471bc721d4727af62d.fsi'
+2022-10-20 10:51:30| 199.9|  0.0|STATS |Stored 79403 feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_Aggregator_2 -1 46 fo 0 AGGREGATE  0  a8dedfc32705f3624e247f4c91c31c94c1dde3cc.ffsupdating'
+2022-10-20 10:51:30| 199.9|  0.0|INFORM|Saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_Aggregator_2 -1 46 fo 0 AGGREGATE  0  a8dedfc32705f3624e247f4c91c31c94c1dde3cc.fsi'
+2022-10-20 10:51:30| 199.9|  0.0|INFORM|Finished saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_Aggregator_2 -1 46 fo 0 AGGREGATE  0  a8dedfc32705f3624e247f4c91c31c94c1dde3cc.fsi'
+2022-10-20 10:51:30| 199.9|  0.0|STATS |Stored 79403 feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_AttributeRemover_2 -1 64 fo 0 OUTPUT  0  f5e1fe74abd72c834d98a61145d2ac414025e95a.ffsupdating'
+2022-10-20 10:51:30| 199.9|  0.0|INFORM|Saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_AttributeRemover_2 -1 64 fo 0 OUTPUT  0  f5e1fe74abd72c834d98a61145d2ac414025e95a.fsi'
+2022-10-20 10:51:31| 199.9|  0.0|INFORM|Finished saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_AttributeRemover_2 -1 64 fo 0 OUTPUT  0  f5e1fe74abd72c834d98a61145d2ac414025e95a.fsi'
+2022-10-20 10:51:31| 199.9|  0.0|STATS |Stored 1 feature(s) to FME feature store file `C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter_7 -1 45 fo 0 SUMMARY  0  4f5ce9dfe98fca38dbf3b7e0b7b92b0105e88208.ffsupdating'
+2022-10-20 10:51:31| 199.9|  0.0|INFORM|Saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter_7 -1 45 fo 0 SUMMARY  0  4f5ce9dfe98fca38dbf3b7e0b7b92b0105e88208.fsi'
+2022-10-20 10:51:31| 199.9|  0.0|INFORM|Finished saving spatial index into file 'C:\Users\longcham\AppData\Local\Temp\wb-cache-fake_data_processing-kBPhOi\Main_FeatureWriter_7 -1 45 fo 0 SUMMARY  0  4f5ce9dfe98fca38dbf3b7e0b7b92b0105e88208.fsi'
+2022-10-20 10:51:31| 199.9|  0.0|STATS |FeatureWriter_7_SUMMARY Feature Counter -1 2147614765 (TeeFactory): Cloned 1 input feature(s) into 0 output feature(s)
+2022-10-20 10:51:31| 199.9|  0.0|STATS |Destination Feature Type Routing Correlator (RoutingFactory): Tested 0 input feature(s), wrote 0 output feature(s): 0 matched merge filters, 0 were routed to output, 0 could not be routed.
+2022-10-20 10:51:31| 199.9|  0.0|STATS |Final Output Nuker (TeeFactory): Cloned 0 input feature(s) into 0 output feature(s)
+2022-10-20 10:51:31| 199.9|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:51:31| 199.9|  0.0|STATS |                            Features Read Summary
+2022-10-20 10:51:31| 199.9|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:51:31| 199.9|  0.0|STATS |==============================================================================
+2022-10-20 10:51:31| 199.9|  0.0|STATS |Total Features Read                                                          0
+2022-10-20 10:51:31| 199.9|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:51:31| 199.9|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:51:31| 199.9|  0.0|STATS |                           Features Written Summary
+2022-10-20 10:51:31| 199.9|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:51:31| 199.9|  0.0|STATS |==============================================================================
+2022-10-20 10:51:31| 199.9|  0.0|STATS |Total Features Written                                                       0
+2022-10-20 10:51:31| 199.9|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2022-10-20 10:51:31| 199.9|  0.0|WARN  |-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-
+2022-10-20 10:51:31| 199.9|  0.0|WARN  |-~                                                                             ~-
+2022-10-20 10:51:31| 199.9|  0.0|WARN  |-~    Feature caches have been recorded at every stage of the translation.     ~-
+2022-10-20 10:51:31| 199.9|  0.0|WARN  |-~                      To inspect the recorded features,                      ~-
+2022-10-20 10:51:31| 199.9|  0.0|WARN  |-~              click the feature cache icons next to the ports.               ~-
+2022-10-20 10:51:31| 199.9|  0.0|WARN  |-~                                                                             ~-
+2022-10-20 10:51:31| 199.9|  0.0|WARN  |-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-
+2022-10-20 10:51:31| 200.1|  0.2|INFORM|Translation was SUCCESSFUL with 7 warning(s) (0 feature(s) output)
+2022-10-20 10:51:31| 200.1|  0.0|INFORM|FME Session Duration: 3 minutes 20.9 seconds. (CPU: 190.6s user, 9.5s system)
+2022-10-20 10:51:31| 200.1|  0.0|INFORM|END - ProcessID: 4988, peak process memory usage: 2321220 kB, current process memory usage: 126260 kB
