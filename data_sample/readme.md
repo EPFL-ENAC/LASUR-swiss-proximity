@@ -1,12 +1,16 @@
 # Mabox vector tiles
 
+
+
+# Data
+
 File : access_5th_amenity_transit_0_13.mbtiles
 
 It contains : 
 
 * 2 levels of H3 hexagons (zoom 0 - 8 and 9-10) :
-
- ![m](h3.png)
+  
+  ![m](h3.png)
 
 * and accurate features (zoom 11 -13) :
 
@@ -14,7 +18,21 @@ It contains :
 
 Both layers (amenity and transit) is included. 
 
-## How to start the tile server locally ?
+
+
+# Data publication
+
+## Via the ENAC CDN
+
+Metadata : https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-10-25/metadata.json
+
+
+
+Example query :`https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-10-25/{z}/{x}/{y}.pbf`
+
+
+
+## Local (tileserver-gl) ?
 
 - Place the file access_5th_amenity_transit_0_13.mbtiles into a folder named "tileserv"
 
