@@ -37,8 +37,6 @@ Example query :`https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-10-25/{z
 
 More if on [GitHub - maptiler/tileserver-gl](https://github.com/maptiler/tileserver-gl)
 
-
-
 # Web map
 
 A simple maplibre web map: 
@@ -46,3 +44,5 @@ A simple maplibre web map:
 * [amenity](https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-10-25/access_5th_amenity.html)
 
 * [transit](https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-10-25/access_5th_transit.html)
+
+* [Swipe between maps](https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-10-25/compare.html)
