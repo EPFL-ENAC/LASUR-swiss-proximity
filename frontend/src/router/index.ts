@@ -1,7 +1,8 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-
+import SingleMap from "../views/SingleMap.vue";
+import DoubleMap from "../views/DoubleMap.vue";
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
@@ -9,6 +10,16 @@ const routes: Array<RouteConfig> = [
     path: "/",
     name: "home",
     component: HomeView,
+  },
+  {
+    path: "/singlemap",
+    name: "Single map",
+    component: SingleMap,
+  },
+  {
+    path: "/doublemap",
+    name: "Double map",
+    component: DoubleMap,
   },
   {
     path: "/about",
