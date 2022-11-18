@@ -48,15 +48,15 @@ function zoomed(transform: ZoomTransform) {
   hexagonsmap.value.zoomed(transform);
 }
 
-watch(hexagons, (newHex) => {
-  console.log(newHex);
-});
+// watch(hexagons, (newHex) => {
+//   console.log(newHex);
+// });
 
 onMounted(() => {
   width.value = container.value["clientWidth"] | 0;
   height.value = container.value["clientHeight"] | 0;
 
-  console.log(width.value, height.value, container.value);
+  // console.log(width.value, height.value, container.value);
 
   d3select(container.value)
     .call(zoom.value)
@@ -65,9 +65,12 @@ onMounted(() => {
       d3zoomIdentity.translate(-828, 8730).scale(57494)
     );
 
+  console.log("Start fetch");
   d3csv("/hex.csv").then((data) => {
+    console.log("Data fetched");
     loading.value = false;
     hexagons.value = data as unknown as never[];
+    console.log("Hexagons.value changed");
   });
 });
 </script>
