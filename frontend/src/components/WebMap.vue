@@ -1,22 +1,39 @@
 <template>
-  <div id="webmap" ref="container" class="full-height map">
+  <div ref="container" class="full-height map">
     <BackgroundMapVue ref="background"></BackgroundMapVue>
-    <HexagonsMapVue :hexagons="hexagons" ref="hexagonsmap"></HexagonsMapVue>
+    <HexagonsMapVue
+      :resolutions_hexagons="resolutions_hexagons"
+      :resolutions="resolutions"
+      :last_hexagon_res="last_hexagon_res"
+      :scale-color="props.scaleColor"
+      ref="hexagonsmap"
+    ></HexagonsMapVue>
     <v-progress-linear :active="loading" indeterminate></v-progress-linear>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, watch } from "vue";
+import {
+  ref,
+  onMounted,
+  Ref,
+  defineProps,
+  defineEmits,
+  computed,
+  watch,
+} from "vue";
 import BackgroundMapVue from "./BackgroundMap.vue";
 import HexagonsMapVue from "./HexagonsMap.vue";
+import { Hexagon } from "../models/h3";
+import { parse as Papaparse, ParseResult } from "papaparse";
 import {
   zoom as d3zoom,
   select as d3select,
   zoomIdentity as d3zoomIdentity,
-  csv as d3csv,
   ZoomTransform,
 } from "d3";
+
+import { hexagonsResolutions as resolutions, scale } from "@/utils/map";
 
 const loading = ref(true);
 
@@ -24,8 +41,17 @@ const container = ref();
 const background = ref();
 const hexagonsmap = ref();
 
-const center = [-837, 9380];
-const scale = 61878;
+const props = defineProps<{
+  scaleColor: (hex: Hexagon) => string;
+  transform: ZoomTransform;
+}>();
+
+const emit = defineEmits<{
+  (event: "update:transform", value: ZoomTransform): void;
+}>();
+
+const width = ref(0);
+const height = ref(0);
 
 const zoom = ref(
   d3zoom()
@@ -38,19 +64,28 @@ const zoom = ref(
     .on("end.render", (event) => zoomed(event.transform))
 );
 
-const width = ref(0);
-const height = ref(0);
+const last_hexagon_res: Ref<number> = ref(0);
+const resolutions_hexagons: Ref<Map<number, Hexagon[]>> = ref(new Map());
 
-const hexagons = ref([]);
+const transformSync = computed({
+  get() {
+    return props.transform;
+  },
+  set(value) {
+    emit("update:transform", value);
+  },
+});
+
+watch(
+  () => props.transform,
+  (newTransform) => zoomed(newTransform)
+);
 
 function zoomed(transform: ZoomTransform) {
+  transformSync.value = transform;
   background.value.zoomed(transform);
   hexagonsmap.value.zoomed(transform);
 }
-
-// watch(hexagons, (newHex) => {
-//   console.log(newHex);
-// });
 
 onMounted(() => {
   width.value = container.value["clientWidth"] | 0;
@@ -60,24 +95,30 @@ onMounted(() => {
 
   d3select(container.value)
     .call(zoom.value)
-    .call(
-      zoom.value.transform,
-      d3zoomIdentity.translate(-828, 8730).scale(57494)
-    );
+    .call(zoom.value.transform, transformSync.value);
 
   console.log("Start fetch");
-  d3csv("/hex.csv").then((data) => {
-    console.log("Data fetched");
-    loading.value = false;
-    hexagons.value = data as unknown as never[];
-    console.log("Hexagons.value changed");
-  });
+  for (const res of resolutions) {
+    Papaparse(`/hexagons/hexagons_${res}.csv`, {
+      // worker: t  rue,
+      download: true,
+      header: true,
+      dynamicTyping: true,
+      complete: function (results: ParseResult<Hexagon>) {
+        console.log("Parsing completed res", res);
+        resolutions_hexagons.value.set(res, results.data);
+        loading.value = false;
+        last_hexagon_res.value = res;
+        console.log("Hexagons.value changed");
+      },
+    });
+  }
 });
 </script>
 
 <style scoped>
 .map {
-  min-height: 800px;
+  min-height: 1000px;
   width: 100%;
   position: relative;
 }

@@ -1,7 +1,10 @@
 <template>
-  <svg ref="svg" :viewBox="viewbox" class="backgroundMap">
-    <g id="layers" pointer-events="none"></g>
-  </svg>
+  <svg
+    ref="svg"
+    :viewBox="viewbox"
+    pointer-events="none"
+    class="backgroundMap"
+  ></svg>
 </template>
 
 <script setup>
@@ -49,7 +52,8 @@ onMounted(() => {
 
   tile.value = d3tile().size([width.value, height.value]).tileSize(512);
 
-  levels.value = d3select("#layers")
+  levels.value = d3select(svg.value)
+    .append("g")
     .selectAll("g")
     .data(deltas.value)
     .join("g");
