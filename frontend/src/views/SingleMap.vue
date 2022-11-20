@@ -2,11 +2,8 @@
   <div class="d-flex flex-column full-height text-justify">
     <div class="d-flex flex-row align-center ma-3">
       <div class="flex-grow-1">
-        <h1>Un atlas des paysages de mobilité à Vernier</h1>
-        <span class="text-subtitle-1">
-          Vers une lecture affective de l’espace de la Commune de Vernier,
-          Genève
-        </span>
+        <h1>Mode 1</h1>
+        <span class="text-subtitle-1"> Ratio amenity / transit </span>
       </div>
       <a href="https://epfl.ch" target="_blank">
         <v-img
@@ -19,7 +16,10 @@
     </div>
     <v-divider></v-divider>
     <div class="flex-grow-1 d-flex flex-row">
-      <WebMap></WebMap>
+      <WebMap
+        :scale-color="(hex) => scaleColor(hex.amenity / hex.transit)"
+        :transform="transform"
+      ></WebMap>
       <div class="d-flex flex-column">
         <div class="flex-even"></div>
         <v-divider></v-divider>
@@ -40,6 +40,14 @@
 
 <script lang="ts" setup>
 import WebMap from "@/components/WebMap.vue";
+import { scaleQuantize, zoomIdentity as d3zoomIdentity } from "d3";
+import { ref } from "vue";
+import { mapColors } from "@/utils/map";
+const transform = ref(d3zoomIdentity.translate(-828, 8730).scale(57494));
+
+const scaleColor = ref(
+  scaleQuantize<string, never>().domain([0.2, 6.7]).range(mapColors)
+);
 </script>
 
 <style scoped></style>

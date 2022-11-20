@@ -2,11 +2,8 @@
   <div class="d-flex flex-column full-height text-justify">
     <div class="d-flex flex-row align-center ma-3">
       <div class="flex-grow-1">
-        <h1>Un atlas des paysages de mobilité à Vernier</h1>
-        <span class="text-subtitle-1">
-          Vers une lecture affective de l’espace de la Commune de Vernier,
-          Genève
-        </span>
+        <h1>Mode 2</h1>
+        <span class="text-subtitle-1"> Left is amenity - Right is transit</span>
       </div>
       <a href="https://epfl.ch" target="_blank">
         <v-img
@@ -24,8 +21,27 @@
         <v-divider></v-divider>
       </div>
       <v-divider vertical></v-divider>
+
       <div class="flex-grow-1 d-flex flex-column">
         <v-divider></v-divider>
+        <WebMap
+          :scale-color="(hex) => scaleColor(hex.amenity)"
+          :transform="transform"
+          @update:transform="(newTransform) => (transform = newTransform)"
+        ></WebMap>
+        <div class="d-flex flex-row">
+          <div class="flex-even legend"></div>
+          <v-divider vertical></v-divider>
+          <div class="flex-even legend"></div>
+        </div>
+      </div>
+      <div class="flex-grow-1 d-flex flex-column">
+        <v-divider></v-divider>
+        <WebMap
+          :scale-color="(hex) => scaleColor(hex.transit)"
+          :transform="transform"
+          @update:transform="(newTransform) => (transform = newTransform)"
+        ></WebMap>
         <div class="d-flex flex-row">
           <div class="flex-even legend"></div>
           <v-divider vertical></v-divider>
@@ -36,61 +52,17 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "HelloWorld",
+<script lang="ts" setup>
+import WebMap from "@/components/WebMap.vue";
+import { scaleQuantize, zoomIdentity as d3zoomIdentity } from "d3";
+import { ref, watch } from "vue";
+import { mapColors } from "@/utils/map";
 
-  data: () => ({
-    ecosystem: [
-      {
-        text: "vuetify-loader",
-        href: "https://github.com/vuetifyjs/vuetify-loader",
-      },
-      {
-        text: "github",
-        href: "https://github.com/vuetifyjs/vuetify",
-      },
-      {
-        text: "awesome-vuetify",
-        href: "https://github.com/vuetifyjs/awesome-vuetify",
-      },
-    ],
-    importantLinks: [
-      {
-        text: "Documentation",
-        href: "https://vuetifyjs.com",
-      },
-      {
-        text: "Chat",
-        href: "https://community.vuetifyjs.com",
-      },
-      {
-        text: "Made with Vuetify",
-        href: "https://madewithvuejs.com/vuetify",
-      },
-      {
-        text: "Twitter",
-        href: "https://twitter.com/vuetifyjs",
-      },
-      {
-        text: "Articles",
-        href: "https://medium.com/vuetify",
-      },
-    ],
-    whatsNext: [
-      {
-        text: "Explore components",
-        href: "https://vuetifyjs.com/components/api-explorer",
-      },
-      {
-        text: "Select a layout",
-        href: "https://vuetifyjs.com/getting-started/pre-made-layouts",
-      },
-      {
-        text: "Frequently Asked Questions",
-        href: "https://vuetifyjs.com/getting-started/frequently-asked-questions",
-      },
-    ],
-  }),
-};
+const transform = ref(d3zoomIdentity.translate(-828, 8730).scale(57494));
+
+const scaleColor = ref(
+  scaleQuantize<string, never>().domain([10, 2000]).range(mapColors)
+);
 </script>
+
+<style scoped></style>
