@@ -11,6 +11,8 @@
     "@mdi/font": "5.9.55",
     "core-js": "^3.8.3",
     "d3": "^7.6.1",
+    "d3-geo-projection": "^4.0.0",
+    "d3-tile": "^1.0.0",
     "h3": "^1.0.1",
     "h3-js": "^4.0.1",
     "papaparse": "^5.3.2",
@@ -21,6 +23,7 @@
     "vuetify": "^2.6.0"
   },
   "devDependencies": {
+    "@types/d3": "^7.4.0",
     "@types/papaparse": "^5.3.5",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
