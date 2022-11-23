@@ -1,0 +1,33 @@
+{
+  "version": 8,
+  "name": "OSM Liberty",
+  "sources": {
+    "lh018p56r": {
+      "type": "vector",
+      "tiles": [
+        "https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-11-23/{z}/{x}/{y}.pbf"
+      ],
+      "minZoom": 0,
+      "maxZoom": 22
+    }
+  },
+  "layers": [
+    {
+      "id": "units",
+      "type": "fill",
+      "source": "lh018p56r",
+      "source-layer": "units",
+      "minzoom": 0,
+      "maxzoom": 22,
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-color": "rgba(105, 101, 141, 1)",
+        "fill-opacity": 0.5,
+        "fill-outline-color": "rgba(105, 101, 141, 1)"
+      }
+	  
+    }
+	
+  ],
+  "id": "osm-liberty"
+}
