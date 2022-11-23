@@ -68,6 +68,6 @@ Style url : https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-11-23/style_
 
 Small [webapp](https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-11-23/access_5th_transit.html)
 
-## Styling with MapBox GL or MapLibre
+## Styling with Mapbox or Maplibre
 
 See https://github.com/mapbox/mapbox-gl-native/wiki/Expression-Architecture for a styling explanation.
