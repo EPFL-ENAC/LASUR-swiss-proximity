@@ -61,12 +61,12 @@ Process :
 
 ## Vector tile
 
-Tile url : https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-11-23/{z}/{x}/{y}.pbf
+Tile url : https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-11-24/{z}/{x}/{y}.pbf
 
 
-Style url : https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-11-23/style_access_5th.json
+Style url : https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-11-24/style_access_5th.json
 
-Small [webapp](https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-11-23/access_5th_transit.html)
+Small [webapp](https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-11-24/access_5th_transit.html)
 
 ## Styling with Mapbox or Maplibre
 

@@ -12,6 +12,13 @@
 	
 	
 </style>
+
+<style>
+.mapboxgl-popup {
+max-width: 400px;
+font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+</style>
 </head>
 <body>
 <div id="map"></div>
@@ -37,7 +44,7 @@
         });
         map.addLayer(
             {
-                'id': 'contours',
+                'id': 'units',
                 'type': 'fill',
                 'source': 'contours',
                 'source-layer': 'units',
@@ -49,6 +56,28 @@
             },
             'water_name_line'
         );
+		
+		map.on('click', 'units', function (e) {
+		console.log(e.features[0])
+		new maplibregl.Popup()
+		.setLngLat(e.lngLat)
+		.setHTML(e.features[0].properties.agglomeration_country + 'hello')
+		.addTo(map);
+		});
+		 
+		// Change the cursor to a pointer when the mouse is over the states layer.
+		map.on('mouseenter', 'units', function () {
+		map.getCanvas().style.cursor = 'pointer';
+		});
+		 
+		// Change it back to a pointer when it leaves.
+		map.on('mouseleave', 'units', function () {
+		map.getCanvas().style.cursor = '';
+		});
+		
+		
+		
+		
     });
 
     map.addControl(new maplibregl.NavigationControl());
