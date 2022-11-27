@@ -5,6 +5,7 @@
       <v-tabs>
         <v-tab to="/doublemap">Double</v-tab>
         <v-tab to="/singlemap">Single</v-tab>
+        <v-tab to="/vectortilemap">Vector tiles</v-tab>
         <v-tab to="/about">A propos</v-tab>
       </v-tabs>
     </v-app-bar>
