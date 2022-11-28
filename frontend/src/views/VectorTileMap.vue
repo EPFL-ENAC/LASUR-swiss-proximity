@@ -18,14 +18,17 @@
     <div class="flex-grow-1 d-flex flex-row">
       <div class="d-flex flex-column">
         <div class="variables-selector">
-          <div v-for="variable in listVariables" :key="variable">
+          <div
+            v-for="variable in listVariables"
+            class="checkbox-variable"
+            :key="variable"
+          >
             <input
               type="checkbox"
-              :id="variable"
               :value="variable"
               v-model="selectedVariables"
             />
-            <label :for="variable">{{ variable }}</label>
+            <label :for="variable">{{ cleanVariableString(variable) }}</label>
           </div>
         </div>
 
@@ -49,11 +52,19 @@
 <script lang="ts" setup>
 import MapboxMap from "@/components/MapboxMap.vue";
 import { ref } from "vue";
-import { listPossibleVariables } from "@/utils/map";
+import { listPossibleVariables, cleanVariableString } from "@/utils/variables";
 
 const listVariables = ref(listPossibleVariables);
 
 const selectedVariables = ref(["bike_health", "bike_transit"]);
 </script>
 
-<style scoped></style>
+<style scoped>
+.checkbox-variable >>> input {
+  margin-right: 12px;
+}
+
+.variables-selector {
+  margin: 20px;
+}
+</style>

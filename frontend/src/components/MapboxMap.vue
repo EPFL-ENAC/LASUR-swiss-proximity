@@ -1,9 +1,5 @@
 <template>
   <div ref="container" class="full-height map">
-    <link
-      href="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css"
-      rel="stylesheet"
-    />
     <v-progress-linear :active="loading" indeterminate></v-progress-linear>
   </div>
 </template>
@@ -12,6 +8,7 @@
 import { ref, onMounted, defineProps, watch, onUnmounted } from "vue";
 import { Map, Popup, LngLatLike, MapLayerEventType } from "maplibre-gl";
 import "@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css";
+import "maplibre-gl/dist/maplibre-gl.css";
 import MaplibreGeocoder from "@maplibre/maplibre-gl-geocoder";
 
 import {
@@ -21,10 +18,9 @@ import {
   geocoderAPI,
 } from "@/utils/map";
 
-const loading = ref(true);
+import { cleanVariableString } from "@/utils/variables";
 
-const width = ref(0);
-const height = ref(0);
+const loading = ref(true);
 
 const container = ref<HTMLDivElement>();
 
@@ -61,7 +57,9 @@ function onMove(e: MapLayerEventType["mousemove"]) {
         properties.agglomeration_name + "-" + properties.id
       }</h3>
 </br>${props.variables.map(
-        (key) => "<div>" + key + " : " + properties[key] || null + "</div>"
+        (key) =>
+          "<div>" + cleanVariableString(key) + " : " + properties[key] ||
+          null + "</div>"
       )}`
     )
     .addTo(map);
@@ -87,13 +85,6 @@ watch(
 );
 
 onMounted(() => {
-  if (container.value) {
-    width.value = container.value.clientWidth;
-    height.value = container.value.clientHeight;
-  }
-  // width.value = container.value["clientWidth"] | 0;
-  // height.value = container.value["clientHeight"] | 0;
-
   map = new Map({
     container: container.value as HTMLDivElement,
     style:
