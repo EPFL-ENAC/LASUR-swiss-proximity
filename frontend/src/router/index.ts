@@ -3,6 +3,7 @@ import VueRouter, { RouteConfig } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import SingleMap from "../views/SingleMap.vue";
 import DoubleMap from "../views/DoubleMap.vue";
+import VectorTileMap from "../views/VectorTileMap.vue";
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
@@ -20,6 +21,11 @@ const routes: Array<RouteConfig> = [
     path: "/doublemap",
     name: "Double map",
     component: DoubleMap,
+  },
+  {
+    path: "/vectortilemap",
+    name: "Vector tiles map",
+    component: VectorTileMap,
   },
   {
     path: "/about",
