@@ -55,7 +55,7 @@
 <script lang="ts" setup>
 import WebMap from "@/components/WebMap.vue";
 import { scaleQuantize, zoomIdentity as d3zoomIdentity } from "d3";
-import { ref, watch } from "vue";
+import { ref } from "vue";
 import { mapColors } from "@/utils/map";
 
 const transform = ref(d3zoomIdentity.translate(-828, 8730).scale(57494));

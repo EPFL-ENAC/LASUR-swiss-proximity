@@ -26,12 +26,7 @@ import BackgroundMapVue from "./BackgroundMap.vue";
 import HexagonsMapVue from "./HexagonsMap.vue";
 import { Hexagon } from "../models/h3";
 import { parse as Papaparse, ParseResult } from "papaparse";
-import {
-  zoom as d3zoom,
-  select as d3select,
-  zoomIdentity as d3zoomIdentity,
-  ZoomTransform,
-} from "d3";
+import { zoom as d3zoom, select as d3select, ZoomTransform } from "d3";
 
 import { hexagonsResolutions as resolutions, scale } from "@/utils/map";
 
