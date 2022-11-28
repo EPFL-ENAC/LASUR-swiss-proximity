@@ -41,3 +41,60 @@ export function stepsColors(min: number, max: number, colors: string[]) {
   }
   return returnVal;
 }
+
+export const listPossibleVariables = [
+  "bike_barsresaurants",
+  "bike_health",
+  "bike_posts",
+  "bike_schools",
+  "bike_transit",
+  "transit_barsresaurants",
+  "transit_health",
+  "transit_posts",
+  "transit_schools",
+  "transit_transit",
+  "walk_barsresaurants",
+  "walk_health",
+  "walk_posts",
+  "walk_schools",
+  "walk_transit",
+];
+
+export const geocoderAPI = {
+  forwardGeocode: async (config: { query: string }) => {
+    const features = [];
+    try {
+      const request =
+        "https://nominatim.openstreetmap.org/search?q=" +
+        config.query +
+        "&format=geojson&polygon_geojson=1&addressdetails=1";
+      const response = await fetch(request);
+      const geojson = await response.json();
+      for (const feature of geojson.features) {
+        const center = [
+          feature.bbox[0] + (feature.bbox[2] - feature.bbox[0]) / 2,
+          feature.bbox[1] + (feature.bbox[3] - feature.bbox[1]) / 2,
+        ];
+        const point = {
+          type: "Feature",
+          geometry: {
+            type: "Point",
+            coordinates: center,
+          },
+          place_name: feature.properties.display_name,
+          properties: feature.properties,
+          text: feature.properties.display_name,
+          place_type: ["place"],
+          center: center,
+        };
+        features.push(point);
+      }
+    } catch (e) {
+      console.error(`Failed to forwardGeocode with error: ${e}`);
+    }
+
+    return {
+      features: features,
+    };
+  },
+};

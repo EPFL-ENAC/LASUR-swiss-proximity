@@ -9,27 +9,17 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  ref,
-  onMounted,
-  Ref,
-  defineProps,
-  defineEmits,
-  computed,
-  watch,
-  onUnmounted,
-} from "vue";
-import {
-  Map,
-  Popup,
-  LngLatLike,
-  ExpressionSpecification,
-  ExpressionInputType,
-  MapEventType,
-  MapLayerEventType,
-} from "maplibre-gl";
+import { ref, onMounted, defineProps, watch, onUnmounted } from "vue";
+import { Map, Popup, LngLatLike, MapLayerEventType } from "maplibre-gl";
+import "@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css";
+import MaplibreGeocoder from "@maplibre/maplibre-gl-geocoder";
 
-import { mapColors, stepsColors, expressionMean } from "@/utils/map";
+import {
+  mapColors,
+  stepsColors,
+  expressionMean,
+  geocoderAPI,
+} from "@/utils/map";
 
 const loading = ref(true);
 
@@ -82,6 +72,19 @@ function onLeave() {
   map.getCanvas().style.cursor = "";
   popup.value.remove();
 }
+
+watch(
+  () => props.variables,
+  (newVariables) => {
+    if (map === null) return;
+    map.setPaintProperty("units", "fill-color", [
+      "interpolate",
+      ["linear"],
+      expressionMean(newVariables.length > 0 ? newVariables : ["bike_health"]),
+      ...stepsColors(0, 2000, mapColors),
+    ]);
+  }
+);
 
 onMounted(() => {
   if (container.value) {
@@ -138,6 +141,8 @@ onMounted(() => {
     });
 
     map.on("mousemove", "units", onMove).on("mouseleave", "units", onLeave);
+
+    map.addControl(new MaplibreGeocoder(geocoderAPI));
   });
 });
 

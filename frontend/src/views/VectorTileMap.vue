@@ -17,14 +17,25 @@
     <v-divider></v-divider>
     <div class="flex-grow-1 d-flex flex-row">
       <div class="d-flex flex-column">
-        <div class="flex-even"></div>
+        <div class="variables-selector">
+          <div v-for="variable in listVariables" :key="variable">
+            <input
+              type="checkbox"
+              :id="variable"
+              :value="variable"
+              v-model="selectedVariables"
+            />
+            <label :for="variable">{{ variable }}</label>
+          </div>
+        </div>
+
         <v-divider></v-divider>
       </div>
       <v-divider vertical></v-divider>
 
       <div class="flex-grow-1 d-flex flex-column">
         <v-divider></v-divider>
-        <MapboxMap :variables="variables"></MapboxMap>
+        <MapboxMap :variables="selectedVariables"></MapboxMap>
         <div class="d-flex flex-row">
           <div class="flex-even legend"></div>
           <v-divider vertical></v-divider>
@@ -37,17 +48,12 @@
 
 <script lang="ts" setup>
 import MapboxMap from "@/components/MapboxMap.vue";
-import { scaleQuantize, zoomIdentity as d3zoomIdentity } from "d3";
-import { ref, watch } from "vue";
-import { mapColors } from "@/utils/map";
+import { ref } from "vue";
+import { listPossibleVariables } from "@/utils/map";
 
-const transform = ref(d3zoomIdentity.translate(-828, 8730).scale(57494));
+const listVariables = ref(listPossibleVariables);
 
-const scaleColor = ref(
-  scaleQuantize<string, never>().domain([10, 2000]).range(mapColors)
-);
-
-const variables = ref(["bike_health", "bike_transit"]);
+const selectedVariables = ref(["bike_health", "bike_transit"]);
 </script>
 
 <style scoped></style>
