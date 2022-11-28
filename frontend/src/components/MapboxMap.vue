@@ -66,7 +66,10 @@ function onMove(e: MapLayerEventType["mousemove"]) {
   popup.value
     .setLngLat(e.lngLat)
     .setHTML(
-      `<h3>${properties.municipality_name}</h3>
+      `<h3>${
+        properties.municipality_name ||
+        properties.agglomeration_name + "-" + properties.id
+      }</h3>
 </br>${props.variables.map(
         (key) => "<div>" + key + " : " + properties[key] || null + "</div>"
       )}`
@@ -106,7 +109,7 @@ onMounted(() => {
     map.addSource("lh018p56r", {
       type: "vector",
       tiles: [
-        "https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-11-23/{z}/{x}/{y}.pbf",
+        "https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-11-24/{z}/{x}/{y}.pbf",
       ],
       minzoom: 1,
       maxzoom: 13,
