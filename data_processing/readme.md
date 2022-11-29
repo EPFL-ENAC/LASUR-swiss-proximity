@@ -70,7 +70,9 @@ Process :
 
 ## Vector tile
 
-Tile url : https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-11-24/{z}/{x}/{y}.pbf
+Tile url : https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-11-29/h3/{z}/{x}/{y}.pbf or  [https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-11-29/trafic_agglo/{z}/{x}/{y}.pbf](https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-11-29/trafic_agglo/%7Bz%7D/%7Bx%7D/%7By%7D.pbf)
+
+
 
 Style url : https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-11-24/style_access_5th.json
 
