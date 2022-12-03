@@ -1,17 +1,21 @@
 <template>
   <div ref="container" class="full-height map">
-    <link
-      href="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css"
-      rel="stylesheet"
-    />
     <v-progress-linear :active="loading" indeterminate></v-progress-linear>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref, onMounted, defineProps, watch, onUnmounted } from "vue";
-import { Map, Popup, LngLatLike, MapLayerEventType, Marker } from "maplibre-gl";
+import {
+  Map,
+  Popup,
+  LngLatLike,
+  MapLayerEventType,
+  Source,
+  Marker,
+} from "maplibre-gl";
 import "@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css";
+import "maplibre-gl/dist/maplibre-gl.css";
 import MaplibreGeocoder from "@maplibre/maplibre-gl-geocoder";
 
 import {
@@ -21,10 +25,9 @@ import {
   geocoderAPI,
 } from "@/utils/map";
 
-const loading = ref(true);
+import { cleanVariableString } from "@/utils/variables";
 
-const width = ref(0);
-const height = ref(0);
+const loading = ref(true);
 
 const container = ref<HTMLDivElement>();
 
@@ -38,6 +41,7 @@ const center: LngLatLike = [7.95, 46.74];
 
 const props = defineProps<{
   variables: string[];
+  tilesUrl: { name: string; url: string };
 }>();
 
 var map: Map | null = null;
@@ -61,7 +65,9 @@ function onMove(e: MapLayerEventType["mousemove"]) {
         properties.agglomeration_name + "-" + properties.id
       }</h3>
 </br>${props.variables.map(
-        (key) => "<div>" + key + " : " + properties[key] || null + "</div>"
+        (key) =>
+          "<div>" + cleanVariableString(key) + " : " + properties[key] ||
+          null + "</div>"
       )}`
     )
     .addTo(map);
@@ -86,14 +92,20 @@ watch(
   }
 );
 
-onMounted(() => {
-  if (container.value) {
-    width.value = container.value.clientWidth;
-    height.value = container.value.clientHeight;
-  }
-  // width.value = container.value["clientWidth"] | 0;
-  // height.value = container.value["clientHeight"] | 0;
+type SourceNewAPI = {
+  setTiles: (tiles: string[]) => void;
+};
 
+watch(
+  () => props.tilesUrl,
+  (newTilesUrl) => {
+    if (map === null) return;
+    const source = map.getSource("tiles") as Source & SourceNewAPI;
+    if (source && source.setTiles) source.setTiles([newTilesUrl.url]);
+  }
+);
+
+onMounted(() => {
   map = new Map({
     container: container.value as HTMLDivElement,
     style:
@@ -109,11 +121,9 @@ onMounted(() => {
 
     // Add Mapillary sequence layer.
     // https://www.mapillary.com/developer/tiles-documentation/#sequence-layer
-    map.addSource("lh018p56r", {
+    map.addSource("tiles", {
       type: "vector",
-      tiles: [
-        "https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-11-24/{z}/{x}/{y}.pbf",
-      ],
+      tiles: [props.tilesUrl.url],
       minzoom: 1,
       maxzoom: 13,
     });
@@ -121,7 +131,7 @@ onMounted(() => {
     map.addLayer({
       id: "units",
       type: "fill",
-      source: "lh018p56r",
+      source: "tiles",
       "source-layer": "units",
       minzoom: 0,
       maxzoom: 22,

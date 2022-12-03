@@ -17,25 +17,41 @@
     <v-divider></v-divider>
     <div class="flex-grow-1 d-flex flex-row">
       <div class="d-flex flex-column">
-        <div class="variables-selector">
-          <div v-for="variable in listVariables" :key="variable">
+        <div class="selector">
+          <div
+            v-for="variable in listVariables"
+            class="variable"
+            :key="variable"
+          >
             <input
               type="checkbox"
-              :id="variable"
               :value="variable"
               v-model="selectedVariables"
             />
-            <label :for="variable">{{ variable }}</label>
+            <label :for="variable">{{ cleanVariableString(variable) }}</label>
           </div>
         </div>
 
         <v-divider></v-divider>
+        <div class="selector">
+          <div
+            v-for="tilesUrl in tilesUrls"
+            class="variable"
+            :key="tilesUrl.name"
+          >
+            <input type="radio" :value="tilesUrl" v-model="selectedTilesUrl" />
+            <label :for="tilesUrl.name">{{ tilesUrl.name }}</label>
+          </div>
+        </div>
       </div>
       <v-divider vertical></v-divider>
 
       <div class="flex-grow-1 d-flex flex-column">
         <v-divider></v-divider>
-        <MapboxMap :variables="selectedVariables"></MapboxMap>
+        <MapboxMap
+          :variables="selectedVariables"
+          :tilesUrl="selectedTilesUrl"
+        ></MapboxMap>
         <div class="d-flex flex-row">
           <div class="flex-even legend"></div>
           <v-divider vertical></v-divider>
@@ -49,11 +65,25 @@
 <script lang="ts" setup>
 import MapboxMap from "@/components/MapboxMap.vue";
 import { ref } from "vue";
-import { listPossibleVariables } from "@/utils/map";
+import {
+  listPossibleVariables,
+  tilesUrls,
+  cleanVariableString,
+} from "@/utils/variables";
 
-const listVariables = ref(listPossibleVariables);
+const listVariables = listPossibleVariables;
 
 const selectedVariables = ref(["bike_health", "bike_transit"]);
+
+const selectedTilesUrl = ref(tilesUrls[0]);
 </script>
 
-<style scoped></style>
+<style scoped>
+.variable >>> input {
+  margin-right: 12px;
+}
+
+.selector {
+  margin: 20px;
+}
+</style>
