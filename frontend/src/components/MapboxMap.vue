@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 import { ref, onMounted, defineProps, watch, onUnmounted } from "vue";
-import { Map, Popup, LngLatLike, MapLayerEventType } from "maplibre-gl";
+import { Map, Popup, LngLatLike, MapLayerEventType, Source } from "maplibre-gl";
 import "@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 import MaplibreGeocoder from "@maplibre/maplibre-gl-geocoder";
@@ -34,6 +34,7 @@ const center: LngLatLike = [7.95, 46.74];
 
 const props = defineProps<{
   variables: string[];
+  tilesUrl: { name: string; url: string };
 }>();
 
 var map: Map | null = null;
@@ -84,6 +85,19 @@ watch(
   }
 );
 
+type SourceNewAPI = {
+  setTiles: (tiles: string[]) => void;
+};
+
+watch(
+  () => props.tilesUrl,
+  (newTilesUrl) => {
+    if (map === null) return;
+    const source = map.getSource("tiles") as Source & SourceNewAPI;
+    if (source && source.setTiles) source.setTiles([newTilesUrl.url]);
+  }
+);
+
 onMounted(() => {
   map = new Map({
     container: container.value as HTMLDivElement,
@@ -100,11 +114,9 @@ onMounted(() => {
 
     // Add Mapillary sequence layer.
     // https://www.mapillary.com/developer/tiles-documentation/#sequence-layer
-    map.addSource("lh018p56r", {
+    map.addSource("tiles", {
       type: "vector",
-      tiles: [
-        "https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-11-24/{z}/{x}/{y}.pbf",
-      ],
+      tiles: [props.tilesUrl.url],
       minzoom: 1,
       maxzoom: 13,
     });
@@ -112,7 +124,7 @@ onMounted(() => {
     map.addLayer({
       id: "units",
       type: "fill",
-      source: "lh018p56r",
+      source: "tiles",
       "source-layer": "units",
       minzoom: 0,
       maxzoom: 22,

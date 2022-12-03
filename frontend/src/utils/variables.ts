@@ -16,6 +16,17 @@ export const listPossibleVariables = [
   "walk_transit",
 ];
 
+export const tilesUrls = [
+  {
+    name: "Hexagons h3",
+    url: "https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-11-29/h3/{z}/{x}/{y}.pbf",
+  },
+  {
+    name: "Polygons agglomération",
+    url: "https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-11-29/trafic/{z}/{x}/{y}.pbf",
+  },
+];
+
 export function cleanVariableString(name: string) {
   const str = name.replace(/(-|_|\.)/g, " ").trim();
   return str.charAt(0).toUpperCase() + str.slice(1);
