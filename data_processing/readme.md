@@ -52,16 +52,26 @@ Attributes :
 
 Note that the output data has the same coverage as the Swiss official one (no squares are totally outside Switzerland).
 
-## Municipalities
+## Verkehrszonen
+
+source files : Verkehrszonen_Ausland_NPVM_2017
 
 Process :
 
-1. Select the swiss municipalities that have at least 50% of their surface included into a agglomeration (dissolved_Agglo_Verkehrszonen_NPVM_2017_agglo.shp)
-2. concatanate the agglomeration's names for each selected municipalities
+1. Remove lakes from _Verkehrszonen_Ausland_NPVM_2017
+
+2. Take only polygons thar are inside the agglomerations dissolved_Agglo_Verkehrszonen_NPVM_2017_agglo.shp
+
+3. Keep name for polygon outside switzerland 
+
+4. Redefine municipality name based on swissBOUNDARIES3D_1_3_TLM_HOHEITSGEBIET.shp - if an polygon is on many municipalities, the attributes gather all name with percentage.
+   
+   ![ ](many_municipalities.png)
 
 ## Vector tile
 
-Tile url : https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-11-24/{z}/{x}/{y}.pbf
+Tile url : https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-11-29/h3/{z}/{x}/{y}.pbf or  [https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-11-29/trafic_agglo/{z}/{x}/{y}.pbf](https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-11-29/trafic_agglo/%7Bz%7D/%7Bx%7D/%7By%7D.pbf)
+
 
 
 Style url : https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-11-24/style_access_5th.json

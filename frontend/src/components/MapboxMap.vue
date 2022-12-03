@@ -6,7 +6,14 @@
 
 <script lang="ts" setup>
 import { ref, onMounted, defineProps, watch, onUnmounted } from "vue";
-import { Map, Popup, LngLatLike, MapLayerEventType, Source } from "maplibre-gl";
+import {
+  Map,
+  Popup,
+  LngLatLike,
+  MapLayerEventType,
+  Source,
+  Marker,
+} from "maplibre-gl";
 import "@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 import MaplibreGeocoder from "@maplibre/maplibre-gl-geocoder";
@@ -145,7 +152,13 @@ onMounted(() => {
 
     map.on("mousemove", "units", onMove).on("mouseleave", "units", onLeave);
 
-    map.addControl(new MaplibreGeocoder(geocoderAPI));
+    map.addControl(
+      new MaplibreGeocoder(geocoderAPI, {
+        showResultsWhileTyping: true,
+        showResultMarkers: true,
+        maplibregl: { Marker },
+      })
+    );
   });
 });
 
