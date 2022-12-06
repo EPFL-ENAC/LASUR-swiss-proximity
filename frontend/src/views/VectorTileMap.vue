@@ -19,16 +19,16 @@
       <div class="d-flex flex-column">
         <div class="selector">
           <div
-            v-for="variable in listVariables"
+            v-for="variable in variables"
             class="variable"
-            :key="variable"
+            :key="variable.name"
           >
-            <input
-              type="checkbox"
-              :value="variable"
-              v-model="selectedVariables"
-            />
-            <label :for="variable">{{ cleanVariableString(variable) }}</label>
+            <input type="checkbox" v-model="variable.selected" />
+
+            <label :for="variable.name">{{
+              cleanVariableString(variable.name)
+            }}</label
+            ><input type="number" v-model.number="variable.weight" />
           </div>
         </div>
 
@@ -44,6 +44,7 @@
           </div>
         </div>
       </div>
+
       <v-divider vertical></v-divider>
 
       <div class="flex-grow-1 d-flex flex-column">
@@ -64,7 +65,7 @@
 
 <script lang="ts" setup>
 import MapboxMap from "@/components/MapboxMap.vue";
-import { ref } from "vue";
+import { ref, watch, computed } from "vue";
 import {
   listPossibleVariables,
   tilesUrls,
@@ -73,9 +74,23 @@ import {
 
 const listVariables = listPossibleVariables;
 
-const selectedVariables = ref(["bike_health", "bike_transit"]);
+const variables = ref(
+  listVariables.map((v) => ({
+    name: v,
+    weight: 1,
+    selected: v === "bike_health" || v === "bike_transit",
+  }))
+);
+
+const selectedVariables = computed(() => {
+  return variables.value.filter((v) => v.selected);
+});
 
 const selectedTilesUrl = ref(tilesUrls[0]);
+
+watch(selectedVariables, (newVal) => {
+  console.log(newVal);
+});
 </script>
 
 <style scoped>
