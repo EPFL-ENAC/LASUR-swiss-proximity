@@ -40,7 +40,7 @@ const popup = ref<Popup>(
 const center: LngLatLike = [7.95, 46.74];
 
 const props = defineProps<{
-  variables: string[];
+  variables: { name: string; weight: number; selected: boolean }[];
   tilesUrl: { name: string; url: string };
 }>();
 
@@ -66,8 +66,10 @@ function onMove(e: MapLayerEventType["mousemove"]) {
       }</h3>
 </br>${props.variables.map(
         (key) =>
-          "<div>" + cleanVariableString(key) + " : " + properties[key] ||
-          null + "</div>"
+          "<div>" +
+            cleanVariableString(key.name) +
+            " : " +
+            properties[key.name] || null + "</div>"
       )}`
     )
     .addTo(map);
@@ -86,7 +88,11 @@ watch(
     map.setPaintProperty("units", "fill-color", [
       "interpolate",
       ["linear"],
-      expressionMean(newVariables.length > 0 ? newVariables : ["bike_health"]),
+      expressionMean(
+        newVariables.length > 0
+          ? newVariables
+          : [{ name: "bike_health", weight: 1 }]
+      ),
       ...stepsColors(0, 2000, mapColors),
     ]);
   }

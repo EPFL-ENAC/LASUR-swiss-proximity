@@ -18,16 +18,28 @@ export const center = [-837, 9380];
 export const scale = 61878;
 
 export function expressionMean(
-  attributes: string[]
+  attributes: { name: string; weight: number }[]
 ): ExpressionSpecification | number {
   if (attributes.length == 0) return 0;
-  const n = attributes.length;
-  const values = attributes.map((attr: string) => ["to-number", ["get", attr]]);
-  if (values.length == 1) return values[0] as ExpressionSpecification;
+  const sumWeight = attributes.reduce(
+    (partialSum, attribute) => partialSum + attribute.weight,
+    0
+  );
+  if (attributes.length == 1)
+    return [
+      "to-number",
+      ["get", attributes[0].name],
+    ] as ExpressionSpecification;
+
+  const values = attributes.map(({ name, weight }) => [
+    "*",
+    ["to-number", ["get", name]],
+    weight,
+  ]);
   const total = values.reduce(
     (acc, curr) => ["+", acc, curr] as (string | string[])[]
   );
-  return ["/", total, n] as ExpressionSpecification;
+  return ["/", total, sumWeight] as ExpressionSpecification;
 }
 
 export function stepsColors(min: number, max: number, colors: string[]) {

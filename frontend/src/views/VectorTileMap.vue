@@ -16,34 +16,44 @@
     </div>
     <v-divider></v-divider>
     <div class="flex-grow-1 d-flex flex-row">
-      <div class="d-flex flex-column">
-        <div class="selector">
-          <div
-            v-for="variable in listVariables"
-            class="variable"
-            :key="variable"
-          >
-            <input
-              type="checkbox"
-              :value="variable"
-              v-model="selectedVariables"
-            />
-            <label :for="variable">{{ cleanVariableString(variable) }}</label>
-          </div>
-        </div>
+      <v-reponsive class="d-flex flex-column selector-column">
+        <v-responsive-content>
+          <v-radio-group v-model="selectedTilesUrl">
+            <v-radio
+              v-for="tilesUrl in tilesUrls"
+              class="variable"
+              :key="tilesUrl.name"
+              :label="tilesUrl.name"
+              :value="tilesUrl"
+            >
+            </v-radio>
+          </v-radio-group>
 
-        <v-divider></v-divider>
-        <div class="selector">
-          <div
-            v-for="tilesUrl in tilesUrls"
+          <v-divider></v-divider>
+
+          <v-input
+            v-for="variable in variables"
             class="variable"
-            :key="tilesUrl.name"
+            :key="variable.name"
           >
-            <input type="radio" :value="tilesUrl" v-model="selectedTilesUrl" />
-            <label :for="tilesUrl.name">{{ tilesUrl.name }}</label>
-          </div>
-        </div>
-      </div>
+            <v-checkbox
+              v-model="variable.selected"
+              :label="cleanVariableString(variable.name)"
+            ></v-checkbox>
+
+            <v-slider
+              dense
+              min="0"
+              max="2"
+              step="0.1"
+              v-model="variable.weight"
+              thumb-label
+              :thumb-size="26"
+            ></v-slider>
+          </v-input>
+        </v-responsive-content>
+      </v-reponsive>
+
       <v-divider vertical></v-divider>
 
       <div class="flex-grow-1 d-flex flex-column">
@@ -64,7 +74,7 @@
 
 <script lang="ts" setup>
 import MapboxMap from "@/components/MapboxMap.vue";
-import { ref } from "vue";
+import { ref, watch, computed } from "vue";
 import {
   listPossibleVariables,
   tilesUrls,
@@ -73,17 +83,28 @@ import {
 
 const listVariables = listPossibleVariables;
 
-const selectedVariables = ref(["bike_health", "bike_transit"]);
+const variables = ref(
+  listVariables.map((v) => ({
+    name: v,
+    weight: 1,
+    selected: v === "bike_health" || v === "bike_transit",
+  }))
+);
+
+const selectedVariables = computed(() => {
+  return variables.value.filter(({ weight, selected }) => selected);
+});
 
 const selectedTilesUrl = ref(tilesUrls[0]);
 </script>
 
 <style scoped>
-.variable >>> input {
+.variable :deep(input) {
   margin-right: 12px;
+  text-align: right;
 }
 
-.selector {
-  margin: 20px;
+.selector-column {
+  width: 400px;
 }
 </style>
