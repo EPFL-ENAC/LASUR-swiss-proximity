@@ -16,34 +16,43 @@
     </div>
     <v-divider></v-divider>
     <div class="flex-grow-1 d-flex flex-row">
-      <div class="d-flex flex-column">
-        <div class="selector">
-          <div
+      <v-reponsive class="d-flex flex-column selector-column">
+        <v-responsive-content>
+          <v-radio-group v-model="selectedTilesUrl">
+            <v-radio
+              v-for="tilesUrl in tilesUrls"
+              class="variable"
+              :key="tilesUrl.name"
+              :label="tilesUrl.name"
+              :value="tilesUrl"
+            >
+            </v-radio>
+          </v-radio-group>
+
+          <v-divider></v-divider>
+
+          <v-input
             v-for="variable in variables"
             class="variable"
             :key="variable.name"
           >
-            <input type="checkbox" v-model="variable.selected" />
+            <v-checkbox
+              v-model="variable.selected"
+              :label="cleanVariableString(variable.name)"
+            ></v-checkbox>
 
-            <label :for="variable.name">{{
-              cleanVariableString(variable.name)
-            }}</label
-            ><input type="number" v-model.number="variable.weight" />
-          </div>
-        </div>
-
-        <v-divider></v-divider>
-        <div class="selector">
-          <div
-            v-for="tilesUrl in tilesUrls"
-            class="variable"
-            :key="tilesUrl.name"
-          >
-            <input type="radio" :value="tilesUrl" v-model="selectedTilesUrl" />
-            <label :for="tilesUrl.name">{{ tilesUrl.name }}</label>
-          </div>
-        </div>
-      </div>
+            <v-slider
+              dense
+              min="0"
+              max="2"
+              step="0.1"
+              v-model="variable.weight"
+              thumb-label
+              :thumb-size="26"
+            ></v-slider>
+          </v-input>
+        </v-responsive-content>
+      </v-reponsive>
 
       <v-divider vertical></v-divider>
 
@@ -83,22 +92,19 @@ const variables = ref(
 );
 
 const selectedVariables = computed(() => {
-  return variables.value.filter((v) => v.selected);
+  return variables.value.filter(({ weight, selected }) => selected);
 });
 
 const selectedTilesUrl = ref(tilesUrls[0]);
-
-watch(selectedVariables, (newVal) => {
-  console.log(newVal);
-});
 </script>
 
 <style scoped>
-.variable >>> input {
+.variable :deep(input) {
   margin-right: 12px;
+  text-align: right;
 }
 
-.selector {
-  margin: 20px;
+.selector-column {
+  width: 400px;
 }
 </style>

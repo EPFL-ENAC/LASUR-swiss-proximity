@@ -39,7 +39,6 @@ export function expressionMean(
   const total = values.reduce(
     (acc, curr) => ["+", acc, curr] as (string | string[])[]
   );
-  console.debug(sumWeight, values, total);
   return ["/", total, sumWeight] as ExpressionSpecification;
 }
 
