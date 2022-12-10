@@ -11,3 +11,7 @@ make install
 ```bash
 make run
 ```
+
+## Data Processing
+
+See `/data_processing/README.md`
