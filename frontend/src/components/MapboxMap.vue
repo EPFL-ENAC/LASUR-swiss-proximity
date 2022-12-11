@@ -6,7 +6,14 @@
 
 <script lang="ts" setup>
 import { ref, onMounted, defineProps, watch, onUnmounted } from "vue";
-import { Map, Popup, LngLatLike, MapLayerEventType, Marker } from "maplibre-gl";
+import {
+  Map,
+  Popup,
+  LngLatLike,
+  MapLayerEventType,
+  Marker,
+  Source,
+} from "maplibre-gl";
 import "@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 import MaplibreGeocoder from "@maplibre/maplibre-gl-geocoder";
@@ -19,6 +26,9 @@ import {
 } from "@/utils/map";
 
 import { cleanVariableString, TileParams } from "@/utils/variables";
+import { Isochrones } from "openrouteservice-js";
+
+import { Feature } from "geojson";
 
 const loading = ref(true);
 
@@ -39,6 +49,10 @@ const props = defineProps<{
 }>();
 
 var map: Map | null = null;
+
+const orsIsochrones = new Isochrones({
+  api_key: process.env.VUE_APP_OPENROUTESERVICE_API_KEY,
+});
 
 function onMove(e: MapLayerEventType["mousemove"]) {
   if (map === null) return;
@@ -100,12 +114,6 @@ watch(
   }
 );
 
-// This was a try to use the new API of maplibre-gl, I used it to change the source of layers, now we have both layers and trigger visibility
-// type SourceNewAPI = {
-//   setTiles: (tiles: string[]) => void;
-//   setSourceProperty: (callback: any) => void;
-// };
-
 watch(
   () => props.selectedTilesName,
   (newSelectedTileName) => {
@@ -124,6 +132,33 @@ watch(
 
 function secureTilesName(name: string) {
   return name.replace(/[^a-zA-Z0-9]/g, "_").toLowerCase();
+}
+
+type SourceNewAPI = {
+  setData: (data: Feature) => void;
+};
+
+function onGeocodingSearchResult(e: { result: { center: LngLatLike } }) {
+  if (map === null) return;
+  map.flyTo({
+    center: e.result.center,
+    zoom: 12,
+  });
+  console.log(process.env.VUE_APP_OPENROUTESERVICE_API_KEY, e.result.center);
+  orsIsochrones
+    .calculate({
+      locations: [e.result.center],
+      profile: "driving-car",
+      range: [900],
+      range_type: "time",
+    })
+    .then(function (response: { features: Feature[] }) {
+      const source = map?.getSource("isochrone") as Source & SourceNewAPI;
+      if (source && source.setData) source.setData(response.features[0]);
+    })
+    .catch(function (err: Error) {
+      console.error(err);
+    });
 }
 
 onMounted(() => {
@@ -173,6 +208,33 @@ onMounted(() => {
       });
     });
 
+    map.addSource("isochrone", {
+      type: "geojson",
+      data: { type: "Feature", geometry: { type: "Polygon", coordinates: [] } },
+    });
+    // Add a new layer to visualize the isochrone.
+    map.addLayer({
+      id: "isochrone-fill",
+      type: "fill",
+      source: "isochrone", // reference the data source
+      layout: {},
+      paint: {
+        "fill-color": "#0080ff", // blue color fill
+        "fill-opacity": 0.5,
+      },
+    });
+    // Add a blue outline around the isochrone.
+    map.addLayer({
+      id: "isochrone-outline",
+      type: "line",
+      source: "isochrone",
+      layout: {},
+      paint: {
+        "line-color": "#0080ff",
+        "line-width": 2,
+      },
+    });
+
     map.on("mousemove", "units", onMove).on("mouseleave", "units", onLeave);
 
     // This control is used to search for a location
@@ -181,6 +243,13 @@ onMounted(() => {
         showResultsWhileTyping: true,
         showResultMarkers: true,
         maplibregl: { Marker },
+      }).on("result", (e: { result: { center: LngLatLike } }) => {
+        if (map === null) return;
+        map.flyTo({
+          center: e.result.center,
+          zoom: 12,
+        });
+        onGeocodingSearchResult(e);
       })
     );
   });
