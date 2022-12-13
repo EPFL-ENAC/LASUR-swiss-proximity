@@ -11,3 +11,8 @@ make install
 ```bash
 make run
 ```
+## Project deploy
+
+```bash
+make deploy
+```
