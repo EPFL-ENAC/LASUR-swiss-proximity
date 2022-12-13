@@ -12,6 +12,12 @@ make install
 make run
 ```
 
+## Project deploy
+
+```bash
+make deploy
+```
+
 ## Data Processing
 
 See `/data_processing/README.md`
