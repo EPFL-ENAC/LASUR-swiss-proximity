@@ -18,13 +18,13 @@
     <div class="flex-grow-1 d-flex flex-row">
       <v-reponsive class="d-flex flex-column selector-column">
         <v-responsive-content>
-          <v-radio-group v-model="selectedTilesUrl">
+          <v-radio-group v-model="selectedTilesSource">
             <v-radio
-              v-for="tilesUrl in tilesUrls"
+              v-for="tilesParams in listTilesParams"
               class="variable"
-              :key="tilesUrl.name"
-              :label="tilesUrl.name"
-              :value="tilesUrl"
+              :key="tilesParams.name"
+              :label="tilesParams.name"
+              :value="tilesParams"
             >
             </v-radio>
           </v-radio-group>
@@ -60,7 +60,8 @@
         <v-divider></v-divider>
         <MapboxMap
           :variables="selectedVariables"
-          :tilesUrl="selectedTilesUrl"
+          :list-tiles-params="listTilesParams"
+          :selected-tiles-name="selectedTilesSource.name"
         ></MapboxMap>
         <div class="d-flex flex-row">
           <div class="flex-even legend"></div>
@@ -74,10 +75,10 @@
 
 <script lang="ts" setup>
 import MapboxMap from "@/components/MapboxMap.vue";
-import { ref, watch, computed } from "vue";
+import { ref, computed } from "vue";
 import {
   listPossibleVariables,
-  tilesUrls,
+  listTilesParams,
   cleanVariableString,
 } from "@/utils/variables";
 
@@ -92,10 +93,10 @@ const variables = ref(
 );
 
 const selectedVariables = computed(() => {
-  return variables.value.filter(({ weight, selected }) => selected);
+  return variables.value.filter(({ selected }) => selected);
 });
 
-const selectedTilesUrl = ref(tilesUrls[0]);
+const selectedTilesSource = ref(listTilesParams[0]);
 </script>
 
 <style scoped>

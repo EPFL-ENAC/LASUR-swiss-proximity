@@ -17,31 +17,50 @@ export const hexagonsResolutions = [6, 7, 8];
 export const center = [-837, 9380];
 export const scale = 61878;
 
+// This function calculates the weighted mean of a set of attributes in an object. It takes an array of objects with name and weight properties, and returns either a number or an expression specification.
+// If the input array is empty, the function returns 0. If the array has only one element, it returns an expression specification for the attribute specified in the element.
+// Otherwise, it returns an expression specification that calculates the mean of the attributes.
+
+// Thanks ChatGPT ;)
+
+// I'm actually using this function to create the "maplibre" expression https://maplibre.org/maplibre-gl-js-docs/style-spec/expressions/#math to calculate the weighted mean of the variables in the map
+
 export function expressionMean(
   attributes: { name: string; weight: number }[]
 ): ExpressionSpecification | number {
   if (attributes.length == 0) return 0;
+
+  // Calculate the sum of the weights
   const sumWeight = attributes.reduce(
     (partialSum, attribute) => partialSum + attribute.weight,
     0
   );
+
+  // If there is only one attribute, return an expression that gets the value of the attribute
   if (attributes.length == 1)
     return [
       "to-number",
       ["get", attributes[0].name],
     ] as ExpressionSpecification;
 
+  // Otherwise, calculate the weighted mean of the attributes
   const values = attributes.map(({ name, weight }) => [
     "*",
     ["to-number", ["get", name]],
     weight,
   ]);
+
+  // Create an expression that calculates the sum of the weighted values
   const total = values.reduce(
     (acc, curr) => ["+", acc, curr] as (string | string[])[]
   );
+
+  // Use the total and the sum of the weights to calculate the weighted mean
   return ["/", total, sumWeight] as ExpressionSpecification;
 }
 
+// This function returns an array of colors and values to be used in the map legend. It takes the minimum and maximum values of the variable, and an array of colors.
+// It returns an array of values and colors, where the values are the values of the variable that correspond to the colors in the legend.
 export function stepsColors(min: number, max: number, colors: string[]) {
   const diff = max - min,
     n = colors.length - 1,
@@ -54,29 +73,14 @@ export function stepsColors(min: number, max: number, colors: string[]) {
   return returnVal;
 }
 
-export const listPossibleVariables = [
-  "bike_barsresaurants",
-  "bike_health",
-  "bike_posts",
-  "bike_schools",
-  "bike_transit",
-  "transit_barsresaurants",
-  "transit_health",
-  "transit_posts",
-  "transit_schools",
-  "transit_transit",
-  "walk_barsresaurants",
-  "walk_health",
-  "walk_posts",
-  "walk_schools",
-  "walk_transit",
-];
-
+// Thoses coordinates create a bounding box around Switzerland, I use them to limit the search to Switzerland
+// I choose them by hand with a little margin around the country
 const switzerlandGeocoordinatesLimits = [
   [45.8, 5.9],
   [47.9, 10.6],
 ];
 
+// This function is used to forward geocode the search input. It takes a query string and returns a list of features.
 export const geocoderAPI = {
   forwardGeocode: async (config: { query: string }) => {
     const features = [];

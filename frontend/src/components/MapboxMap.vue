@@ -6,14 +6,7 @@
 
 <script lang="ts" setup>
 import { ref, onMounted, defineProps, watch, onUnmounted } from "vue";
-import {
-  Map,
-  Popup,
-  LngLatLike,
-  MapLayerEventType,
-  Source,
-  Marker,
-} from "maplibre-gl";
+import { Map, Popup, LngLatLike, MapLayerEventType, Marker } from "maplibre-gl";
 import "@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 import MaplibreGeocoder from "@maplibre/maplibre-gl-geocoder";
@@ -25,7 +18,7 @@ import {
   geocoderAPI,
 } from "@/utils/map";
 
-import { cleanVariableString } from "@/utils/variables";
+import { cleanVariableString, TileParams } from "@/utils/variables";
 
 const loading = ref(true);
 
@@ -41,7 +34,8 @@ const center: LngLatLike = [7.95, 46.74];
 
 const props = defineProps<{
   variables: { name: string; weight: number; selected: boolean }[];
-  tilesUrl: { name: string; url: string };
+  listTilesParams: TileParams[];
+  selectedTilesName: string;
 }>();
 
 var map: Map | null = null;
@@ -84,32 +78,53 @@ function onLeave() {
 watch(
   () => props.variables,
   (newVariables) => {
-    if (map === null) return;
-    map.setPaintProperty("units", "fill-color", [
+    // Change the paint property using new variables and weights
+
+    const expression = [
       "interpolate",
       ["linear"],
-      expressionMean(
-        newVariables.length > 0
-          ? newVariables
-          : [{ name: "bike_health", weight: 1 }]
-      ),
+      expressionMean(newVariables),
+      // Right now steps colors don't change, I will create a static value for them once the data are normalized
       ...stepsColors(0, 2000, mapColors),
-    ]);
+    ];
+
+    props.listTilesParams.forEach(({ name }) => {
+      if (map === null) return;
+
+      map.setPaintProperty(
+        "layer-" + secureTilesName(name),
+        "fill-color",
+        expression
+      );
+    });
   }
 );
 
-type SourceNewAPI = {
-  setTiles: (tiles: string[]) => void;
-};
+// This was a try to use the new API of maplibre-gl, I used it to change the source of layers, now we have both layers and trigger visibility
+// type SourceNewAPI = {
+//   setTiles: (tiles: string[]) => void;
+//   setSourceProperty: (callback: any) => void;
+// };
 
 watch(
-  () => props.tilesUrl,
-  (newTilesUrl) => {
-    if (map === null) return;
-    const source = map.getSource("tiles") as Source & SourceNewAPI;
-    if (source && source.setTiles) source.setTiles([newTilesUrl.url]);
+  () => props.selectedTilesName,
+  (newSelectedTileName) => {
+    props.listTilesParams.forEach(({ name }) => {
+      if (map === null) return;
+
+      // Change the visibility of the layers, only one is visible at a time
+      map.setLayoutProperty(
+        "layer-" + secureTilesName(name),
+        "visibility",
+        name === newSelectedTileName ? "visible" : "none"
+      );
+    });
   }
 );
+
+function secureTilesName(name: string) {
+  return name.replace(/[^a-zA-Z0-9]/g, "_").toLowerCase();
+}
 
 onMounted(() => {
   map = new Map({
@@ -125,39 +140,42 @@ onMounted(() => {
 
     if (map == null) return;
 
-    // Add Mapillary sequence layer.
-    // https://www.mapillary.com/developer/tiles-documentation/#sequence-layer
-    map.addSource("tiles", {
-      type: "vector",
-      tiles: [props.tilesUrl.url],
-      minzoom: 1,
-      maxzoom: 13,
-    });
+    // We add all the vector tiles sources to the map (polygons & h3)
+    props.listTilesParams.forEach((tile) => {
+      if (map == null) return;
 
-    map.addLayer({
-      id: "units",
-      type: "fill",
-      source: "tiles",
-      "source-layer": "units",
-      minzoom: 0,
-      maxzoom: 22,
-      layout: {
-        visibility: "visible",
-      },
-      paint: {
-        "fill-color": [
-          "interpolate",
-          ["linear"],
-          expressionMean(props.variables),
-          ...stepsColors(0, 2000, mapColors),
-        ],
-        "fill-opacity": 0.4,
-        "fill-outline-color": "rgba(105, 101, 141, 1)",
-      },
+      map.addSource(secureTilesName(tile.name), {
+        type: "vector",
+        tiles: [tile.url],
+        minzoom: tile.minzoom,
+        maxzoom: tile.maxzoom,
+      });
+
+      map.addLayer({
+        id: "layer-" + secureTilesName(tile.name),
+        type: "fill",
+        source: secureTilesName(tile.name),
+        "source-layer": "units",
+        layout: {
+          visibility:
+            props.selectedTilesName === tile.name ? "visible" : "none",
+        },
+        paint: {
+          "fill-color": [
+            "interpolate",
+            ["linear"],
+            expressionMean(props.variables),
+            ...stepsColors(0, 2000, mapColors),
+          ],
+          "fill-opacity": 0.4,
+          "fill-outline-color": "rgba(105, 101, 141, 1)",
+        },
+      });
     });
 
     map.on("mousemove", "units", onMove).on("mouseleave", "units", onLeave);
 
+    // This control is used to search for a location
     map.addControl(
       new MaplibreGeocoder(geocoderAPI, {
         showResultsWhileTyping: true,
