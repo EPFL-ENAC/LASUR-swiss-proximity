@@ -1,3 +1,4 @@
+// List of variables available in data, this is not supposed to be modified
 export const listPossibleVariables = [
   "bike_barsresaurants",
   "bike_health",
@@ -16,17 +17,29 @@ export const listPossibleVariables = [
   "walk_transit",
 ];
 
-export const tilesUrls = [
+export type TileParams = {
+  name: string;
+  url: string;
+  minzoom: number;
+  maxzoom: number;
+};
+
+export const listTilesParams: TileParams[] = [
   {
     name: "Hexagons h3",
     url: "https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-11-29/h3/{z}/{x}/{y}.pbf",
+    minzoom: 0,
+    maxzoom: 11,
   },
   {
     name: "Polygons agglomération",
     url: "https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2022-11-29/trafic/{z}/{x}/{y}.pbf",
+    minzoom: 0,
+    maxzoom: 9,
   },
 ];
 
+// Transforms underscores "_" and dashes "-" to spaces and capitalizes the first letter
 export function cleanVariableString(name: string) {
   const str = name.replace(/(-|_|\.)/g, " ").trim();
   return str.charAt(0).toUpperCase() + str.slice(1);
