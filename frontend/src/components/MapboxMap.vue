@@ -130,7 +130,7 @@ onMounted(() => {
   map = new Map({
     container: container.value as HTMLDivElement,
     style:
-      "https://api.maptiler.com/maps/ch-swisstopo-lbm-grey/style.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL",
+      "https://api.maptiler.com/maps/basic-v2-light/style.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL",
     zoom: 7,
     center,
   }) as InstanceType<typeof Map>;
