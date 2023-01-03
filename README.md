@@ -21,3 +21,8 @@ make deploy
 ## Data Processing
 
 See `/data_processing/README.md`
+
+
+## Dev app deployed
+
+https://swiss-proximity-test.epfl.ch/
