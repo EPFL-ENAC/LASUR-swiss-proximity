@@ -51,7 +51,9 @@ const props = defineProps<{
 var map: Map | null = null;
 
 const orsIsochrones = new Isochrones({
-  api_key: process.env.VUE_APP_OPENROUTESERVICE_API_KEY,
+  // On purpose no API key is set, nginx will add Authorization header to the request using API key from env file
+  api_key: "",
+  host: "/orsapi",
 });
 
 function onMove(e: MapLayerEventType["mousemove"]) {
@@ -144,7 +146,7 @@ function onGeocodingSearchResult(e: { result: { center: LngLatLike } }) {
     center: e.result.center,
     zoom: 12,
   });
-  console.log(process.env.VUE_APP_OPENROUTESERVICE_API_KEY, e.result.center);
+
   orsIsochrones
     .calculate({
       locations: [e.result.center],
