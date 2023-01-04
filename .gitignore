@@ -3,3 +3,4 @@ data_sample/tiles/*
 leaflet/*
 *.log
 tiles/
+.env

@@ -2,6 +2,9 @@ install:
 	npm install
 	$(MAKE) -C frontend install
 
+run-proxy:
+	docker-compose up --build --remove-orphans
+
 run:
 	$(MAKE) -C frontend run
 
@@ -12,7 +15,7 @@ lint:
 	$(MAKE) -C frontend lint
 
 deploy:
-	docker-compose build --parallel --pull
+	docker-compose build --pull
 	docker-compose up --remove-orphans
 
 process:

@@ -21,7 +21,11 @@ services:
       - ./traefik.yaml:/configuration/traefik.yml
       - /etc/ssl:/etc/ssl
   frontend:
-    build: ./frontend
+    volumes:
+      - ./nginx.conf.template:/etc/nginx/templates/nginx.conf.template
+    environment:
+      - ORS_API_KEY=${ORS_API_KEY}
+    build: ./
     labels:
       - "traefik.http.routers.frontend.tls=true"
       - "traefik.http.routers.frontend.rule=PathPrefix(`/`)"
