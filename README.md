@@ -1,34 +1,46 @@
 # Swiss Mobility - LASUR & TRANSP OR
 
-## Project setup
+## Setup
 
 ```bash
 make install
 ```
 
-You need to specify your APIs keys in .env file (Openrouteservice, Traveltime, Maptiler)
+You need to specify your APIs keys in `.env` file (Openrouteservice, Traveltime, Maptiler) for api-proxy.
+Example of `.env` file (root folder, as docker-compose.yml):
 
-## Project start dev app
+```
+ORS_API_KEY=thisisasecretapikeypleasedontcopyitlikethisitwontwork
+```
+
+## Start dev app
 
 ```bash
 make run
 ```
 
-For a completely functional app, you will need to have a nginx reverse-proxy working to add secret APIs keys to your requests.
-Before running you can use make ploy
+Only starts development server.
 
-## Project deploy
+## Start dev app with api-proxy
+
+```bash
+make run-dev
+```
+
+Run only reverse-proxy & api-proxy with docker, then starts development server.
+
+## Deploy
 
 ```bash
 make deploy
 ```
 
-This builds the app in a docker image and then runs nginx container, including proxy.
+Build the app in a docker image and then runs nginx container, including api-proxy.
 
 ## Data Processing
 
 See `/data_processing/README.md`
 
-## Dev app deployed
+## Test app deployed
 
 https://swiss-proximity-test.epfl.ch/
