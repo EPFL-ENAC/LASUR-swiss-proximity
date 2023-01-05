@@ -49,6 +49,7 @@ const props = defineProps<{
 }>();
 
 var map: Map | null = null;
+const isochroneMarker: Marker = new Marker({ draggable: true, color: "grey" });
 
 const orsIsochrones = new Isochrones({
   // On purpose no API key is set, nginx will add Authorization header to the request using API key from env file
@@ -140,16 +141,10 @@ type SourceNewAPI = {
   setData: (data: Feature) => void;
 };
 
-function onGeocodingSearchResult(e: { result: { center: LngLatLike } }) {
-  if (map === null) return;
-  map.flyTo({
-    center: e.result.center,
-    zoom: 12,
-  });
-
+function fetchIsochrone(location: LngLatLike) {
   orsIsochrones
     .calculate({
-      locations: [e.result.center],
+      locations: [location],
       profile: "driving-car",
       range: [900],
       range_type: "time",
@@ -161,6 +156,17 @@ function onGeocodingSearchResult(e: { result: { center: LngLatLike } }) {
     .catch(function (err: Error) {
       console.error(err);
     });
+}
+
+function onGeocodingSearchResult(e: { result: { center: LngLatLike } }) {
+  if (map === null) return;
+  isochroneMarker.setLngLat(e.result.center).addTo(map);
+  map.flyTo({
+    center: e.result.center,
+    zoom: 12,
+  });
+
+  fetchIsochrone(e.result.center);
 }
 
 onMounted(() => {
@@ -243,17 +249,16 @@ onMounted(() => {
     map.addControl(
       new MaplibreGeocoder(geocoderAPI, {
         showResultsWhileTyping: true,
-        showResultMarkers: true,
-        maplibregl: { Marker },
-      }).on("result", (e: { result: { center: LngLatLike } }) => {
-        if (map === null) return;
-        map.flyTo({
-          center: e.result.center,
-          zoom: 12,
-        });
-        onGeocodingSearchResult(e);
-      })
+        showResultMarkers: false,
+        marker: false,
+        maplibregl: { Marker, Popup },
+      }).on("result", onGeocodingSearchResult)
     );
+
+    isochroneMarker.on("dragend", () => {
+      const { lng, lat } = isochroneMarker.getLngLat();
+      fetchIsochrone([lng, lat]);
+    });
   });
 });
 
