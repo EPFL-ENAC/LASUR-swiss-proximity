@@ -26,6 +26,13 @@ import {
 } from "@/utils/map";
 
 import { cleanVariableString, TileParams } from "@/utils/variables";
+
+import {
+  TimeMapFastRequestSearch,
+  TimeMapRequestDepartureSearch,
+  TimeMapResponseGeoJSON,
+  TravelTimeClient,
+} from "traveltime-api";
 import { Isochrones } from "openrouteservice-js";
 
 import { Feature } from "geojson";
@@ -51,9 +58,17 @@ const props = defineProps<{
 var map: Map | null = null;
 const isochroneMarker: Marker = new Marker({ draggable: true, color: "grey" });
 
+const traveltimeIsochrones = new TravelTimeClient(
+  {
+    apiKey: "notvalidapikeyitwillbeoverwrittenbynginx",
+    applicationId: "thisisnotasecretbutwillstillbeinenvfile",
+  },
+  { baseURL: "/traveltimeapi" }
+);
+
 const orsIsochrones = new Isochrones({
   // On purpose no API key is set, nginx will add Authorization header to the request using API key from env file
-  api_key: "",
+  api_key: "notvalidapikeyitwillbeoverwrittenbynginx",
   host: "/orsapi",
 });
 
@@ -142,6 +157,32 @@ type SourceNewAPI = {
 };
 
 function fetchIsochrone(location: LngLatLike) {
+  // Parse LngLatLike coords to array
+  const [lng, lat] = location as [number, number];
+  console.log(lat, lng, new Date().toISOString());
+  const departure_search: TimeMapRequestDepartureSearch = {
+    id: "Isochrone transport Switzerland",
+    departure_time: new Date().toISOString(),
+    travel_time: 1800,
+    coords: { lat, lng },
+    transportation: { type: "public_transport" },
+  };
+
+  traveltimeIsochrones
+    .timeMap(
+      {
+        departure_searches: [departure_search],
+      },
+      "application/geo+json"
+    )
+    // .then((data) => console.log(data))
+    .then(function (value: TimeMapResponseGeoJSON) {
+      const source = map?.getSource("isochrone") as Source & SourceNewAPI;
+      if (source && source.setData)
+        source.setData(value.features[0] as Feature);
+    })
+    .catch((e) => console.error(e));
+
   orsIsochrones
     .calculate({
       locations: [location],
@@ -149,10 +190,10 @@ function fetchIsochrone(location: LngLatLike) {
       range: [900],
       range_type: "time",
     })
-    .then(function (response: { features: Feature[] }) {
-      const source = map?.getSource("isochrone") as Source & SourceNewAPI;
-      if (source && source.setData) source.setData(response.features[0]);
-    })
+    // .then(function (response: { features: Feature[] }) {
+    //   const source = map?.getSource("isochrone") as Source & SourceNewAPI;
+    //   if (source && source.setData) source.setData(response.features[0]);
+    // })
     .catch(function (err: Error) {
       console.error(err);
     });

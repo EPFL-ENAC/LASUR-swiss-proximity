@@ -28,6 +28,8 @@ services:
       - ./nginx.conf.template:/etc/nginx/templates/default.conf.template
     environment:
       - ORS_API_KEY=${ORS_API_KEY}
+      - TRAVELTIME_API_KEY=${TRAVELTIME_API_KEY}
+      - TRAVELTIME_APP_ID=${TRAVELTIME_APP_ID}
     build: ./frontend/
     labels:
       - "traefik.http.routers.frontend.tls=true"
@@ -41,6 +43,8 @@ services:
     profiles: ["dev"]
     environment:
       - ORS_API_KEY=${ORS_API_KEY}
+      - TRAVELTIME_API_KEY=${TRAVELTIME_API_KEY}
+      - TRAVELTIME_APP_ID=${TRAVELTIME_APP_ID}
     labels:
       - "traefik.http.routers.frontend.tls=true"
       - "traefik.http.routers.frontend.rule=PathPrefix(`/`)"
