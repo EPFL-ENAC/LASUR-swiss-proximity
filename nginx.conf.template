@@ -42,6 +42,19 @@ server {
 
   }
 
+  # Our proxy endpoint for Maptiler
+  location /maptiler/ {
+    set $delimeter "";
+
+    if ($is_args) {
+      set $delimeter "&";
+    }
+
+    set $args "$args${delimeter}key=${MAPTILER_API_KEY}";
+
+    proxy_pass https://api.maptiler.com/;
+  }
+
   error_page   500 502 503 504  /50x.html;
   location = /50x.html {
     root   /usr/share/nginx/html;

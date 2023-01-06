@@ -213,8 +213,8 @@ function onGeocodingSearchResult(e: { result: { center: LngLatLike } }) {
 onMounted(() => {
   map = new Map({
     container: container.value as HTMLDivElement,
-    style:
-      "https://api.maptiler.com/maps/basic-v2-light/style.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL",
+    // nginx will redirect to the correct maptiler url adding the API key
+    style: "/maptiler/maps/basic-v2-light/style.json",
     zoom: 7,
     center,
   }) as InstanceType<typeof Map>;
