@@ -30,6 +30,7 @@ services:
       - ORS_API_KEY=${ORS_API_KEY}
       - TRAVELTIME_API_KEY=${TRAVELTIME_API_KEY}
       - TRAVELTIME_APP_ID=${TRAVELTIME_APP_ID}
+      - MAPTILER_API_KEY=${MAPTILER_API_KEY}
     build: ./frontend/
     labels:
       - "traefik.http.routers.frontend.tls=true"
@@ -45,6 +46,8 @@ services:
       - ORS_API_KEY=${ORS_API_KEY}
       - TRAVELTIME_API_KEY=${TRAVELTIME_API_KEY}
       - TRAVELTIME_APP_ID=${TRAVELTIME_APP_ID}
+      - MAPTILER_API_KEY=${MAPTILER_API_KEY}
+
     labels:
       - "traefik.http.routers.frontend.tls=true"
       - "traefik.http.routers.frontend.rule=PathPrefix(`/`)"

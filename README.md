@@ -10,7 +10,10 @@ You need to specify your APIs keys in `.env` file (Openrouteservice, Traveltime,
 Example of `.env` file (root folder, as docker-compose.yml):
 
 ```
+TRAVELTIME_API_KEY=thisisasecretapikeypleasedontcopyitlikethisitwontwork
+TRAVELTIME_APP_ID=thisisanotreallysecretbutstillletsprotectitappid
 ORS_API_KEY=thisisasecretapikeypleasedontcopyitlikethisitwontwork
+MAPTILER_API_KEY=thisisasecretapikeypleasedontcopyitlikethisitwontwork
 ```
 
 ## Start dev app
