@@ -7,6 +7,7 @@ make install
 ```
 
 You need to specify your APIs keys in `.env` file (Openrouteservice, Traveltime, Maptiler) for api-proxy.
+For ENACIT team, you can find our keys in KeeWeb keyring (Notion for details)
 Example of `.env` file (root folder, as docker-compose.yml):
 
 ```
