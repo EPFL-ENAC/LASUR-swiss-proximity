@@ -1,6 +1,9 @@
 <template>
   <div ref="container" class="full-height map">
     <v-progress-linear :active="loading" indeterminate></v-progress-linear>
+    <v-alert v-model="error" type="error" dismissible>{{
+      errorMessage
+    }}</v-alert>
   </div>
 </template>
 
@@ -13,6 +16,7 @@ import {
   MapLayerEventType,
   Marker,
   Source,
+  LngLat,
 } from "maplibre-gl";
 import "@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -27,15 +31,9 @@ import {
 
 import { cleanVariableString, TileParams } from "@/utils/variables";
 
-import {
-  TimeMapFastRequestSearch,
-  TimeMapRequestDepartureSearch,
-  TimeMapResponseGeoJSON,
-  TravelTimeClient,
-} from "traveltime-api";
-import { Isochrones } from "openrouteservice-js";
+import { getIsochrone } from "@/utils/isochrone";
 
-import { Feature } from "geojson";
+import { Feature, GeoJsonProperties, Geometry } from "geojson";
 
 const loading = ref(true);
 
@@ -47,30 +45,20 @@ const popup = ref<Popup>(
   })
 );
 
+const error = ref(false);
+const errorMessage = ref<string | null>(null);
+
 const center: LngLatLike = [7.95, 46.74];
 
 const props = defineProps<{
   variables: { name: string; weight: number; selected: boolean }[];
   listTilesParams: TileParams[];
   selectedTilesName: string;
+  selectedTransportMode: string;
 }>();
 
 var map: Map | null = null;
 const isochroneMarker: Marker = new Marker({ draggable: true, color: "grey" });
-
-const traveltimeIsochrones = new TravelTimeClient(
-  {
-    apiKey: "notvalidapikeyitwillbeoverwrittenbynginx",
-    applicationId: "thisisnotasecretbutwillstillbeinenvfile",
-  },
-  { baseURL: "/traveltimeapi" }
-);
-
-const orsIsochrones = new Isochrones({
-  // On purpose no API key is set, nginx will add Authorization header to the request using API key from env file
-  api_key: "notvalidapikeyitwillbeoverwrittenbynginx",
-  host: "/orsapi",
-});
 
 function onMove(e: MapLayerEventType["mousemove"]) {
   if (map === null) return;
@@ -152,50 +140,34 @@ function secureTilesName(name: string) {
   return name.replace(/[^a-zA-Z0-9]/g, "_").toLowerCase();
 }
 
+watch(
+  () => props.selectedTransportMode,
+  (newTransportMode) => {
+    fetchIsochrone(isochroneMarker.getLngLat());
+  }
+);
+
 type SourceNewAPI = {
   setData: (data: Feature) => void;
 };
 
 function fetchIsochrone(location: LngLatLike) {
-  // Parse LngLatLike coords to array
-  const [lng, lat] = location as [number, number];
-  console.log(lat, lng, new Date().toISOString());
-  const departure_search: TimeMapRequestDepartureSearch = {
-    id: "Isochrone transport Switzerland",
-    departure_time: new Date().toISOString(),
-    travel_time: 1800,
-    coords: { lat, lng },
-    transportation: { type: "public_transport" },
-  };
+  // Use getIsochrone to fetch isochrone at the given location, for 900 min time
+  //Then set the geojson data to the source "isochrone" using the setData method
 
-  traveltimeIsochrones
-    .timeMap(
-      {
-        departure_searches: [departure_search],
-      },
-      "application/geo+json"
-    )
-    // .then((data) => console.log(data))
-    .then(function (value: TimeMapResponseGeoJSON) {
+  getIsochrone(
+    LngLat.convert(location).toArray() as [number, number],
+    props.selectedTransportMode,
+    900
+  )
+    .then((data: Feature<Geometry, GeoJsonProperties>) => {
+      if (map === null) return;
       const source = map?.getSource("isochrone") as Source & SourceNewAPI;
-      if (source && source.setData)
-        source.setData(value.features[0] as Feature);
+      source.setData(data);
     })
-    .catch((e) => console.error(e));
-
-  orsIsochrones
-    .calculate({
-      locations: [location],
-      profile: "driving-car",
-      range: [900],
-      range_type: "time",
-    })
-    // .then(function (response: { features: Feature[] }) {
-    //   const source = map?.getSource("isochrone") as Source & SourceNewAPI;
-    //   if (source && source.setData) source.setData(response.features[0]);
-    // })
-    .catch(function (err: Error) {
-      console.error(err);
+    .catch((err: string) => {
+      error.value = true;
+      errorMessage.value = err;
     });
 }
 
@@ -272,6 +244,19 @@ onMounted(() => {
         "fill-opacity": 0.5,
       },
     });
+
+    //Add layer for isochrone feature
+    map.addLayer({
+      id: "isochrone",
+      type: "fill",
+      source: "isochrone",
+      layout: {},
+      paint: {
+        "fill-color": "#0080ff",
+        "fill-opacity": 0.5,
+      },
+    });
+
     // Add a blue outline around the isochrone.
     map.addLayer({
       id: "isochrone-outline",
@@ -314,5 +299,12 @@ onUnmounted(() => {
   min-height: 1000px;
   width: 100%;
   position: relative;
+}
+.v-alert {
+  position: fixed;
+  left: 50%;
+  bottom: 50px;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
 }
 </style>

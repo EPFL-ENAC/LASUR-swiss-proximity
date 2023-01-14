@@ -29,7 +29,7 @@ server {
 
   # Our proxy endpoint for the traveltime API
   location /traveltimeapi/ {
-    proxy_pass https://api.traveltimeapp.com/v4/;
+    proxy_pass https://api.traveltimeapp.com/;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection 'upgrade';
     proxy_set_header X-Real-IP $remote_addr;

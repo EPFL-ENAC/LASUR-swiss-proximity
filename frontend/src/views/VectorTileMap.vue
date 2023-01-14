@@ -31,6 +31,16 @@
 
           <v-divider></v-divider>
 
+          <v-select
+            v-model="selectedTransportMode"
+            :items="listTransportModes"
+            item-text="name"
+            return-object
+            label="Transport mode"
+          ></v-select>
+
+          <v-divider></v-divider>
+
           <v-input
             v-for="variable in variables"
             class="variable"
@@ -62,6 +72,7 @@
           :variables="selectedVariables"
           :list-tiles-params="listTilesParams"
           :selected-tiles-name="selectedTilesSource.name"
+          :selected-transport-mode="selectedTransportMode.profile"
         ></MapboxMap>
         <div class="d-flex flex-row">
           <div class="flex-even legend"></div>
@@ -82,6 +93,7 @@ import {
   cleanVariableString,
 } from "@/utils/variables";
 
+import { listTransportModes } from "@/utils/isochrone";
 const listVariables = listPossibleVariables;
 
 const variables = ref(
@@ -95,6 +107,11 @@ const variables = ref(
 const selectedVariables = computed(() => {
   return variables.value.filter(({ selected }) => selected);
 });
+
+const selectedTransportMode = ref(
+  listTransportModes.find((t) => t.name === "Public transport") ||
+    listTransportModes[0]
+);
 
 const selectedTilesSource = ref(listTilesParams[0]);
 </script>
