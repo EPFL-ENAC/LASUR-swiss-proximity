@@ -94,6 +94,7 @@ import {
 } from "@/utils/variables";
 
 import { listTransportModes } from "@/utils/isochrone";
+
 const listVariables = listPossibleVariables;
 
 const variables = ref(
@@ -105,7 +106,10 @@ const variables = ref(
 );
 
 const selectedVariables = computed(() => {
-  return variables.value.filter(({ selected }) => selected);
+  //I added weight so it update props when weight change
+  return variables.value.filter(
+    ({ selected, weight }) => selected && weight > 0
+  );
 });
 
 const selectedTransportMode = ref(
