@@ -34,6 +34,7 @@ import { cleanVariableString, TileParams } from "@/utils/variables";
 import { getIsochrone } from "@/utils/isochrone";
 
 import { Feature, GeoJsonProperties, Geometry } from "geojson";
+import { AxiosError } from "axios";
 
 const loading = ref(true);
 
@@ -142,13 +143,17 @@ function secureTilesName(name: string) {
 
 watch(
   () => props.selectedTransportMode,
-  (newTransportMode) => {
+  () => {
     fetchIsochrone(isochroneMarker.getLngLat());
   }
 );
 
 type SourceNewAPI = {
   setData: (data: Feature) => void;
+};
+
+type ApiError = {
+  error_description: string;
 };
 
 function fetchIsochrone(location: LngLatLike) {
@@ -165,9 +170,9 @@ function fetchIsochrone(location: LngLatLike) {
       const source = map?.getSource("isochrone") as Source & SourceNewAPI;
       source.setData(data);
     })
-    .catch((err: string) => {
+    .catch((err: AxiosError & ApiError) => {
       error.value = true;
-      errorMessage.value = err;
+      errorMessage.value = err.message + " : \n\n" + err.error_description;
     });
 }
 
@@ -304,6 +309,7 @@ onUnmounted(() => {
   position: fixed;
   left: 50%;
   bottom: 50px;
+  z-index: 100;
   transform: translate(-50%, -50%);
   margin: 0 auto;
 }
