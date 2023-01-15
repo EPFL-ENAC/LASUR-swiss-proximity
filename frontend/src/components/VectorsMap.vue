@@ -9,15 +9,7 @@
 
 <script lang="ts" setup>
 import { ref, onMounted, defineProps, watch, onUnmounted } from "vue";
-import {
-  Map,
-  Popup,
-  LngLatLike,
-  MapLayerEventType,
-  Marker,
-  Source,
-  LngLat,
-} from "maplibre-gl";
+import { Map, Popup, LngLatLike, MapLayerEventType, Marker } from "maplibre-gl";
 import "@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 import MaplibreGeocoder from "@maplibre/maplibre-gl-geocoder";
@@ -30,16 +22,6 @@ import {
 } from "@/utils/map";
 
 import { cleanVariableString, TileParams } from "@/utils/variables";
-
-import { getIsochrone } from "@/utils/isochrone";
-
-import {
-  Feature,
-  FeatureCollection,
-  GeoJsonProperties,
-  Geometry,
-} from "geojson";
-import { AxiosError } from "axios";
 
 const loading = ref(true);
 
@@ -60,11 +42,9 @@ const props = defineProps<{
   variables: { name: string; weight: number; selected: boolean }[];
   listTilesParams: TileParams[];
   selectedTilesName: string;
-  selectedTransportMode: string;
 }>();
 
 var map: Map | null = null;
-const isochroneMarker: Marker = new Marker({ draggable: true, color: "grey" });
 
 function onMove(e: MapLayerEventType["mousemove"]) {
   if (map === null) return;
@@ -146,50 +126,13 @@ function secureTilesName(name: string) {
   return name.replace(/[^a-zA-Z0-9]/g, "_").toLowerCase();
 }
 
-watch(
-  () => props.selectedTransportMode,
-  () => {
-    fetchIsochrone(isochroneMarker.getLngLat());
-  }
-);
-
-type SourceNewAPI = {
-  setData: (data: FeatureCollection) => void;
-};
-
-type ApiError = {
-  error_description: string;
-};
-
-function fetchIsochrone(location: LngLatLike) {
-  // Use getIsochrone to fetch isochrone at the given location, for [1, 5, 10, 15] times
-  //Then set the geojson data to the source "isochrone" using the setData method
-
-  getIsochrone(
-    LngLat.convert(location).toArray() as [number, number],
-    props.selectedTransportMode,
-    [5, 10, 15].map((minutes) => minutes * 60)
-  )
-    .then((data: Feature<Geometry, GeoJsonProperties>[]) => {
-      if (map === null) return;
-      const source = map?.getSource("isochrone") as Source & SourceNewAPI;
-      source.setData({ type: "FeatureCollection", features: data });
-    })
-    .catch((err: AxiosError & ApiError) => {
-      error.value = true;
-      errorMessage.value = err.message + " : " + err.error_description;
-    });
-}
-
 function onGeocodingSearchResult(e: { result: { center: LngLatLike } }) {
   if (map === null) return;
-  isochroneMarker.setLngLat(e.result.center).addTo(map);
+
   map.flyTo({
     center: e.result.center,
     zoom: 12,
   });
-
-  fetchIsochrone(e.result.center);
 }
 
 onMounted(() => {
@@ -239,39 +182,6 @@ onMounted(() => {
       });
     });
 
-    map.addSource("isochrone", {
-      type: "geojson",
-      data: { type: "Feature", geometry: { type: "Polygon", coordinates: [] } },
-    });
-    // Add a new layer to visualize the isochrone.
-    map.addLayer({
-      id: "isochrone-fill",
-      type: "fill",
-      source: "isochrone", // reference the data source
-      layout: {},
-      paint: {
-        "fill-color": "#0080ff", // blue color fill
-        "fill-opacity": 0.5,
-      },
-    });
-
-    //Add layer for isochrone feature
-    map.addLayer({
-      id: "isochrone",
-      type: "fill",
-      source: "isochrone",
-      layout: {},
-      paint: {
-        "fill-color": [
-          "interpolate",
-          ["linear"],
-          ["get", "value"],
-          ...stepsColors(300, 900, mapColors),
-        ],
-        "fill-opacity": 0.5,
-      },
-    });
-
     map.on("mousemove", "units", onMove).on("mouseleave", "units", onLeave);
 
     // This control is used to search for a location
@@ -279,15 +189,10 @@ onMounted(() => {
       new MaplibreGeocoder(geocoderAPI, {
         showResultsWhileTyping: true,
         showResultMarkers: false,
-        marker: false,
+        marker: true,
         maplibregl: { Marker, Popup },
       }).on("result", onGeocodingSearchResult)
     );
-
-    isochroneMarker.on("dragend", () => {
-      const { lng, lat } = isochroneMarker.getLngLat();
-      fetchIsochrone([lng, lat]);
-    });
   });
 });
 

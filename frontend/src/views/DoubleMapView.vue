@@ -31,16 +31,6 @@
 
           <v-divider></v-divider>
 
-          <v-select
-            v-model="selectedTransportMode"
-            :items="listTransportModes"
-            item-text="name"
-            return-object
-            label="Transport mode"
-          ></v-select>
-
-          <v-divider></v-divider>
-
           <v-input
             v-for="variable in variables"
             class="variable"
@@ -68,12 +58,11 @@
 
       <div class="flex-grow-1 d-flex flex-column">
         <v-divider></v-divider>
-        <MaplibreMap
+        <VectorsMap
           :variables="selectedVariables"
           :list-tiles-params="listTilesParams"
           :selected-tiles-name="selectedTilesSource.name"
-          :selected-transport-mode="selectedTransportMode.profile"
-        ></MaplibreMap>
+        ></VectorsMap>
         <div class="d-flex flex-row">
           <div class="flex-even legend"></div>
           <v-divider vertical></v-divider>
@@ -85,15 +74,13 @@
 </template>
 
 <script lang="ts" setup>
-import MaplibreMap from "@/components/VectorsMap.vue";
+import VectorsMap from "@/components/VectorsMap.vue";
 import { ref, computed } from "vue";
 import {
   listPossibleVariables,
   listTilesParams,
   cleanVariableString,
 } from "@/utils/variables";
-
-import { listTransportModes } from "@/utils/isochrone";
 
 const listVariables = listPossibleVariables;
 
@@ -111,11 +98,6 @@ const selectedVariables = computed(() => {
     ({ selected, weight }) => selected && weight > 0
   );
 });
-
-const selectedTransportMode = ref(
-  listTransportModes.find((t) => t.name === "Public transport") ||
-    listTransportModes[0]
-);
 
 const selectedTilesSource = ref(listTilesParams[0]);
 </script>
