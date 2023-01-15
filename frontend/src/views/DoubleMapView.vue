@@ -68,12 +68,12 @@
 
       <div class="flex-grow-1 d-flex flex-column">
         <v-divider></v-divider>
-        <MapboxMap
+        <MaplibreMap
           :variables="selectedVariables"
           :list-tiles-params="listTilesParams"
           :selected-tiles-name="selectedTilesSource.name"
           :selected-transport-mode="selectedTransportMode.profile"
-        ></MapboxMap>
+        ></MaplibreMap>
         <div class="d-flex flex-row">
           <div class="flex-even legend"></div>
           <v-divider vertical></v-divider>
@@ -85,7 +85,7 @@
 </template>
 
 <script lang="ts" setup>
-import MapboxMap from "@/components/MapboxMap.vue";
+import MaplibreMap from "@/components/MaplibreMap.vue";
 import { ref, computed } from "vue";
 import {
   listPossibleVariables,

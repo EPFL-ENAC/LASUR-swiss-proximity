@@ -33,7 +33,12 @@ import { cleanVariableString, TileParams } from "@/utils/variables";
 
 import { getIsochrone } from "@/utils/isochrone";
 
-import { Feature, GeoJsonProperties, Geometry } from "geojson";
+import {
+  Feature,
+  FeatureCollection,
+  GeoJsonProperties,
+  Geometry,
+} from "geojson";
 import { AxiosError } from "axios";
 
 const loading = ref(true);
@@ -149,7 +154,7 @@ watch(
 );
 
 type SourceNewAPI = {
-  setData: (data: Feature) => void;
+  setData: (data: FeatureCollection) => void;
 };
 
 type ApiError = {
@@ -157,22 +162,22 @@ type ApiError = {
 };
 
 function fetchIsochrone(location: LngLatLike) {
-  // Use getIsochrone to fetch isochrone at the given location, for 900 min time
+  // Use getIsochrone to fetch isochrone at the given location, for [1, 5, 10, 15] times
   //Then set the geojson data to the source "isochrone" using the setData method
 
   getIsochrone(
     LngLat.convert(location).toArray() as [number, number],
     props.selectedTransportMode,
-    900
+    [5, 10, 15].map((minutes) => minutes * 60)
   )
-    .then((data: Feature<Geometry, GeoJsonProperties>) => {
+    .then((data: Feature<Geometry, GeoJsonProperties>[]) => {
       if (map === null) return;
       const source = map?.getSource("isochrone") as Source & SourceNewAPI;
-      source.setData(data);
+      source.setData({ type: "FeatureCollection", features: data });
     })
     .catch((err: AxiosError & ApiError) => {
       error.value = true;
-      errorMessage.value = err.message + " : \n\n" + err.error_description;
+      errorMessage.value = err.message + " : " + err.error_description;
     });
 }
 
@@ -257,20 +262,13 @@ onMounted(() => {
       source: "isochrone",
       layout: {},
       paint: {
-        "fill-color": "#0080ff",
+        "fill-color": [
+          "interpolate",
+          ["linear"],
+          ["get", "value"],
+          ...stepsColors(300, 900, mapColors),
+        ],
         "fill-opacity": 0.5,
-      },
-    });
-
-    // Add a blue outline around the isochrone.
-    map.addLayer({
-      id: "isochrone-outline",
-      type: "line",
-      source: "isochrone",
-      layout: {},
-      paint: {
-        "line-color": "#0080ff",
-        "line-width": 2,
       },
     });
 
