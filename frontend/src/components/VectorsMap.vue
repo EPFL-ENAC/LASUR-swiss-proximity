@@ -1,0 +1,314 @@
+<template>
+  <div ref="container" class="full-height map">
+    <v-progress-linear :active="loading" indeterminate></v-progress-linear>
+    <v-alert v-model="error" type="error" dismissible>{{
+      errorMessage
+    }}</v-alert>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { ref, onMounted, defineProps, watch, onUnmounted } from "vue";
+import {
+  Map,
+  Popup,
+  LngLatLike,
+  MapLayerEventType,
+  Marker,
+  Source,
+  LngLat,
+} from "maplibre-gl";
+import "@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css";
+import "maplibre-gl/dist/maplibre-gl.css";
+import MaplibreGeocoder from "@maplibre/maplibre-gl-geocoder";
+
+import {
+  mapColors,
+  stepsColors,
+  expressionMean,
+  geocoderAPI,
+} from "@/utils/map";
+
+import { cleanVariableString, TileParams } from "@/utils/variables";
+
+import { getIsochrone } from "@/utils/isochrone";
+
+import {
+  Feature,
+  FeatureCollection,
+  GeoJsonProperties,
+  Geometry,
+} from "geojson";
+import { AxiosError } from "axios";
+
+const loading = ref(true);
+
+const container = ref<HTMLDivElement>();
+
+const popup = ref<Popup>(
+  new Popup({
+    closeButton: false,
+  })
+);
+
+const error = ref(false);
+const errorMessage = ref<string | null>(null);
+
+const center: LngLatLike = [7.95, 46.74];
+
+const props = defineProps<{
+  variables: { name: string; weight: number; selected: boolean }[];
+  listTilesParams: TileParams[];
+  selectedTilesName: string;
+  selectedTransportMode: string;
+}>();
+
+var map: Map | null = null;
+const isochroneMarker: Marker = new Marker({ draggable: true, color: "grey" });
+
+function onMove(e: MapLayerEventType["mousemove"]) {
+  if (map === null) return;
+  // Change the cursor style as a UI indicator.
+  map.getCanvas().style.cursor = "pointer";
+  // Use the first found feature.
+  if (e.features === undefined || e.features === null) return;
+
+  const feature = e.features[0],
+    properties = feature.properties || {};
+
+  // Display a popup with the name of the county.
+  popup.value
+    .setLngLat(e.lngLat)
+    .setHTML(
+      `<h3>${
+        properties.municipality_name ||
+        properties.agglomeration_name + "-" + properties.id
+      }</h3>
+</br>${props.variables.map(
+        (key) =>
+          "<div>" +
+            cleanVariableString(key.name) +
+            " : " +
+            properties[key.name] || null + "</div>"
+      )}`
+    )
+    .addTo(map);
+}
+
+function onLeave() {
+  if (map == null) return;
+  map.getCanvas().style.cursor = "";
+  popup.value.remove();
+}
+
+watch(
+  () => props.variables,
+  (newVariables) => {
+    // Change the paint property using new variables and weights
+
+    const expression = [
+      "interpolate",
+      ["linear"],
+      expressionMean(newVariables),
+      // Right now steps colors don't change, I will create a static value for them once the data are normalized
+      ...stepsColors(0, 2000, mapColors),
+    ];
+
+    props.listTilesParams.forEach(({ name }) => {
+      if (map === null) return;
+
+      map.setPaintProperty(
+        "layer-" + secureTilesName(name),
+        "fill-color",
+        expression
+      );
+    });
+  }
+);
+
+watch(
+  () => props.selectedTilesName,
+  (newSelectedTileName) => {
+    props.listTilesParams.forEach(({ name }) => {
+      if (map === null) return;
+
+      // Change the visibility of the layers, only one is visible at a time
+      map.setLayoutProperty(
+        "layer-" + secureTilesName(name),
+        "visibility",
+        name === newSelectedTileName ? "visible" : "none"
+      );
+    });
+  }
+);
+
+function secureTilesName(name: string) {
+  return name.replace(/[^a-zA-Z0-9]/g, "_").toLowerCase();
+}
+
+watch(
+  () => props.selectedTransportMode,
+  () => {
+    fetchIsochrone(isochroneMarker.getLngLat());
+  }
+);
+
+type SourceNewAPI = {
+  setData: (data: FeatureCollection) => void;
+};
+
+type ApiError = {
+  error_description: string;
+};
+
+function fetchIsochrone(location: LngLatLike) {
+  // Use getIsochrone to fetch isochrone at the given location, for [1, 5, 10, 15] times
+  //Then set the geojson data to the source "isochrone" using the setData method
+
+  getIsochrone(
+    LngLat.convert(location).toArray() as [number, number],
+    props.selectedTransportMode,
+    [5, 10, 15].map((minutes) => minutes * 60)
+  )
+    .then((data: Feature<Geometry, GeoJsonProperties>[]) => {
+      if (map === null) return;
+      const source = map?.getSource("isochrone") as Source & SourceNewAPI;
+      source.setData({ type: "FeatureCollection", features: data });
+    })
+    .catch((err: AxiosError & ApiError) => {
+      error.value = true;
+      errorMessage.value = err.message + " : " + err.error_description;
+    });
+}
+
+function onGeocodingSearchResult(e: { result: { center: LngLatLike } }) {
+  if (map === null) return;
+  isochroneMarker.setLngLat(e.result.center).addTo(map);
+  map.flyTo({
+    center: e.result.center,
+    zoom: 12,
+  });
+
+  fetchIsochrone(e.result.center);
+}
+
+onMounted(() => {
+  map = new Map({
+    container: container.value as HTMLDivElement,
+    // nginx will redirect to the correct maptiler url adding the API key
+    style: "/maptiler/maps/basic-v2-light/style.json",
+    zoom: 7,
+    center,
+  }) as InstanceType<typeof Map>;
+
+  map.on("load", function () {
+    loading.value = false;
+
+    if (map == null) return;
+
+    // We add all the vector tiles sources to the map (polygons & h3)
+    props.listTilesParams.forEach((tile) => {
+      if (map == null) return;
+
+      map.addSource(secureTilesName(tile.name), {
+        type: "vector",
+        tiles: [tile.url],
+        minzoom: tile.minzoom,
+        maxzoom: tile.maxzoom,
+      });
+
+      map.addLayer({
+        id: "layer-" + secureTilesName(tile.name),
+        type: "fill",
+        source: secureTilesName(tile.name),
+        "source-layer": "units",
+        layout: {
+          visibility:
+            props.selectedTilesName === tile.name ? "visible" : "none",
+        },
+        paint: {
+          "fill-color": [
+            "interpolate",
+            ["linear"],
+            expressionMean(props.variables),
+            ...stepsColors(0, 2000, mapColors),
+          ],
+          "fill-opacity": 0.4,
+          "fill-outline-color": "rgba(105, 101, 141, 1)",
+        },
+      });
+    });
+
+    map.addSource("isochrone", {
+      type: "geojson",
+      data: { type: "Feature", geometry: { type: "Polygon", coordinates: [] } },
+    });
+    // Add a new layer to visualize the isochrone.
+    map.addLayer({
+      id: "isochrone-fill",
+      type: "fill",
+      source: "isochrone", // reference the data source
+      layout: {},
+      paint: {
+        "fill-color": "#0080ff", // blue color fill
+        "fill-opacity": 0.5,
+      },
+    });
+
+    //Add layer for isochrone feature
+    map.addLayer({
+      id: "isochrone",
+      type: "fill",
+      source: "isochrone",
+      layout: {},
+      paint: {
+        "fill-color": [
+          "interpolate",
+          ["linear"],
+          ["get", "value"],
+          ...stepsColors(300, 900, mapColors),
+        ],
+        "fill-opacity": 0.5,
+      },
+    });
+
+    map.on("mousemove", "units", onMove).on("mouseleave", "units", onLeave);
+
+    // This control is used to search for a location
+    map.addControl(
+      new MaplibreGeocoder(geocoderAPI, {
+        showResultsWhileTyping: true,
+        showResultMarkers: false,
+        marker: false,
+        maplibregl: { Marker, Popup },
+      }).on("result", onGeocodingSearchResult)
+    );
+
+    isochroneMarker.on("dragend", () => {
+      const { lng, lat } = isochroneMarker.getLngLat();
+      fetchIsochrone([lng, lat]);
+    });
+  });
+});
+
+onUnmounted(() => {
+  if (map === null) return;
+  map.off("mousemove", "units", onMove).off("mouseleave", "units", onLeave);
+});
+</script>
+
+<style scoped>
+.map {
+  min-height: 1000px;
+  width: 100%;
+  position: relative;
+}
+.v-alert {
+  position: fixed;
+  left: 50%;
+  bottom: 50px;
+  z-index: 100;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
+}
+</style>
