@@ -18,17 +18,6 @@
     <div class="flex-grow-1 d-flex flex-row">
       <v-reponsive class="d-flex flex-column selector-column">
         <v-responsive-content>
-          <v-radio-group v-model="selectedTilesSource">
-            <v-radio
-              v-for="tilesParams in listTilesParams"
-              class="variable"
-              :key="tilesParams.name"
-              :label="tilesParams.name"
-              :value="tilesParams"
-            >
-            </v-radio>
-          </v-radio-group>
-
           <v-divider></v-divider>
 
           <v-select
@@ -40,27 +29,6 @@
           ></v-select>
 
           <v-divider></v-divider>
-
-          <v-input
-            v-for="variable in variables"
-            class="variable"
-            :key="variable.name"
-          >
-            <v-checkbox
-              v-model="variable.selected"
-              :label="cleanVariableString(variable.name)"
-            ></v-checkbox>
-
-            <v-slider
-              dense
-              min="0"
-              max="2"
-              step="0.1"
-              v-model="variable.weight"
-              thumb-label
-              :thumb-size="26"
-            ></v-slider>
-          </v-input>
         </v-responsive-content>
       </v-reponsive>
 
@@ -68,12 +36,9 @@
 
       <div class="flex-grow-1 d-flex flex-column">
         <v-divider></v-divider>
-        <MaplibreMap
-          :variables="selectedVariables"
-          :list-tiles-params="listTilesParams"
-          :selected-tiles-name="selectedTilesSource.name"
+        <IsochronesMap
           :selected-transport-mode="selectedTransportMode.profile"
-        ></MaplibreMap>
+        ></IsochronesMap>
         <div class="d-flex flex-row">
           <div class="flex-even legend"></div>
           <v-divider vertical></v-divider>
@@ -85,39 +50,15 @@
 </template>
 
 <script lang="ts" setup>
-import MaplibreMap from "@/components/VectorsMap.vue";
-import { ref, computed } from "vue";
-import {
-  listPossibleVariables,
-  listTilesParams,
-  cleanVariableString,
-} from "@/utils/variables";
+import IsochronesMap from "@/components/IsochronesMap.vue";
+import { ref } from "vue";
 
 import { listTransportModes } from "@/utils/isochrone";
-
-const listVariables = listPossibleVariables;
-
-const variables = ref(
-  listVariables.map((v) => ({
-    name: v,
-    weight: 1,
-    selected: v === "bike_health" || v === "bike_transit",
-  }))
-);
-
-const selectedVariables = computed(() => {
-  //I added weight so it update props when weight change
-  return variables.value.filter(
-    ({ selected, weight }) => selected && weight > 0
-  );
-});
 
 const selectedTransportMode = ref(
   listTransportModes.find((t) => t.name === "Public transport") ||
     listTransportModes[0]
 );
-
-const selectedTilesSource = ref(listTilesParams[0]);
 </script>
 
 <style scoped>
