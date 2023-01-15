@@ -26,17 +26,17 @@ type ErrorORS = {
 const getIsochroneORS = (
   location: [number, number],
   mode: string,
-  time: number
+  times: number[]
 ) => {
   // Axios post request to ORS API
   return axios
     .post<ExtendedFeatureCollection>(`/orsapi/v2/isochrones/${mode}`, {
       locations: [location],
-      // ORS API expects time in minutes
-      range: [time],
+      // ORS API expects times in minutes
+      range: times,
       range_type: "time",
     })
-    .then((res) => res.data.features[0] as Feature<Geometry, GeoJsonProperties>)
+    .then((res) => res.data.features as Feature<Geometry, GeoJsonProperties>[])
     .catch((error: AxiosError<ErrorORS>) => {
       if (axios.isAxiosError(error)) {
         // Access to config, request, and response
@@ -50,7 +50,7 @@ const getIsochroneORS = (
 const getIsochroneTravelTime = (
   location: [number, number],
   mode: string,
-  time: number
+  times: number[]
 ) => {
   const [lng, lat] = location;
 
@@ -59,15 +59,13 @@ const getIsochroneTravelTime = (
     .post<ExtendedFeatureCollection>(
       `/traveltimeapi/v4/time-map`,
       {
-        departure_searches: [
-          {
-            id: "Isochrone transport Switzerland",
-            departure_time: new Date().toISOString(),
-            travel_time: time,
-            coords: { lat, lng },
-            transportation: { type: mode },
-          },
-        ],
+        departure_searches: times.map((time) => ({
+          id: `Isochrone transport Switzerland ${Math.round(time / 60)}min}`,
+          departure_time: new Date().toISOString(),
+          travel_time: time,
+          coords: { lat, lng },
+          transportation: { type: mode },
+        })),
       },
       {
         headers: {
@@ -76,7 +74,13 @@ const getIsochroneTravelTime = (
         },
       }
     )
-    .then((res) => res.data.features[0] as Feature<Geometry, GeoJsonProperties>) // TravelTime API returns a FeatureCollection, we only want the first feature (the isochron
+    .then(
+      (res) =>
+        res.data.features.map((feat, index) => {
+          feat.properties = { value: times[index] };
+          return feat;
+        }) as Feature<Geometry, GeoJsonProperties>[]
+    )
     .catch((error: AxiosError<ErrorTravelTime>) => {
       if (axios.isAxiosError(error)) {
         // Access to config, request, and response
@@ -90,9 +94,9 @@ const getIsochroneTravelTime = (
 export const getIsochrone = (
   location: [number, number],
   mode: string,
-  time: number
+  times: number[]
 ) => {
   return mode === "public_transport"
-    ? getIsochroneTravelTime(location, mode, time)
-    : getIsochroneORS(location, mode, time);
+    ? getIsochroneTravelTime(location, mode, times)
+    : getIsochroneORS(location, mode, times);
 };
