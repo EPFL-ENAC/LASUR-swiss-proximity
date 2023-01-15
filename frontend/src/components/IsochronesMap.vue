@@ -33,6 +33,13 @@ const container = ref<HTMLDivElement>();
 const error = ref(false);
 const errorMessage = ref<string | null>(null);
 
+const geocoder = new MaplibreGeocoder(geocoderAPI, {
+  showResultsWhileTyping: true,
+  showResultMarkers: false,
+  marker: false,
+  maplibregl: { Marker, Popup },
+});
+
 const center: LngLatLike = [7.95, 46.74];
 
 const props = defineProps<{
@@ -136,14 +143,9 @@ onMounted(() => {
     });
 
     // This control is used to search for a location
-    map.addControl(
-      new MaplibreGeocoder(geocoderAPI, {
-        showResultsWhileTyping: true,
-        showResultMarkers: false,
-        marker: false,
-        maplibregl: { Marker, Popup },
-      }).on("result", onGeocodingSearchResult)
-    );
+    map.addControl(geocoder.on("result", onGeocodingSearchResult));
+
+    geocoder.query("EPFL Lausanne");
 
     isochroneMarker.on("dragend", () => {
       const { lng, lat } = isochroneMarker.getLngLat();
