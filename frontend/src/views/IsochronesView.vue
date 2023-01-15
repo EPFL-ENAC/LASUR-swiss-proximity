@@ -85,7 +85,7 @@
 </template>
 
 <script lang="ts" setup>
-import MaplibreMap from "@/components/MaplibreMap.vue";
+import MaplibreMap from "@/components/VectorsMap.vue";
 import { ref, computed } from "vue";
 import {
   listPossibleVariables,
