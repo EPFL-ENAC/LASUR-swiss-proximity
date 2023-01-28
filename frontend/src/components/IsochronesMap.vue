@@ -1,7 +1,7 @@
 <template>
   <div ref="container" class="full-height map">
     <v-progress-linear :active="loading" indeterminate></v-progress-linear>
-    <v-alert v-model="error" type="error" dismissible>{{
+    <v-alert class="centered-alert" v-model="error" type="error" dismissible>{{
       errorMessage
     }}</v-alert>
   </div>
@@ -161,7 +161,7 @@ onMounted(() => {
   width: 100%;
   position: relative;
 }
-.v-alert {
+.centered-alert {
   position: fixed;
   left: 50%;
   bottom: 50px;

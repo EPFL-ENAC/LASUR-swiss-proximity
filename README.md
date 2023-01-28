@@ -11,10 +11,10 @@ For ENACIT team, you can find our keys in KeeWeb keyring (Notion for details)
 Example of `.env` file (root folder, as docker-compose.yml):
 
 ```
-TRAVELTIME_API_KEY=thisisasecretapikeypleasedontcopyitlikethisitwontwork
-TRAVELTIME_APP_ID=thisisanotreallysecretbutstillletsprotectitappid
-ORS_API_KEY=thisisasecretapikeypleasedontcopyitlikethisitwontwork
-MAPTILER_API_KEY=thisisasecretapikeypleasedontcopyitlikethisitwontwork
+TRAVELTIME_API_KEY=changeit
+TRAVELTIME_APP_ID=notreallysecretbutchangeit
+ORS_API_KEY=changeit
+MAPTILER_API_KEY=changeit
 ```
 
 ## Start dev app
