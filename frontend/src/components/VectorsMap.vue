@@ -8,7 +8,14 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, defineProps, watch, onUnmounted } from "vue";
+import {
+  ref,
+  onMounted,
+  defineProps,
+  defineEmits,
+  watch,
+  onUnmounted,
+} from "vue";
 import { Map, Popup, LngLatLike, MapLayerEventType, Marker } from "maplibre-gl";
 import "@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -42,6 +49,11 @@ const props = defineProps<{
   variables: { name: string; weight: number; selected: boolean }[];
   listTilesParams: TileParams[];
   selectedTilesName: string;
+  showLog: boolean;
+}>();
+
+const emit = defineEmits<{
+  (event: "created:map", value: Map): void;
 }>();
 
 var map: Map | null = null;
@@ -194,6 +206,7 @@ onMounted(() => {
       }).on("result", onGeocodingSearchResult)
     );
   });
+  emit("created:map", map);
 });
 
 onUnmounted(() => {

@@ -15,72 +15,76 @@
       </a>
     </div>
     <v-divider></v-divider>
-    <div class="flex-grow-1 d-flex flex-row">
-      <v-reponsive class="d-flex flex-column selector-column">
-        <v-responsive-content>
-          <v-radio-group v-model="selectedTilesSource">
-            <v-radio
-              v-for="tilesParams in listTilesParams"
-              class="variable"
-              :key="tilesParams.name"
-              :label="tilesParams.name"
-              :value="tilesParams"
-            >
-            </v-radio>
-          </v-radio-group>
-
-          <v-divider></v-divider>
-
-          <v-input
-            v-for="variable in variables"
+    <v-row>
+      <v-col cols="2">
+        <v-radio-group v-model="selectedTilesSource">
+          <v-radio
+            v-for="tilesParams in listTilesParams"
             class="variable"
-            :key="variable.name"
+            :key="tilesParams.name"
+            :label="tilesParams.name"
+            :value="tilesParams"
           >
-            <v-checkbox
-              v-model="variable.selected"
-              :label="cleanVariableString(variable.name)"
-            ></v-checkbox>
+          </v-radio>
+        </v-radio-group>
 
-            <v-slider
-              dense
-              min="0"
-              max="2"
-              step="0.1"
-              v-model="variable.weight"
-              thumb-label
-              :thumb-size="26"
-            ></v-slider>
-          </v-input>
-        </v-responsive-content>
-      </v-reponsive>
-
-      <v-divider vertical></v-divider>
-
-      <div class="flex-grow-1 d-flex flex-column">
         <v-divider></v-divider>
+
+        <v-input
+          v-for="variable in variables"
+          class="variable"
+          :key="variable.name"
+        >
+          <v-checkbox
+            v-model="variable.selected"
+            :label="cleanVariableString(variable.name)"
+          ></v-checkbox>
+
+          <v-slider
+            dense
+            min="0"
+            max="2"
+            step="0.1"
+            v-model="variable.weight"
+            thumb-label
+            :thumb-size="26"
+          ></v-slider>
+        </v-input>
+      </v-col>
+      <v-col cols="5">
         <VectorsMap
+          class="left-map"
           :variables="selectedVariables"
           :list-tiles-params="listTilesParams"
           :selected-tiles-name="selectedTilesSource.name"
+          :showLog="true"
+          @created:map="leftMap = $event"
         ></VectorsMap>
-        <div class="d-flex flex-row">
-          <div class="flex-even legend"></div>
-          <v-divider vertical></v-divider>
-          <div class="flex-even legend"></div>
-        </div>
-      </div>
-    </div>
+      </v-col>
+      <v-col cols="5">
+        <VectorsMap
+          class="right-map"
+          :variables="selectedVariables"
+          :list-tiles-params="listTilesParams"
+          :selected-tiles-name="selectedTilesSource.name"
+          :showLog="false"
+          @created:map="rightMap = $event"
+        ></VectorsMap>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
 <script lang="ts" setup>
 import VectorsMap from "@/components/VectorsMap.vue";
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import {
   listPossibleVariables,
   listTilesParams,
   cleanVariableString,
 } from "@/utils/variables";
+import { Map } from "maplibre-gl";
+import { syncMaps } from "@/utils/syncmap";
 
 const listVariables = listPossibleVariables;
 
@@ -99,7 +103,19 @@ const selectedVariables = computed(() => {
   );
 });
 
+const leftMap = ref<Map>();
+const rightMap = ref<Map>();
+
 const selectedTilesSource = ref(listTilesParams[0]);
+
+watch(
+  () => ({ leftMap: leftMap.value, rightMap: rightMap.value }),
+  ({ leftMap, rightMap }) => {
+    if (leftMap !== undefined && rightMap !== undefined) {
+      syncMaps([leftMap, rightMap]);
+    }
+  }
+);
 </script>
 
 <style scoped>
