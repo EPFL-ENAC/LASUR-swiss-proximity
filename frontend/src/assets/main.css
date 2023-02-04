@@ -1,0 +1,6 @@
+/* No other way using vuetify's API 
+Helps with filling screen with map without overflowing
+*/
+.container.fill-height > .row {
+  flex-basis: auto;
+}

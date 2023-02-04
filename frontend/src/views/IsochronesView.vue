@@ -1,52 +1,34 @@
 <template>
-  <div class="d-flex flex-column full-height text-justify">
-    <div class="d-flex flex-row align-center ma-3">
-      <div class="flex-grow-1">
+  <v-container
+    class="d-flex fill-height align-stretch flex-column flex-nowrap"
+    fluid
+  >
+    <v-row class="shrink no-gutters">
+      <v-col cols="12">
         <h1>Maplibre prototype</h1>
         <span class="text-subtitle-1"> Using MaplibreGL and vector tiles</span>
-      </div>
-      <a href="https://epfl.ch" target="_blank">
-        <v-img
-          contain
-          src="/logo/EPFL_Logo_184X53.svg"
-          height="50px"
-          width="100px"
-        ></v-img>
-      </a>
-    </div>
-    <v-divider></v-divider>
-    <div class="flex-grow-1 d-flex flex-row">
-      <v-reponsive class="d-flex flex-column selector-column">
-        <v-responsive-content>
-          <v-divider></v-divider>
-
-          <v-select
-            v-model="selectedTransportMode"
-            :items="listTransportModes"
-            item-text="name"
-            return-object
-            label="Transport mode"
-          ></v-select>
-
-          <v-divider></v-divider>
-        </v-responsive-content>
-      </v-reponsive>
-
+        <v-divider></v-divider>
+      </v-col>
+    </v-row>
+    <v-row class="grow no-gutters ma-0">
+      <v-col cols="3">
+        <v-select
+          v-model="selectedTransportMode"
+          :items="listTransportModes"
+          item-text="name"
+          return-object
+          label="Transport mode"
+        ></v-select>
+      </v-col>
       <v-divider vertical></v-divider>
 
-      <div class="flex-grow-1 d-flex flex-column">
-        <v-divider></v-divider>
+      <v-col cols="9" class="pa-0">
         <IsochronesMap
           :selected-transport-mode="selectedTransportMode.profile"
         ></IsochronesMap>
-        <div class="d-flex flex-row">
-          <div class="flex-even legend"></div>
-          <v-divider vertical></v-divider>
-          <div class="flex-even legend"></div>
-        </div>
-      </div>
-    </div>
-  </div>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script lang="ts" setup>
