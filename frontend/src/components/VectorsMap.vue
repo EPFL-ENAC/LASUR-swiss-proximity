@@ -1,10 +1,19 @@
 <template>
-  <div ref="container" class="full-height map">
+  <v-container class="pa-0 fill-height" fluid>
     <v-progress-linear :active="loading" indeterminate></v-progress-linear>
-    <v-alert v-model="error" type="error" dismissible>{{
-      errorMessage
-    }}</v-alert>
-  </div>
+
+    <div ref="container" class="map fill-height" />
+    <v-snackbar
+      color="transparent"
+      elevation="0"
+      v-model="error"
+      :timeout="15000"
+    >
+      <v-alert v-model="error" type="error" dismissible>
+        {{ errorMessage }}
+      </v-alert>
+    </v-snackbar>
+  </v-container>
 </template>
 
 <script lang="ts" setup>
@@ -217,16 +226,7 @@ onUnmounted(() => {
 
 <style scoped>
 .map {
-  min-height: 1000px;
   width: 100%;
   position: relative;
-}
-.v-alert {
-  position: fixed;
-  left: 50%;
-  bottom: 50px;
-  z-index: 100;
-  transform: translate(-50%, -50%);
-  margin: 0 auto;
 }
 </style>
