@@ -1,0 +1,84 @@
+// https://vuetifyjs.com/en/getting-started/frequently-asked-questions/#scrollbar-overflow
+html {
+  overflow-y: auto;
+}
+
+.full-height {
+  height: 100%;
+}
+
+// override .v-application ul, .v-application ol
+.v-application ul.browser-print-holder {
+  padding-left: 0px;
+}
+
+.btn-left {
+  > .v-btn__content {
+    justify-content: start;
+  }
+}
+
+.btn-right {
+  > .v-btn__content {
+    justify-content: end;
+  }
+}
+
+.text-justify {
+  hyphens: auto;
+}
+
+.v-ripple__container {
+  display: none !important;
+}
+
+.v-btn::before {
+  background-color: transparent;
+}
+
+.v-list-item {
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+}
+
+.text-point-tooltip {
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+.v-treeview-node__label {
+  height: 1.2rem;
+}
+
+.theme--light.v-btn {
+  color: var(--v-primary-base) !important;
+}
+
+.theme--light.v-card {
+  color: var(--v-primary-base) !important;
+
+  & > .v-card__text {
+    color: var(--v-primary-base) !important;
+  }
+}
+
+/* https://www.digitalocean.com/community/tutorials/css-scrollbars */
+
+$scrollbar-color: var(--v-secondary-base);
+$scrollbar-background-color: white;
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: $scrollbar-color $scrollbar-background-color;
+}
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: $scrollbar-background-color;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: $scrollbar-color;
+}
