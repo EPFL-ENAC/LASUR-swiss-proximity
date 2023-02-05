@@ -1,57 +1,72 @@
 <template>
-  <div class="d-flex flex-column full-height text-justify">
-    <div class="d-flex flex-row align-center ma-3">
-      <div class="flex-grow-1">
-        <h1>Maplibre prototype</h1>
-        <span class="text-subtitle-1"> Using MaplibreGL and vector tiles</span>
-      </div>
-      <a href="https://epfl.ch" target="_blank">
-        <v-img
-          contain
-          src="/logo/EPFL_Logo_184X53.svg"
-          height="50px"
-          width="100px"
-        ></v-img>
-      </a>
-    </div>
-    <v-divider></v-divider>
-    <v-row>
-      <v-col cols="2">
-        <v-radio-group v-model="selectedTilesSource">
-          <v-radio
-            v-for="tilesParams in listTilesParams"
-            class="variable"
-            :key="tilesParams.name"
-            :label="tilesParams.name"
-            :value="tilesParams"
+  <v-container
+    class="d-flex fill-height pa-0 align-stretch flex-column flex-nowrap"
+    fluid
+  >
+    <v-row class="shrink no-gutters">
+      <v-col cols="12">
+        <v-container fluid>
+          <h1>Maplibre prototype</h1>
+          <span class="text-subtitle-1">
+            Using MaplibreGL and vector tiles</span
           >
-          </v-radio>
-        </v-radio-group>
+        </v-container>
+        <v-divider></v-divider>
+      </v-col>
+    </v-row>
+    <v-row class="grow no-gutters ma-0">
+      <v-col cols="2">
+        <v-container>
+          <v-radio-group v-model="selectedTilesSource">
+            <v-radio
+              v-for="tilesParams in listTilesParams"
+              class="variable"
+              :key="tilesParams.name"
+              :label="tilesParams.name"
+              :value="tilesParams"
+            >
+            </v-radio>
+          </v-radio-group>
+        </v-container>
 
         <v-divider></v-divider>
+        <v-container>
+          <v-input
+            v-for="variable in variables"
+            class="my-2"
+            :key="variable.name"
+            hide-details
+          >
+            <v-row>
+              <v-col>
+                <v-checkbox
+                  v-model="variable.selected"
+                  :label="cleanVariableString(variable.name)"
+                  hide-details
+                  class="ma-auto"
+                ></v-checkbox>
+              </v-col>
 
-        <v-input
-          v-for="variable in variables"
-          class="variable"
-          :key="variable.name"
-        >
-          <v-checkbox
-            v-model="variable.selected"
-            :label="cleanVariableString(variable.name)"
-          ></v-checkbox>
-
-          <v-slider
-            dense
-            min="0"
-            max="2"
-            step="0.1"
-            v-model="variable.weight"
-            thumb-label
-            :thumb-size="26"
-          ></v-slider>
-        </v-input>
+              <v-col>
+                <v-slider
+                  hide-details
+                  dense
+                  min="0"
+                  max="2"
+                  step="0.1"
+                  v-model="variable.weight"
+                  thumb-label
+                  :thumb-size="26"
+                ></v-slider>
+              </v-col>
+            </v-row>
+          </v-input>
+        </v-container>
       </v-col>
-      <v-col cols="5">
+
+      <v-divider vertical></v-divider>
+
+      <v-col cols="5" class="pa-0">
         <VectorsMap
           class="left-map"
           :variables="selectedVariables"
@@ -61,7 +76,7 @@
           @created:map="leftMap = $event"
         ></VectorsMap>
       </v-col>
-      <v-col cols="5">
+      <v-col cols="5" class="pa-0">
         <VectorsMap
           class="right-map"
           :variables="selectedVariables"
@@ -72,7 +87,7 @@
         ></VectorsMap>
       </v-col>
     </v-row>
-  </div>
+  </v-container>
 </template>
 
 <script lang="ts" setup>
@@ -117,14 +132,3 @@ watch(
   }
 );
 </script>
-
-<style scoped>
-.variable :deep(input) {
-  margin-right: 12px;
-  text-align: right;
-}
-
-.selector-column {
-  width: 400px;
-}
-</style>
