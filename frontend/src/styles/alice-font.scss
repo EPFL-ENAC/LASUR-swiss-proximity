@@ -1,0 +1,29 @@
+$alice-font-family: "Akzidenz-Grotesk Pro";
+@font-face {
+  font-family: $alice-font-family;
+  src: url("../../public/fonts/Akzidenz-Grotesk-Pro/AkzidenzGroteskPro-Regular.otf")
+    format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: $alice-font-family;
+  src: url("../../public/fonts/Akzidenz-Grotesk-Pro/AkzidenzGroteskPro-It.otf")
+    format("opentype");
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: $alice-font-family;
+  src: url("../../public/fonts/Akzidenz-Grotesk-Pro/AkzidenzGroteskPro-Bold.otf")
+    format("opentype");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: $alice-font-family;
+  src: url("../../public/fonts/Akzidenz-Grotesk-Pro/AkzidenzGroteskPro-BoldIt.otf")
+    format("opentype");
+  font-weight: bold;
+  font-style: italic;
+}

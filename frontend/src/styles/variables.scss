@@ -1,0 +1,17 @@
+// https://vuetifyjs.com/en/features/sass-variables/
+
+// https://vuetifyjs.com/en/api/vuetify/#sass
+$body-font-family: "Akzidenz-Grotesk Pro", "Roboto", "Arial";
+$headings: (
+  "subtitle-1": (
+    "size": 1.1rem,
+  ),
+);
+
+// https://vuetifyjs.com/en/api/v-treeview/#sass
+$treeview-node-height-dense: 24px;
+
+// https://vuetifyjs.com/en/api/v-list/#sass
+$list-item-dense-title-line-height: 1.1rem;
+
+$line-height-root: 1.1;
