@@ -58,7 +58,6 @@ const props = defineProps<{
   variables: { name: string; weight: number; selected: boolean }[];
   listTilesParams: TileParams[];
   selectedTilesName: string;
-  showLog: boolean;
 }>();
 
 const emit = defineEmits<{

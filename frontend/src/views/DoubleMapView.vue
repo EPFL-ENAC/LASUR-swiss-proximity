@@ -72,17 +72,15 @@
           :variables="selectedVariables"
           :list-tiles-params="listTilesParams"
           :selected-tiles-name="selectedTilesSource.name"
-          :showLog="true"
           @created:map="leftMap = $event"
         ></VectorsMap>
       </v-col>
       <v-col cols="5" class="pa-0">
         <VectorsMap
           class="right-map"
-          :variables="selectedVariables"
+          :variables="[selectedControlVariable]"
           :list-tiles-params="listTilesParams"
           :selected-tiles-name="selectedTilesSource.name"
-          :showLog="false"
           @created:map="rightMap = $event"
         ></VectorsMap>
       </v-col>
@@ -104,7 +102,7 @@ import { syncMaps } from "@/utils/syncmap";
 const listVariables = listPossibleVariables;
 
 const variables = ref(
-  listVariables.map((v) => ({
+  listVariables.slice(0, listVariables.length - 1).map((v) => ({
     name: v,
     weight: 1,
     selected: v === "bike_health" || v === "bike_transit",
@@ -117,6 +115,13 @@ const selectedVariables = computed(() => {
     ({ selected, weight }) => selected && weight > 0
   );
 });
+
+//For the time being, arbitrarily choose last variable as control variable
+const selectedControlVariable = {
+  name: listVariables[listVariables.length - 1],
+  weight: 1,
+  selected: true,
+};
 
 const leftMap = ref<Map>();
 const rightMap = ref<Map>();
