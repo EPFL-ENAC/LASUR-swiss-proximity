@@ -1,4 +1,4 @@
-import { ExpressionSpecification } from "maplibre-gl";
+import { ExpressionSpecification, LngLat, LngLatBounds } from "maplibre-gl";
 
 export const mapColors = [
   "#1a9850",
@@ -13,6 +13,11 @@ export const mapColors = [
 ];
 
 export const hexagonsResolutions = [6, 7, 8];
+
+const sw = new LngLat(5.5, 45.5),
+  ne = new LngLat(10.5, 48);
+
+export const mapBounds = new LngLatBounds(sw, ne);
 
 export const center = [-837, 9380];
 export const scale = 61878;

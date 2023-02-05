@@ -35,6 +35,7 @@ import {
   stepsColors,
   expressionMean,
   geocoderAPI,
+  mapBounds,
 } from "@/utils/map";
 
 import { cleanVariableString, TileParams } from "@/utils/variables";
@@ -162,6 +163,7 @@ onMounted(() => {
     style: "/maptiler/maps/basic-v2-light/style.json",
     zoom: 7,
     center,
+    maxBounds: mapBounds,
   }) as InstanceType<typeof Map>;
 
   map.on("load", function () {
