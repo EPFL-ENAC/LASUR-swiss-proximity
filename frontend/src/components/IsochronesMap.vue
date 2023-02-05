@@ -23,7 +23,7 @@ import "@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 import MaplibreGeocoder from "@maplibre/maplibre-gl-geocoder";
 
-import { mapColors, stepsColors, geocoderAPI } from "@/utils/map";
+import { mapColors, stepsColors, geocoderAPI, mapBounds } from "@/utils/map";
 
 import { getIsochrone } from "@/utils/isochrone";
 
@@ -111,6 +111,7 @@ onMounted(() => {
     style: "/maptiler/maps/basic-v2-light/style.json",
     zoom: 7,
     center,
+    maxBounds: mapBounds,
   }) as InstanceType<typeof Map>;
 
   map.on("load", function () {
