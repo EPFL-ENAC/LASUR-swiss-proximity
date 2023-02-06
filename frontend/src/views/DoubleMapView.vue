@@ -6,10 +6,12 @@
     <v-row class="shrink no-gutters">
       <v-col cols="12">
         <v-container fluid>
-          <h1>Maplibre prototype</h1>
+          <h1>Comparaison de l'offre et de la demande</h1>
           <span class="text-subtitle-1">
-            Using MaplibreGL and vector tiles</span
-          >
+            A gauche une carte explorant l'offre selon les variables, et leur
+            poids, choisies dans la colonne de gauche. A droite une carte de la
+            demande.
+          </span>
         </v-container>
         <v-divider></v-divider>
       </v-col>
@@ -75,6 +77,8 @@
           @created:map="leftMap = $event"
         ></VectorsMap>
       </v-col>
+      <v-divider vertical></v-divider>
+
       <v-col cols="5" class="pa-0">
         <VectorsMap
           class="right-map"
