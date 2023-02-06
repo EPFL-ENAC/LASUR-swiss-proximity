@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <v-app-bar app dense>
+    <v-app-bar flat outlined color="white" app>
       <v-app-bar-title>SWISS MOBILITY</v-app-bar-title>
-      <v-tabs>
+      <v-tabs grow>
         <v-tab to="/doublemap">Double</v-tab>
         <v-tab to="/isochrones">Isochrones</v-tab>
       </v-tabs>
