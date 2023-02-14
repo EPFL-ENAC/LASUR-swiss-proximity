@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
-import HomeView from "../views/HomeView.vue";
 import Isochrones from "../views/IsochronesView.vue";
 import DoubleMap from "../views/DoubleMapView.vue";
 Vue.use(VueRouter);
@@ -8,8 +7,7 @@ Vue.use(VueRouter);
 const routes: Array<RouteConfig> = [
   {
     path: "/",
-    name: "home",
-    component: HomeView,
+    redirect: "/doublemap",
   },
   {
     path: "/doublemap",

@@ -45,7 +45,4 @@ services:
       - TRAVELTIME_APP_ID=${TRAVELTIME_APP_ID}
       - MAPTILER_API_KEY=${MAPTILER_API_KEY}
 
-    labels:
-      - "traefik.http.routers.frontend.tls=true"
-      - "traefik.http.routers.frontend.rule=PathPrefix(`/`)"
     restart: unless-stopped
