@@ -1,10 +1,7 @@
-import Vue from "vue";
-import VueRouter, { RouteConfig } from "vue-router";
-import Isochrones from "../views/IsochronesView.vue";
-import DoubleMap from "../views/DoubleMapView.vue";
-Vue.use(VueRouter);
+// Composables
+import { createRouter, createWebHistory } from 'vue-router'
 
-const routes: Array<RouteConfig> = [
+const routes = [
   {
     path: "/",
     redirect: "/doublemap",
@@ -12,19 +9,18 @@ const routes: Array<RouteConfig> = [
   {
     path: "/doublemap",
     name: "Double map",
-    component: DoubleMap,
+    component: () => import('@/views/DoubleMapView.vue'),
   },
   {
     path: "/isochrones",
     name: "Isochrones map",
-    component: Isochrones,
-  },
-];
+    component: () => import('@/views/IsochronesView.vue'),
+  }
+]
 
-const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
   routes,
-});
+})
 
-export default router;
+export default router
