@@ -44,5 +44,20 @@ services:
       - TRAVELTIME_API_KEY=${TRAVELTIME_API_KEY}
       - TRAVELTIME_APP_ID=${TRAVELTIME_APP_ID}
       - MAPTILER_API_KEY=${MAPTILER_API_KEY}
-
     restart: unless-stopped
+
+  api-proxy-dev:
+    image: nginx:1-alpine
+    profiles: ["dev"]
+    volumes:
+      - ./nginx.conf.template:/etc/nginx/templates/default.conf.template
+    environment:
+      - ORS_API_KEY=${ORS_API_KEY}
+      - TRAVELTIME_API_KEY=${TRAVELTIME_API_KEY}
+      - TRAVELTIME_APP_ID=${TRAVELTIME_APP_ID}
+      - MAPTILER_API_KEY=${MAPTILER_API_KEY}
+    labels:
+      - "traefik.http.routers.frontend.tls=true"
+      - "traefik.http.routers.frontend.rule=PathPrefix(`/`)"
+    restart: unless-stopped
+
