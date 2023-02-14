@@ -20,7 +20,7 @@ lint:
 
 run:
 	docker-compose build --pull
-	docker-compose up --remove-orphans
+	docker-compose up --remove-orphans -d
 
 process:
 	$(MAKE) -C data process
