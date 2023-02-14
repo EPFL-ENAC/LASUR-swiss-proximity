@@ -3,14 +3,14 @@ install:
 	$(MAKE) -C frontend install
 
 dev-proxy:
-	docker-compose --profile dev up --build --remove-orphans
+	docker-compose up api-proxy reverse-proxy --remove-orphans
 
 dev-frontend:
 	$(MAKE) -C frontend run
 
 dev:
-	$(MAKE) run-proxy &
-	$(MAKE) run
+	$(MAKE) dev-proxy &
+	$(MAKE) dev-frontend
 
 test:
 	$(MAKE) -C frontend test
@@ -19,8 +19,8 @@ lint:
 	$(MAKE) -C frontend lint
 
 run:
-	docker-compose --profile prod build --pull
-	docker-compose --profile prod up --remove-orphans
+	docker-compose build --pull
+	docker-compose up --remove-orphans
 
 process:
 	$(MAKE) -C data process

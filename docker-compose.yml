@@ -1,7 +1,6 @@
 services:
   reverse-proxy:
     image: traefik:v2.8
-    profiles: ["dev","prod"]
     command:
       - "--providers.docker"
       - "--providers.file.directory=/configuration/"
@@ -23,7 +22,6 @@ services:
       - /etc/ssl:/etc/ssl
       
   frontend:
-    profiles: ["prod"]
     volumes:
       - ./nginx.conf.template:/etc/nginx/templates/default.conf.template
     environment:
@@ -41,7 +39,6 @@ services:
     image: nginx:1-alpine
     volumes:
       - ./nginx.conf.template:/etc/nginx/templates/default.conf.template
-    profiles: ["dev"]
     environment:
       - ORS_API_KEY=${ORS_API_KEY}
       - TRAVELTIME_API_KEY=${TRAVELTIME_API_KEY}
