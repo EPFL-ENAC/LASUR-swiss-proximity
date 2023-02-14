@@ -2,7 +2,7 @@ install:
 	npm install
 
 run:
-	npm run serve
+	npm run dev
 
 test:
 	npm run test:unit
