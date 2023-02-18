@@ -1,9 +1,9 @@
 <template>
   <v-container
-    class="d-flex fill-height pa-0 align-stretch flex-column flex-nowrap"
+    class="fill-height pa-0 align-stretch flex-column flex-nowrap"
     fluid
   >
-    <v-row class="shrink no-gutters">
+    <v-row class="flew-shrink-1 flex-grow-0 no-gutters">
       <v-col cols="12">
         <v-container fluid>
           <h1>Maplibre prototype</h1>
@@ -15,7 +15,7 @@
         <v-divider></v-divider>
       </v-col>
     </v-row>
-    <v-row class="grow no-gutters ma-0">
+    <v-row class="flex-grow-1 no-gutters ma-0">
       <v-col cols="3">
         <v-container fluid>
           <v-select
@@ -31,10 +31,10 @@
 
       <v-col cols="9" class="pa-0">
         <v-container
-          class="d-flex pb-4 pa-0 fill-height align-stretch flex-column flex-nowrap"
+          class="pb-4 pa-0 fill-height align-stretch flex-column"
           fluid
         >
-          <v-row class="grow">
+          <v-row class="flex-grow-1">
             <v-col cols="12">
               <IsochronesMap
                 :selected-transport-mode="selectedTransportMode.profile"
@@ -42,7 +42,7 @@
             </v-col>
           </v-row>
           <v-divider></v-divider>
-          <v-row class="shrink">
+          <v-row class="flex-grow-0">
             <v-col cols="12">
               <v-container fluid>
                 <h4>Légende</h4>
@@ -83,9 +83,5 @@ const selectedTransportMode = ref(
 .variable :deep(input) {
   margin-right: 12px;
   text-align: right;
-}
-
-.selector-column {
-  width: 400px;
 }
 </style>
