@@ -3,7 +3,7 @@
     class="d-flex fill-height pa-0 align-stretch flex-column flex-nowrap"
     fluid
   >
-    <v-row class="shrink no-gutters">
+    <v-row class="flex-grow-0 no-gutters">
       <v-col cols="12">
         <v-container fluid>
           <h1>Comparaison de l'offre et de la demande</h1>
@@ -16,7 +16,7 @@
         <v-divider></v-divider>
       </v-col>
     </v-row>
-    <v-row class="grow no-gutters ma-0">
+    <v-row class="flex-grow-1 no-gutters ma-0">
       <v-col cols="2">
         <v-container>
           <v-radio-group v-model="selectedTilesSource">
@@ -46,19 +46,24 @@
                   :label="cleanVariableString(variable.name)"
                   hide-details
                   class="ma-auto"
+                  density="compact"
                 ></v-checkbox>
               </v-col>
 
               <v-col>
                 <v-slider
                   hide-details
+                  density="compact"
+                  tick-size="1"
+                  track-size="1"
+                  thumb-size="10"
+                  :color="variable.selected ? 'black' : 'grey'"
                   dense
                   min="0"
                   max="2"
                   step="0.1"
                   v-model="variable.weight"
                   thumb-label
-                  :thumb-size="26"
                 ></v-slider>
               </v-col>
             </v-row>
