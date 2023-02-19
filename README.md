@@ -1,4 +1,4 @@
-# Swiss Mobility - LASUR & TRANSP OR
+# Swiss Proximity - LASUR & TRANSP OR
 
 ## Setup
 
