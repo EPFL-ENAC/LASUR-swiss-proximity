@@ -18,22 +18,23 @@
 
 <script lang="ts" setup>
 import { ref, onMounted, defineProps, watch } from "vue";
-import { Map, Popup, LngLatLike, Marker, Source, LngLat } from "maplibre-gl";
-import "@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css";
+import { Map, Popup, Marker, LngLat } from "maplibre-gl";
+import type { LngLatLike, Source } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import MaplibreGeocoder from "@maplibre/maplibre-gl-geocoder";
+import "@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css";
 
 import { mapColors, stepsColors, geocoderAPI, mapBounds } from "@/utils/map";
 
 import { getIsochrone } from "@/utils/isochrone";
 
-import {
+import type {
   Feature,
   FeatureCollection,
   GeoJsonProperties,
   Geometry,
 } from "geojson";
-import { AxiosError } from "axios";
+import type { AxiosError } from "axios";
 
 const loading = ref(true);
 
@@ -41,6 +42,8 @@ const container = ref<HTMLDivElement>();
 
 const error = ref(false);
 const errorMessage = ref<string | null>(null);
+
+console.log(MaplibreGeocoder, geocoderAPI);
 
 const geocoder = new MaplibreGeocoder(geocoderAPI, {
   showResultsWhileTyping: true,

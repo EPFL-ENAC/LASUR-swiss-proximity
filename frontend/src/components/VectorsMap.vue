@@ -25,7 +25,8 @@ import {
   watch,
   onUnmounted,
 } from "vue";
-import { Map, Popup, LngLatLike, MapLayerEventType, Marker } from "maplibre-gl";
+import { Map, Popup, Marker } from "maplibre-gl";
+import type { LngLatLike, MapLayerEventType } from "maplibre-gl";
 import "@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 import MaplibreGeocoder from "@maplibre/maplibre-gl-geocoder";
@@ -38,7 +39,8 @@ import {
   mapBounds,
 } from "@/utils/map";
 
-import { cleanVariableString, TileParams } from "@/utils/variables";
+import { cleanVariableString } from "@/utils/variables";
+import type { TileParams } from "@/utils/variables";
 
 const loading = ref(true);
 
