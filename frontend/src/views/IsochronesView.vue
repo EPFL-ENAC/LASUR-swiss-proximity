@@ -18,13 +18,16 @@
     <v-row class="flex-grow-1 no-gutters ma-0">
       <v-col cols="3">
         <v-container fluid>
-          <v-select
-            v-model="selectedTransportMode"
-            :items="listTransportModes"
-            item-text="name"
-            return-object
-            label="Transport mode"
-          ></v-select>
+          <v-radio-group v-model="selectedTransportMode">
+            <v-radio
+              v-for="transportMode in listTransportModes"
+              class="variable"
+              :key="transportMode.name"
+              :label="transportMode.name"
+              :value="transportMode"
+            >
+            </v-radio>
+          </v-radio-group>
         </v-container>
       </v-col>
       <v-divider vertical></v-divider>
@@ -69,14 +72,26 @@
 
 <script lang="ts" setup>
 import IsochronesMap from "@/components/IsochronesMap.vue";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 import { listTransportModes } from "@/utils/isochrone";
+import type { TransportMode } from "@/utils/isochrone";
+const storageKeyTransportMode = "selectedTransportMode";
 
-const selectedTransportMode = ref(
-  listTransportModes.find((t) => t.name === "Public transport") ||
-    listTransportModes[0]
-);
+const storageItem = sessionStorage.getItem(storageKeyTransportMode),
+  savedTransportMode = storageItem
+    ? (JSON.parse(storageItem) as TransportMode)
+    : listTransportModes.find((t) => t.name === "Public transport") ||
+      listTransportModes[0];
+
+const selectedTransportMode = ref(savedTransportMode);
+
+watch(selectedTransportMode, (newTransportMode) => {
+  sessionStorage.setItem(
+    storageKeyTransportMode,
+    JSON.stringify(newTransportMode)
+  );
+});
 </script>
 
 <style scoped>
