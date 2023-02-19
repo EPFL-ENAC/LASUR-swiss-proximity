@@ -41,12 +41,8 @@
           <li>
             Le chapitre
             <v-tooltip bottom max-width="512">
-              <template #activator="{ on, attrs }">
-                <span
-                  v-bind="attrs"
-                  class="d-inline-flex font-weight-bold"
-                  v-on="on"
-                >
+              <template #activator="{ attrs }">
+                <span v-bind="attrs" class="d-inline-flex font-weight-bold">
                   Cartographies affectives&nbsp;
                   <v-icon color="primary" small>
                     mdi-information-outline
@@ -73,12 +69,8 @@
           <li>
             Le chapitre
             <v-tooltip bottom max-width="512">
-              <template #activator="{ on, attrs }">
-                <span
-                  v-bind="attrs"
-                  class="d-inline-flex font-weight-bold"
-                  v-on="on"
-                >
+              <template #activator="{ attrs }">
+                <span v-bind="attrs" class="d-inline-flex font-weight-bold">
                   Atlas des paysages de mobilité&nbsp;
                   <v-icon color="primary" small>
                     mdi-information-outline
@@ -106,12 +98,8 @@
           <li>
             Le chapitre
             <v-tooltip bottom max-width="512">
-              <template #activator="{ on, attrs }">
-                <span
-                  v-bind="attrs"
-                  class="d-inline-flex font-weight-bold"
-                  v-on="on"
-                >
+              <template #activator="{ attrs }">
+                <span v-bind="attrs" class="d-inline-flex font-weight-bold">
                   Contexte et fonds de cartes&nbsp;
                   <v-icon color="primary" small>
                     mdi-information-outline

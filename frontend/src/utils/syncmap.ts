@@ -1,4 +1,4 @@
-import { Map } from "maplibre-gl";
+import type { Map } from "maplibre-gl";
 
 //code from https://github.com/mapbox/mapbox-gl-sync-move
 //transpiled to typescript

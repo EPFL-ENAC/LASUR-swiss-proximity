@@ -1,5 +1,5 @@
-import { ExpressionSpecification, LngLat, LngLatBounds } from "maplibre-gl";
-
+import type { ExpressionSpecification } from "maplibre-gl";
+import { LngLat, LngLatBounds } from "maplibre-gl";
 export const mapColors = [
   "#1a9850",
   "#66bd63",

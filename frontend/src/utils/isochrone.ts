@@ -1,7 +1,12 @@
 import axios, { AxiosError } from "axios";
-import { Feature, GeoJsonProperties, Geometry } from "geojson";
-import { ExtendedFeatureCollection } from "d3";
+import type {
+  Feature,
+  FeatureCollection,
+  GeoJsonProperties,
+  Geometry,
+} from "geojson";
 
+export type TransportMode = { name: string; profile: string };
 // List of transport mode, with ORS or TravelTime corresponding terminology
 export const listTransportModes = [
   { name: "Driving", profile: "driving-car" },
@@ -30,7 +35,7 @@ const getIsochroneORS = (
 ) => {
   // Axios post request to ORS API
   return axios
-    .post<ExtendedFeatureCollection>(`/orsapi/v2/isochrones/${mode}`, {
+    .post<FeatureCollection>(`/orsapi/v2/isochrones/${mode}`, {
       locations: [location],
       // ORS API expects times in minutes
       range: times,
@@ -56,7 +61,7 @@ const getIsochroneTravelTime = (
 
   // Axios post request to TravelTime API
   return axios
-    .post<ExtendedFeatureCollection>(
+    .post<FeatureCollection>(
       `/traveltimeapi/v4/time-map`,
       {
         departure_searches: times.map((time) => ({
