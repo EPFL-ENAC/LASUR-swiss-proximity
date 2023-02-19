@@ -60,14 +60,20 @@
                   :color="variable.selected ? 'black' : 'grey'"
                   dense
                   min="0"
-                  max="2"
-                  step="0.1"
+                  max="1"
+                  step="0.25"
                   v-model="variable.weight"
                   thumb-label
                 ></v-slider>
               </v-col>
             </v-row>
           </v-input>
+        </v-container>
+        <v-divider></v-divider>
+        <v-container>
+          <v-btn @click="resetSessionStorage" variant="flat">
+            Reset parameters
+          </v-btn>
         </v-container>
       </v-col>
 
@@ -105,18 +111,27 @@ import {
   listTilesParams,
   cleanVariableString,
 } from "@/utils/variables";
-import { Map } from "maplibre-gl";
+import type { TileParams, ProximityVariable } from "@/utils/variables";
+import type { Map } from "maplibre-gl";
 import { syncMaps } from "@/utils/syncmap";
 
 const listVariables = listPossibleVariables;
 
-const variables = ref(
-  listVariables.slice(0, listVariables.length - 1).map((v) => ({
+const defaultVariables: ProximityVariable[] = listVariables
+  .slice(0, listVariables.length - 1)
+  .map((v) => ({
     name: v,
     weight: 1,
     selected: v === "bike_health" || v === "bike_transit",
-  }))
-);
+  }));
+
+const storageKeyVariables = "selectedVariables",
+  storageItemVariables = sessionStorage.getItem(storageKeyVariables),
+  savedVariables = storageItemVariables
+    ? (JSON.parse(storageItemVariables) as ProximityVariable[])
+    : JSON.parse(JSON.stringify(defaultVariables));
+
+const variables = ref<ProximityVariable[]>(savedVariables);
 
 const selectedVariables = computed(() => {
   //I added weight so it update props when weight change
@@ -135,7 +150,26 @@ const selectedControlVariable = {
 const leftMap = ref<Map>();
 const rightMap = ref<Map>();
 
-const selectedTilesSource = ref(listTilesParams[0]);
+const storageKeyTilesSource = "selectedTilesSource",
+  storageItemTilesSource = sessionStorage.getItem(storageKeyTilesSource),
+  savedTilesSource = storageItemTilesSource
+    ? (JSON.parse(storageItemTilesSource) as TileParams)
+    : listTilesParams[0];
+
+const selectedTilesSource = ref(savedTilesSource);
+
+watch(selectedTilesSource, (newTilesSource) =>
+  sessionStorage.setItem(storageKeyTilesSource, JSON.stringify(newTilesSource))
+);
+
+watch(selectedVariables, () =>
+  sessionStorage.setItem(storageKeyVariables, JSON.stringify(variables.value))
+);
+
+function resetSessionStorage() {
+  variables.value = JSON.parse(JSON.stringify(defaultVariables));
+  selectedTilesSource.value = listTilesParams[0];
+}
 
 watch(
   () => ({ leftMap: leftMap.value, rightMap: rightMap.value }),

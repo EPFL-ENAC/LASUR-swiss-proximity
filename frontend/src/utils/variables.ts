@@ -17,6 +17,11 @@ export const listPossibleVariables = [
   "walk_transit",
 ];
 
+export type ProximityVariable = {
+  name: string;
+  weight: number;
+  selected: boolean;
+};
 export type TileParams = {
   name: string;
   url: string;

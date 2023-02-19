@@ -22,21 +22,23 @@
 </template>
 
 <script lang="ts" setup>
-import { withDefaults, defineProps, onMounted, ref } from "vue";
+import { withDefaults, onMounted, ref, watch } from "vue";
 
 const props = withDefaults(
   defineProps<{
     name?: string;
     width?: number;
-    open?: boolean;
     buttonText?: string;
   }>(),
-  { width: 1024, open: true }
+  { width: 1024 }
 );
 
-const dialog = ref(false);
+const storageItem = sessionStorage.getItem("dialogClosed"),
+  dialogClosed = storageItem ? JSON.parse(storageItem) : false;
 
-onMounted(() => {
-  dialog.value = props.open;
+const dialog = ref(!dialogClosed);
+
+watch(dialog, (value) => {
+  sessionStorage.setItem("dialogClosed", JSON.stringify(!value));
 });
 </script>

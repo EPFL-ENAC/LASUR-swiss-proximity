@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-app-bar flat outlined color="white" app>
-      <v-app-bar-title>SWISS MOBILITY</v-app-bar-title>
+      <v-app-bar-title>SWISS PROXIMITY</v-app-bar-title>
       <v-tabs grow>
         <v-tab to="/doublemap">Double</v-tab>
         <v-tab to="/isochrones">Isochrones</v-tab>
@@ -9,7 +9,7 @@
     </v-app-bar>
     <v-main>
       <router-view></router-view>
-      <simple-dialog button-text="Commencer" open>
+      <simple-dialog button-text="Commencer">
         <h1>Bienvenue sur Swiss Proximity ! __________________</h1>
         <br />
         <p>
@@ -153,20 +153,8 @@
   </v-app>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import SimpleDialog from "@/components/SimpleDialog.vue";
-
-// import HelloWorld from "./components/HelloWorld";
-
-export default {
-  name: "App",
-
-  components: { SimpleDialog },
-
-  data: () => ({
-    //
-  }),
-};
 </script>
 
 <style lang="scss" scoped>
