@@ -1,13 +1,13 @@
 <template>
   <v-app>
-    <v-app-bar flat outlined color="white" app>
-      <v-app-bar-title>SWISS PROXIMITY</v-app-bar-title>
-      <v-tabs grow>
+    <v-toolbar flat color="white" app>
+      <v-toolbar-title max-width="300px">SWISS PROXIMITY</v-toolbar-title>
+      <v-tabs class="flex-grow-1 flex-shrink-0 px-10" align-tabs="center" grow>
         <v-tab to="/simplemap">Simple</v-tab>
         <v-tab to="/doublemap">Double</v-tab>
         <v-tab to="/isochrones">Isochrones</v-tab>
       </v-tabs>
-    </v-app-bar>
+    </v-toolbar>
     <v-main>
       <router-view></router-view>
       <simple-dialog button-text="Commencer">
