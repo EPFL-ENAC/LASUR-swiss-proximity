@@ -12,6 +12,8 @@ export const mapColors = [
   "#d73027",
 ];
 
+export const isochroneColors = ["#ffffe5", "#bbe395", "#389d55"];
+
 export const hexagonsResolutions = [6, 7, 8];
 
 const sw = new LngLat(5.5, 45.5),
@@ -68,11 +70,11 @@ export function expressionMean(
 // It returns an array of values and colors, where the values are the values of the variable that correspond to the colors in the legend.
 export function stepsColors(min: number, max: number, colors: string[]) {
   const diff = max - min,
-    n = colors.length - 1,
-    step = ~~(diff / n);
+    n = colors.length,
+    step = diff / (n - 1);
   const returnVal = [];
-  for (let i = 1; i < n; i++) {
-    returnVal.push(i * step);
+  for (let i = 0; i < n; i++) {
+    returnVal.push(i * step + min);
     returnVal.push(colors[i]);
   }
   return returnVal;

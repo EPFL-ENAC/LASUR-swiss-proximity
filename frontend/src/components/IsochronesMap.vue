@@ -24,7 +24,12 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import MaplibreGeocoder from "@maplibre/maplibre-gl-geocoder";
 import "@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css";
 
-import { mapColors, stepsColors, geocoderAPI, mapBounds } from "@/utils/map";
+import {
+  isochroneColors,
+  stepsColors,
+  geocoderAPI,
+  mapBounds,
+} from "@/utils/map";
 
 import { getIsochrone } from "@/utils/isochrone";
 
@@ -33,6 +38,7 @@ import type {
   FeatureCollection,
   GeoJsonProperties,
   Geometry,
+  Polygon,
 } from "geojson";
 import type { AxiosError } from "axios";
 
@@ -42,8 +48,6 @@ const container = ref<HTMLDivElement>();
 
 const error = ref(false);
 const errorMessage = ref<string | null>(null);
-
-console.log(MaplibreGeocoder, geocoderAPI);
 
 const geocoder = new MaplibreGeocoder(geocoderAPI, {
   showResultsWhileTyping: true,
@@ -83,12 +87,13 @@ function fetchIsochrone(location: LngLatLike) {
   getIsochrone(
     LngLat.convert(location).toArray() as [number, number],
     props.selectedTransportMode,
-    [5, 10, 15].map((minutes) => minutes * 60)
+    [15, 20, 30].map((minutes) => minutes * 60)
   )
-    .then((data: Feature<Geometry, GeoJsonProperties>[]) => {
+    .then((data: Feature<Polygon, GeoJsonProperties>[]) => {
       if (map === null) return;
       const source = map?.getSource("isochrone") as Source & SourceNewAPI;
       source.setData({ type: "FeatureCollection", features: data });
+      console.log(data);
     })
     .catch((err: AxiosError & ApiError) => {
       error.value = true;
@@ -126,34 +131,38 @@ onMounted(() => {
       type: "geojson",
       data: { type: "Feature", geometry: { type: "Polygon", coordinates: [] } },
     });
-    // Add a new layer to visualize the isochrone.
-    map.addLayer({
-      id: "isochrone-fill",
-      type: "fill",
-      source: "isochrone", // reference the data source
-      layout: {},
-      paint: {
-        "fill-color": "#0080ff", // blue color fill
-        "fill-opacity": 0.5,
-      },
-    });
+    // // Add a new layer to visualize the isochrone.
+    // map.addLayer({
+    //   id: "isochrone-fill",
+    //   type: "fill",
+    //   source: "isochrone", // reference the data source
+    //   layout: {},
+    //   paint: {
+    //     "fill-color": "#0080ff", // blue color fill
+    //     "fill-opacity": 0.5,
+    //   },
+    // });
 
     //Add layer for isochrone feature
     map.addLayer({
       id: "isochrone",
       type: "fill",
       source: "isochrone",
-      layout: {},
+      //This is the solution I found to reverse the order of the features (smaller isochrone on top)
+      layout: { "fill-sort-key": ["*", ["to-number", ["get", "value"]], -1] },
       paint: {
         "fill-color": [
           "interpolate",
           ["linear"],
           ["get", "value"],
-          ...stepsColors(300, 900, mapColors),
+          ...stepsColors(15 * 60, 30 * 60, isochroneColors),
         ],
         "fill-opacity": 0.5,
+        "fill-outline-color": "rgba(0,0,0,0.1)",
       },
     });
+
+    console.log(...stepsColors(15 * 60, 30 * 60, isochroneColors));
 
     // This control is used to search for a location
     map.addControl(geocoder.on("result", onGeocodingSearchResult));
