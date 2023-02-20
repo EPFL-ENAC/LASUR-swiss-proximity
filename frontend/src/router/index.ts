@@ -7,6 +7,11 @@ const routes = [
     redirect: "/doublemap",
   },
   {
+    path: "/simplemap",
+    name: "Simple map",
+    component: () => import("@/views/SimpleMapView.vue"),
+  },
+  {
     path: "/doublemap",
     name: "Double map",
     component: () => import("@/views/DoubleMapView.vue"),
