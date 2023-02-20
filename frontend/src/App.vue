@@ -7,10 +7,12 @@
         <v-tab to="/doublemap">Double</v-tab>
         <v-tab to="/isochrones">Isochrones</v-tab>
       </v-tabs>
+      <v-spacer></v-spacer>
+      <v-btn @click="openDialog"> Infos </v-btn>
     </v-toolbar>
     <v-main>
       <router-view></router-view>
-      <simple-dialog button-text="Commencer">
+      <simple-dialog v-model:open="open" button-text="Commencer">
         <h1>Bienvenue sur Swiss Proximity ! __________________</h1>
         <br />
         <p>
@@ -156,6 +158,13 @@
 
 <script setup lang="ts">
 import SimpleDialog from "@/components/SimpleDialog.vue";
+
+import { ref } from "vue";
+
+const open = ref(false);
+const openDialog = () => {
+  open.value = true;
+};
 </script>
 
 <style lang="scss" scoped>

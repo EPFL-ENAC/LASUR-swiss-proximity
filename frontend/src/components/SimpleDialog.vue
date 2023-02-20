@@ -22,23 +22,36 @@
 </template>
 
 <script lang="ts" setup>
-import { withDefaults, onMounted, ref, watch } from "vue";
+import { withDefaults, ref, watch } from "vue";
 
 const props = withDefaults(
   defineProps<{
     name?: string;
     width?: number;
     buttonText?: string;
+    open: boolean;
   }>(),
   { width: 1024 }
 );
+
+const emits = defineEmits<{
+  (event: "update:open", value: boolean): void;
+}>();
 
 const storageItem = sessionStorage.getItem("dialogClosed"),
   dialogClosed = storageItem ? JSON.parse(storageItem) : false;
 
 const dialog = ref(!dialogClosed);
 
+watch(
+  () => props.open,
+  (value) => {
+    dialog.value = value;
+  }
+);
+
 watch(dialog, (value) => {
   sessionStorage.setItem("dialogClosed", JSON.stringify(!value));
+  emits("update:open", value);
 });
 </script>
