@@ -20,7 +20,7 @@
 import {
   ref,
   onMounted,
-  defineProps,
+  withDefaults,
   defineEmits,
   watch,
   onUnmounted,
@@ -57,11 +57,15 @@ const errorMessage = ref<string | null>(null);
 
 const center: LngLatLike = [7.95, 46.74];
 
-const props = defineProps<{
-  variables: { name: string; weight: number; selected: boolean }[];
-  listTilesParams: TileParams[];
-  selectedTilesName: string;
-}>();
+const props = withDefaults(
+  defineProps<{
+    variables: { name: string; weight: number; selected: boolean }[];
+    listTilesParams: TileParams[];
+    selectedTilesName: string;
+    hasGeocoderSearch?: boolean;
+  }>(),
+  { hasGeocoderSearch: true }
+);
 
 const emit = defineEmits<{
   (event: "created:map", value: Map): void;
@@ -208,15 +212,17 @@ onMounted(() => {
 
     map.on("mousemove", "units", onMove).on("mouseleave", "units", onLeave);
 
-    // This control is used to search for a location
-    map.addControl(
-      new MaplibreGeocoder(geocoderAPI, {
-        showResultsWhileTyping: true,
-        showResultMarkers: false,
-        marker: true,
-        maplibregl: { Marker, Popup },
-      }).on("result", onGeocodingSearchResult)
-    );
+    if (props.hasGeocoderSearch) {
+      // This control is used to search for a location
+      map.addControl(
+        new MaplibreGeocoder(geocoderAPI, {
+          showResultsWhileTyping: true,
+          showResultMarkers: false,
+          marker: true,
+          maplibregl: { Marker, Popup },
+        }).on("result", onGeocodingSearchResult)
+      );
+    }
   });
   emit("created:map", map);
 });

@@ -85,6 +85,7 @@
           :variables="selectedVariables"
           :list-tiles-params="listTilesParams"
           :selected-tiles-name="selectedTilesSource.name"
+          :has-geocoder-search="false"
           @created:map="leftMap = $event"
         ></VectorsMap>
       </v-col>
