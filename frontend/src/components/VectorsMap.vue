@@ -85,6 +85,7 @@ function onMove(e: MapLayerEventType["mousemove"]) {
   if (map === null) return;
   // Change the cursor style as a UI indicator.
   map.getCanvas().style.cursor = "pointer";
+
   // Use the first found feature.
   if (e.features === undefined || e.features === null) return;
 
@@ -96,8 +97,9 @@ function onMove(e: MapLayerEventType["mousemove"]) {
     .setLngLat(e.lngLat)
     .setHTML(
       `<h3>${
-        properties.municipality_name ||
-        properties.agglomeration_name + "-" + properties.id
+        !properties.h3index
+          ? properties.municipality_name
+          : properties.agglomeration_name + "-" + properties.id
       }</h3>
 </br>${props.variables.map(
         (key) =>
@@ -216,9 +218,11 @@ onMounted(() => {
           "fill-outline-color": "rgba(0,0,0,0.2)",
         },
       });
-    });
 
-    map.on("mousemove", "units", onMove).on("mouseleave", "units", onLeave);
+      map
+        .on("mousemove", "layer-" + secureTilesName(tile.name), onMove)
+        .on("mouseleave", "layer-" + secureTilesName(tile.name), onLeave);
+    });
 
     if (props.hasGeocoderSearch) {
       // This control is used to search for a location
@@ -241,7 +245,11 @@ onMounted(() => {
 
 onUnmounted(() => {
   if (map === null) return;
-  map.off("mousemove", "units", onMove).off("mouseleave", "units", onLeave);
+  props.listTilesParams.map((tile) => {
+    map
+      ?.off("mousemove", "layer-" + secureTilesName(tile.name), onMove)
+      .off("mouseleave", "layer-" + secureTilesName(tile.name), onLeave);
+  });
 });
 </script>
 
