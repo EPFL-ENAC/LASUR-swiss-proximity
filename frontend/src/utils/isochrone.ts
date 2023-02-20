@@ -4,8 +4,10 @@ import type {
   FeatureCollection,
   GeoJsonProperties,
   Geometry,
+  Polygon,
 } from "geojson";
 
+import difference from "@turf/difference";
 export type TransportMode = { name: string; profile: string };
 // List of transport mode, with ORS or TravelTime corresponding terminology
 export const listTransportModes = [
@@ -28,6 +30,23 @@ type ErrorORS = {
   info: { engine: { version: string; build_date: string }; timestamp: number };
 };
 
+const differenceIsochrones = (
+  features: Feature<Polygon, GeoJsonProperties>[]
+) => {
+  const featuresSorted = features.sort(
+    (a, b) => a?.properties?.value - b?.properties?.value
+  );
+
+  return featuresSorted.map((d, i) =>
+    i == 0
+      ? d
+      : ((difference(d, featuresSorted[i - 1]) || d) as Feature<
+          Polygon,
+          GeoJsonProperties
+        >)
+  );
+};
+
 const getIsochroneORS = (
   location: [number, number],
   mode: string,
@@ -41,7 +60,8 @@ const getIsochroneORS = (
       range: times,
       range_type: "time",
     })
-    .then((res) => res.data.features as Feature<Geometry, GeoJsonProperties>[])
+    .then((res) => res.data.features as Feature<Polygon, GeoJsonProperties>[])
+    .then(differenceIsochrones)
     .catch((error: AxiosError<ErrorORS>) => {
       if (axios.isAxiosError(error)) {
         // Access to config, request, and response
@@ -84,8 +104,9 @@ const getIsochroneTravelTime = (
         res.data.features.map((feat, index) => {
           feat.properties = { value: times[index] };
           return feat;
-        }) as Feature<Geometry, GeoJsonProperties>[]
+        }) as Feature<Polygon, GeoJsonProperties>[]
     )
+    .then(differenceIsochrones)
     .catch((error: AxiosError<ErrorTravelTime>) => {
       if (axios.isAxiosError(error)) {
         // Access to config, request, and response

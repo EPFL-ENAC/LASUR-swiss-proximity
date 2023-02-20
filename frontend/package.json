@@ -24,6 +24,7 @@
     "webfontloader": "^1.0.0"
   },
   "devDependencies": {
+    "@turf/difference": "^6.5.0",
     "@types/jsdom": "^21.1.0",
     "@types/node": "^18.11.9",
     "@types/webfontloader": "^1.6.35",

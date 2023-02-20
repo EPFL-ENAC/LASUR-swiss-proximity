@@ -204,8 +204,8 @@ onMounted(() => {
             expressionMean(props.variables),
             ...stepsColors(0, 2000, mapColors),
           ],
-          "fill-opacity": 0.4,
-          "fill-outline-color": "rgba(105, 101, 141, 1)",
+          "fill-opacity": 0.6,
+          "fill-outline-color": "rgba(0,0,0,0.2)",
         },
       });
     });
