@@ -40,7 +40,7 @@
             hide-details
           >
             <v-row>
-              <v-col>
+              <v-col cols="7">
                 <v-checkbox
                   v-model="variable.selected"
                   :label="cleanVariableString(variable.name)"
@@ -50,15 +50,13 @@
                 ></v-checkbox>
               </v-col>
 
-              <v-col>
+              <v-col cols="5">
                 <v-slider
                   hide-details
                   density="compact"
-                  tick-size="1"
                   track-size="1"
                   thumb-size="10"
                   :color="variable.selected ? 'black' : 'grey'"
-                  dense
                   min="0"
                   max="1"
                   step="0.25"
