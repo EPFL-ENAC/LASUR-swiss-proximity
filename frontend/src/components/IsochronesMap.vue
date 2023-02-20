@@ -95,7 +95,7 @@ function fetchIsochrone(location: LngLatLike) {
   getIsochrone(
     LngLat.convert(location).toArray() as [number, number],
     props.selectedTransportMode,
-    [15, 20, 30].map((minutes) => minutes * 60)
+    [15, 20, 25, 30].map((minutes) => minutes * 60)
   )
     .then((data: Feature<Polygon, GeoJsonProperties>[]) => {
       if (map === null) return;

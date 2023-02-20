@@ -16,8 +16,8 @@ export const isochroneColors = ["#ffffe5", "#bbe395", "#389d55"];
 
 export const hexagonsResolutions = [6, 7, 8];
 
-const sw = new LngLat(5.5, 45.5),
-  ne = new LngLat(10.5, 48);
+const sw = new LngLat(4, 44),
+  ne = new LngLat(13, 49.5);
 
 export const mapBounds = new LngLatBounds(sw, ne);
 
