@@ -4,12 +4,20 @@
 
     <div ref="container" class="map fill-height" />
     <v-snackbar
-      color="transparent"
       elevation="0"
+      color="transparent"
+      variant="flat"
       v-model="error"
       :timeout="15000"
     >
-      <v-alert v-model="error" type="error" dismissible>
+      <v-alert
+        title="Error"
+        border="start"
+        v-model="error"
+        variant="flat"
+        type="error"
+        closable
+      >
         {{ errorMessage }}
       </v-alert>
     </v-snackbar>
@@ -223,6 +231,10 @@ onMounted(() => {
         }).on("result", onGeocodingSearchResult)
       );
     }
+    map.on("error", (e) => {
+      // Hide those annoying 404/403 errors
+      if (e && e.error.message !== "Failed to fetch") console.error(e);
+    });
   });
   emit("created:map", map);
 });

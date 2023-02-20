@@ -4,12 +4,20 @@
 
     <div ref="container" class="map fill-height" />
     <v-snackbar
-      color="transparent"
       elevation="0"
+      color="transparent"
+      variant="flat"
       v-model="error"
       :timeout="15000"
     >
-      <v-alert v-model="error" type="error" dismissible>
+      <v-alert
+        title="Error"
+        border="start"
+        v-model="error"
+        variant="flat"
+        type="error"
+        closable
+      >
         {{ errorMessage }}
       </v-alert>
     </v-snackbar>
@@ -131,17 +139,6 @@ onMounted(() => {
       type: "geojson",
       data: { type: "Feature", geometry: { type: "Polygon", coordinates: [] } },
     });
-    // // Add a new layer to visualize the isochrone.
-    // map.addLayer({
-    //   id: "isochrone-fill",
-    //   type: "fill",
-    //   source: "isochrone", // reference the data source
-    //   layout: {},
-    //   paint: {
-    //     "fill-color": "#0080ff", // blue color fill
-    //     "fill-opacity": 0.5,
-    //   },
-    // });
 
     //Add layer for isochrone feature
     map.addLayer({
