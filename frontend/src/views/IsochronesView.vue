@@ -3,32 +3,36 @@
     class="fill-height pa-0 align-stretch flex-column flex-nowrap"
     fluid
   >
-    <v-row class="flew-shrink-1 flex-grow-0 no-gutters">
-      <v-col cols="12">
-        <v-container fluid>
-          <h1>Maplibre prototype</h1>
-          <span class="text-subtitle-1">
-            Using MaplibreGL and vector tiles</span
-          >
-        </v-container>
-
+    <v-row class="flex-shrink-1 flex-grow-0">
+      <v-col>
+        <v-card flat>
+          <v-card-title>Isochrones de mobilité en Suisse</v-card-title>
+          <v-card-text>
+            Choissisez le type de transport puis déplacez le marqueur ou lancez
+            une recherche avec une adresse. L'application vous montrera les
+            zones accessibles en fonction du temps de trajet.
+          </v-card-text>
+        </v-card>
         <v-divider></v-divider>
       </v-col>
     </v-row>
     <v-row class="flex-grow-1 no-gutters ma-0">
       <v-col cols="3">
-        <v-container fluid>
-          <v-radio-group v-model="selectedTransportMode">
-            <v-radio
-              v-for="transportMode in listTransportModes"
-              class="variable"
-              :key="transportMode.name"
-              :label="transportMode.name"
-              :value="transportMode"
-            >
-            </v-radio>
-          </v-radio-group>
-        </v-container>
+        <v-card flat>
+          <v-card-title>Type de transport</v-card-title>
+          <v-card-text>
+            <v-radio-group v-model="selectedTransportMode">
+              <v-radio
+                v-for="transportMode in listTransportModes"
+                class="variable"
+                :key="transportMode.name"
+                :label="transportMode.name"
+                :value="transportMode"
+              >
+              </v-radio>
+            </v-radio-group>
+          </v-card-text>
+        </v-card>
       </v-col>
       <v-divider vertical></v-divider>
 
