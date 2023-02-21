@@ -37,14 +37,15 @@ const differenceIsochrones = (
     (a, b) => a?.properties?.value - b?.properties?.value
   );
 
-  return featuresSorted.map((d, i) =>
-    i == 0
-      ? d
-      : ((difference(d, featuresSorted[i - 1]) || d) as Feature<
-          Polygon,
-          GeoJsonProperties
-        >)
-  );
+  return featuresSorted.map((d, i) => {
+    if (i == 0) return d;
+    else {
+      const isochroneDiff = difference(d, featuresSorted[i - 1]);
+      return isochroneDiff !== null
+        ? (isochroneDiff as Feature<Polygon, GeoJsonProperties>)
+        : d;
+    }
+  });
 };
 
 const getIsochroneORS = (
@@ -86,7 +87,7 @@ const getIsochroneTravelTime = (
       {
         departure_searches: times.map((time) => ({
           id: `Isochrone transport Switzerland ${Math.round(time / 60)}min}`,
-          departure_time: new Date().toISOString(),
+          departure_time: "2023-02-21T08:00:00.000Z",
           travel_time: time,
           coords: { lat, lng },
           transportation: { type: mode },
