@@ -101,7 +101,6 @@ function fetchIsochrone(location: LngLatLike) {
       if (map === null) return;
       const source = map?.getSource("isochrone") as Source & SourceNewAPI;
       source.setData({ type: "FeatureCollection", features: data });
-      console.log(data);
     })
     .catch((err: AxiosError & ApiError) => {
       error.value = true;
@@ -158,8 +157,6 @@ onMounted(() => {
         "fill-outline-color": "rgba(0,0,0,0.1)",
       },
     });
-
-    console.log(...stepsColors(15 * 60, 30 * 60, isochroneColors));
 
     // This control is used to search for a location
     map.addControl(geocoder.on("result", onGeocodingSearchResult));
