@@ -49,3 +49,9 @@ export function cleanVariableString(name: string) {
   const str = name.replace(/(-|_|\.)/g, " ").trim();
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
+export const getVariableGroup = (variable: ProximityVariable) =>
+  variable.name.split("_")[0];
+
+export const getVariableNameWithoutGroup = (variable: ProximityVariable) =>
+  variable.name.split("_").slice(1).join(" ");
