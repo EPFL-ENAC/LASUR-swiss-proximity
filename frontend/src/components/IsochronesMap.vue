@@ -123,7 +123,8 @@ onMounted(() => {
   map = new Map({
     container: container.value as HTMLDivElement,
     // nginx will redirect to the correct maptiler url adding the API key
-    style: "/maptiler/maps/basic-v2-light/style.json",
+    style:
+      "https://api.maptiler.com/maps/basic-v2-light/style.json?key=1RYHB5HXhtpj8qlO8hFi",
     zoom: 7,
     center,
     maxBounds: mapBounds,
