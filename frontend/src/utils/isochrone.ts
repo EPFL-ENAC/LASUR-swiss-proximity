@@ -73,12 +73,19 @@ const getIsochroneORS = (
     });
 };
 
+const getLastMonday = (date: Date) =>
+  new Date(date.setDate(date.getDate() - ((date.getDay() + 6) % 7)));
+
 const getIsochroneTravelTime = (
   location: [number, number],
   mode: string,
   times: number[]
 ) => {
   const [lng, lat] = location;
+
+  //Because Travel time only has data for last two weeks we ask them for a departure in the morning on most recent Monday
+  const departure_time = getLastMonday(new Date());
+  departure_time.setHours(9);
 
   // Axios post request to TravelTime API
   return axios
@@ -87,7 +94,7 @@ const getIsochroneTravelTime = (
       {
         departure_searches: times.map((time) => ({
           id: `Isochrone transport Switzerland ${Math.round(time / 60)}min}`,
-          departure_time: "2023-02-21T08:00:00.000Z",
+          departure_time: departure_time.toISOString(),
           travel_time: time,
           coords: { lat, lng },
           transportation: { type: mode },

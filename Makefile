@@ -3,7 +3,7 @@ install:
 	$(MAKE) -C frontend install
 
 dev-proxy:
-	docker-compose up api-proxy-dev reverse-proxy --remove-orphans
+	docker-compose up --remove-orphans api-proxy-dev reverse-proxy
 
 dev-frontend:
 	$(MAKE) -C frontend run
