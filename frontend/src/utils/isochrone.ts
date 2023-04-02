@@ -84,8 +84,7 @@ const getIsochroneTravelTime = (
   const [lng, lat] = location;
 
   //Because Travel time only has data for last two weeks we ask them for a departure in the morning on most recent Monday
-  const departure_time = getLastMonday(new Date());
-  departure_time.setHours(9);
+  const departure_time = new Date(getLastMonday(new Date()).setHours(9));
 
   // Axios post request to TravelTime API
   return axios
