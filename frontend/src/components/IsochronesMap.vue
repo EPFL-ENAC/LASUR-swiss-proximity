@@ -25,8 +25,17 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, defineProps, watch } from "vue";
-import { Map, Popup, Marker, LngLat } from "maplibre-gl";
+import { ref, onMounted, defineProps, watch, onUnmounted } from "vue";
+import {
+  Map,
+  Popup,
+  Marker,
+  LngLat,
+  type MapLayerEventType,
+  type ExpressionInputType,
+  type ExpressionSpecification,
+  type DataDrivenPropertyValueSpecification,
+} from "maplibre-gl";
 import type { LngLatLike, Source } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import MaplibreGeocoder from "@maplibre/maplibre-gl-geocoder";
@@ -37,6 +46,7 @@ import {
   stepsColors,
   geocoderAPI,
   mapBounds,
+  publicStopsColors,
 } from "@/utils/map";
 
 import { getIsochrone } from "@/utils/isochrone";
@@ -64,6 +74,12 @@ const geocoder = new MaplibreGeocoder(geocoderAPI, {
   maplibregl: { Marker, Popup },
 });
 
+const popup = ref<Popup>(
+  new Popup({
+    closeButton: false,
+  })
+);
+
 const center: LngLatLike = [7.95, 46.74];
 
 const props = defineProps<{
@@ -72,6 +88,34 @@ const props = defineProps<{
 
 var map: Map | null = null;
 const isochroneMarker: Marker = new Marker({ draggable: true, color: "grey" });
+
+function onMove(e: MapLayerEventType["mousemove"]) {
+  if (map === null) return;
+  // Change the cursor style as a UI indicator.
+  map.getCanvas().style.cursor = "pointer";
+
+  // Use the first found feature.
+  if (e.features === undefined || e.features === null) return;
+
+  const feature = e.features[0],
+    properties = feature.properties || {};
+
+  // Display a popup with the name of the county.
+  popup.value
+    .setLngLat(e.lngLat)
+    .setHTML(
+      `<h3>${properties.stop_name}</h3>
+      <p>${properties.description}</p>
+      </br>`
+    )
+    .addTo(map);
+}
+
+function onLeave() {
+  if (map == null) return;
+  map.getCanvas().style.cursor = "";
+  popup.value.remove();
+}
 
 watch(
   () => props.selectedTransportMode,
@@ -140,7 +184,7 @@ onMounted(() => {
       data: { type: "Feature", geometry: { type: "Polygon", coordinates: [] } },
     });
 
-    //Add layer for isochrone feature
+    // Add layer for isochrone feature
     map.addLayer({
       id: "isochrone",
       type: "fill",
@@ -159,6 +203,34 @@ onMounted(() => {
       },
     });
 
+    map.addSource("stops", {
+      type: "vector",
+      tiles: [
+        "https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/2023-02-06/public-transport-stops/{z}/{x}/{y}.pbf",
+      ],
+      minzoom: 11,
+    });
+
+    //Add layer for public transport stops
+    map.addLayer({
+      id: "stops_layer",
+      "source-layer": "public_transport_stops",
+      type: "circle",
+      source: "stops",
+      paint: {
+        "circle-color": publicStopsColors as
+          | DataDrivenPropertyValueSpecification<string>
+          | undefined,
+        "circle-radius": 5,
+        "circle-stroke-width": 1,
+        "circle-stroke-color": "#fff",
+      },
+    });
+
+    map
+      .on("mousemove", "stops_layer", onMove)
+      .on("mouseleave", "stops_layer", onLeave);
+
     // This control is used to search for a location
     map.addControl(geocoder.on("result", onGeocodingSearchResult));
 
@@ -169,6 +241,13 @@ onMounted(() => {
       fetchIsochrone([lng, lat]);
     });
   });
+});
+
+onUnmounted(() => {
+  if (map === null) return;
+  map
+    ?.off("mousemove", "stops_layer", onMove)
+    .off("mouseleave", "stops_layer", onLeave);
 });
 </script>
 

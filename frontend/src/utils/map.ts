@@ -12,6 +12,51 @@ export const mapColors = [
   "#d73027",
 ];
 
+export const publicStopsColors = [
+  "match",
+  ["get", "description"],
+  // BUS
+  [
+    "Bus Service",
+    "Bus Service,Night Bus Service",
+    "Night Bus Service,Bus Service",
+  ],
+  "#ccc",
+
+  //METRO
+  [
+    "Metro Service",
+    "Metro Service,Bus Service",
+    "Metro Service,Night Bus Service",
+    "Metro Service,Bus Service,Night Bus Service",
+    "Metro Service,Night Bus Service,Bus Service",
+    "Funicular Service",
+  ],
+  "#fbb03b",
+
+  //TRAM
+  ["Tram Service", "Tram Service,Bus Service"],
+  "green",
+
+  //RAILWAY
+  [
+    "Long Distance Trains",
+    "Regional Rail Service",
+    "Suburban Railway",
+    "Suburban Railway,Additional Rail Service",
+    "Suburban Railway,Regional Rail Service,Additional Rail Service",
+    "Suburban Railway,Regional Rail Service",
+    "Suburban Railway,Bus Service",
+    "Regional Rail Service,Bus Service",
+  ],
+  "#C60018",
+
+  //BOAT
+  "Water Transport Service",
+  "#3bb2d0",
+  /* other */ "black",
+];
+
 export const isochroneColors = ["#ffffe5", "#bbe395", "#389d55"];
 
 export const hexagonsResolutions = [6, 7, 8];
