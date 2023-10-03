@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "swissmobility"
+authors = [
+	{name = "Régis Longchamp",email = "regis.longchamp@epfl.ch"},
+]
+description = "ff"
+readme = "README.md"
+keywords = ["python"]
+classifiers = [
+	"Development Status :: 1 - Planning",
+	"Intended Audience :: Developers",
+	"Programming Language :: Python :: 3",
+	"Operating System :: Unix",
+	"Operating System :: MacOS :: MacOS X",
+	"Operating System :: Microsoft :: Windows",
+]
+requires-python = ">=3.8"
+dependencies = [
+	"click",
+	"geopandas",
+	"quarto",
+	"h3",
+	"jupyterlab",
+	"h3pandas",
+	"sqlalchemy",
+	"psycopg2",
+	"geoalchemy2"
+
+]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+dev = [
+]
+
+[tool.setuptools]
+py-modules = []
