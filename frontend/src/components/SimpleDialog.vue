@@ -1,9 +1,9 @@
 <template>
-  <v-dialog v-model="dialog" :width="width">
+  <v-dialog v-model="dialog" :width="width" scrollable>
     <template #activator="{ on, attrs }">
       <slot name="activator" :on="on" :attrs="attrs"></slot>
     </template>
-    <v-card class="text-justify">
+    <v-card>
       <v-card-title v-if="name">{{ name }}</v-card-title>
       <v-card-text>
         <br v-if="!name" />
@@ -31,7 +31,7 @@ const props = withDefaults(
     buttonText?: string;
     open: boolean;
   }>(),
-  { width: 1024 }
+  { width: 1400 }
 );
 
 const emits = defineEmits<{

@@ -51,29 +51,16 @@ html {
   height: 1.2rem;
 }
 
-.theme--light.v-btn {
-  color: var(--v-primary-base) !important;
-}
 
-.theme--light.v-divider {
-  border-color: var(--v-primary-base) !important;
-}
 
 .v-divider {
   z-index: 10;
 }
 
-.theme--light.v-card {
-  color: var(--v-primary-base) !important;
-
-  & > .v-card__text {
-    color: var(--v-primary-base) !important;
-  }
-}
 
 /* https://www.digitalocean.com/community/tutorials/css-scrollbars */
 
-$scrollbar-color: var(--v-secondary-base);
+$scrollbar-color: rgb(var(--v-theme-on-surface));
 $scrollbar-background-color: white;
 /* Works on Firefox */
 * {
