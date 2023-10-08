@@ -32,6 +32,7 @@ import {
   defineEmits,
   watch,
   onUnmounted,
+  computed,
 } from "vue";
 import { Map, Popup, Marker } from "maplibre-gl";
 import type { LngLatLike, MapLayerEventType } from "maplibre-gl";
@@ -40,7 +41,6 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import MaplibreGeocoder from "@maplibre/maplibre-gl-geocoder";
 
 import {
-  mapColors,
   stepsColors,
   expressionMean,
   geocoderAPI,
@@ -65,15 +65,27 @@ const errorMessage = ref<string | null>(null);
 
 const center: LngLatLike = [7.95, 46.74];
 
+type MapVariable = {
+  id: string;
+  name: string;
+  weight: number;
+  selected: boolean;
+};
+
 const props = withDefaults(
   defineProps<{
-    variables: { name: string; weight: number; selected: boolean }[];
+    variables: MapVariable[];
     listTilesParams: TileParams[];
+    colors: { color: string; label: string }[];
     selectedTilesName: string;
     hasGeocoderSearch?: boolean;
+    year: number;
+    distance: number;
   }>(),
   { hasGeocoderSearch: true }
 );
+
+const mapColors = computed(() => props.colors.map((d) => d.color).reverse());
 
 const emit = defineEmits<{
   (event: "created:map", value: Map): void;
@@ -92,21 +104,22 @@ function onMove(e: MapLayerEventType["mousemove"]) {
   const feature = e.features[0],
     properties = feature.properties || {};
 
+  const proxyYearDistance = "_" + props.distance + "_" + props.year;
   // Display a popup with the name of the county.
   popup.value
     .setLngLat(e.lngLat)
     .setHTML(
       `<h3>${
-        !properties.h3index
-          ? properties.municipality_name
-          : properties.agglomeration_name + "-" + properties.id
+        properties.h3index
+          ? properties["Agglo" + proxyYearDistance]
+          : properties.municipality_name + "-" + properties.id
       }</h3>
 </br>${props.variables.map(
         (key) =>
           "<div>" +
             cleanVariableString(key.name) +
             " : " +
-            properties[key.name] || null + "</div>"
+            properties[key.id + proxyYearDistance].toFixed(3) || null + "</div>"
       )}`
     )
     .addTo(map);
@@ -119,16 +132,15 @@ function onLeave() {
 }
 
 watch(
-  () => props.variables,
-  (newVariables) => {
+  () => [props.variables, props.year, props.distance],
+  () => {
     // Change the paint property using new variables and weights
 
     const expression = [
-      "interpolate",
-      ["linear"],
-      expressionMean(newVariables),
+      "step",
+      expressionMean(props.variables, props.year, props.distance),
       // Right now steps colors don't change, I will create a static value for them once the data are normalized
-      ...stepsColors(0, 2000, mapColors),
+      ...stepsColors(0, 1, mapColors.value),
     ];
 
     props.listTilesParams.forEach(({ name }) => {
@@ -160,6 +172,7 @@ watch(
 );
 
 function secureTilesName(name: string) {
+  // console.log(name, name.replace(/[^a-zA-Z0-9]/g, "_").toLowerCase());
   return name.replace(/[^a-zA-Z0-9]/g, "_").toLowerCase();
 }
 
@@ -175,9 +188,7 @@ function onGeocodingSearchResult(e: { result: { center: LngLatLike } }) {
 onMounted(() => {
   map = new Map({
     container: container.value as HTMLDivElement,
-    // nginx will redirect to the correct maptiler url adding the API key
-    style:
-      "https://api.maptiler.com/maps/basic-v2-light/style.json?key=1RYHB5HXhtpj8qlO8hFi",
+    style: "/public/style.json",
     zoom: 7,
     center,
     maxBounds: mapBounds,
@@ -194,29 +205,25 @@ onMounted(() => {
 
       map.addSource(secureTilesName(tile.name), {
         type: "vector",
-        tiles: [tile.url],
-        minzoom: tile.minzoom,
-        maxzoom: tile.maxzoom,
+        url: tile.url,
       });
 
       map.addLayer({
         id: "layer-" + secureTilesName(tile.name),
         type: "fill",
         source: secureTilesName(tile.name),
-        "source-layer": "units",
+        "source-layer": secureTilesName(tile.name),
         layout: {
           visibility:
             props.selectedTilesName === tile.name ? "visible" : "none",
         },
         paint: {
           "fill-color": [
-            "interpolate",
-            ["linear"],
-            expressionMean(props.variables),
-            ...stepsColors(0, 2000, mapColors),
+            "step",
+            expressionMean(props.variables, props.year, props.distance),
+            ...stepsColors(0, 1, mapColors.value),
           ],
           "fill-opacity": 0.6,
-          "fill-outline-color": "rgba(0,0,0,0.2)",
         },
       });
 
