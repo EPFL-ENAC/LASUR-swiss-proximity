@@ -117,6 +117,8 @@ export const proximityTripColors = [
   { label: "Quantile 6/6", color: "#005A32", category: "A" },
 ];
 
+export type MapType = "demand" | "supply";
+
 // Transforms underscores "_" and dashes "-" to spaces and capitalizes the first letter
 export function cleanVariableString(name: string) {
   const str = name.replace(/(-|_|\.)/g, " ").trim();
