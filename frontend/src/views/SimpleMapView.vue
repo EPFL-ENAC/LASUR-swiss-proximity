@@ -15,12 +15,22 @@
     <v-row class="flex-grow-1" no-gutters>
       <v-col cols="2">
         <ProximityConfigColumn
+          v-if="!isDemand"
           v-model:variables="variables"
           :tiles-sources="listTilesParams"
           v-model:selected-tiles-source="selectedTilesSource"
           :on-reset-session-storage="resetSessionStorage"
         >
         </ProximityConfigColumn>
+        <DemandConfigColumn
+          v-else
+          v-model:variables="variables"
+          :tiles-sources="listTilesParams"
+          v-model:year-selected="selectedYear"
+          v-model:distance-selected="selectedDistance"
+          :on-reset-session-storage="resetSessionStorage"
+        >
+        </DemandConfigColumn>
       </v-col>
 
       <v-divider vertical></v-divider>
@@ -30,6 +40,9 @@
           :variables="selectedVariables"
           :list-tiles-params="listTilesParams"
           :selected-tiles-name="selectedTilesSource.name"
+          :colors="isDemand ? demandColors : proximityTripColors"
+          :year="selectedYear"
+          :distance="selectedDistance"
           :has-geocoder-search="true"
         ></VectorsMap>
       </v-col>
@@ -41,18 +54,31 @@
 import VectorsMap from "@/components/VectorsMap.vue";
 import ProximityConfigColumn from "@/components/ProximityConfigColumn.vue";
 import { ref, computed, watch } from "vue";
-import { listPossibleVariables, listTilesParams } from "@/utils/variables";
+import {
+  demandColors,
+  listDistances,
+  listPossibleVariablesDemand,
+  listTilesParams,
+  listYears,
+  proximityTripColors,
+} from "@/utils/variables";
 import type { TileParams, ProximityVariable } from "@/utils/variables";
+import DemandConfigColumn from "@/components/DemandConfigColumn.vue";
 
-const listVariables = listPossibleVariables;
+const listVariables = listPossibleVariablesDemand;
 
-const defaultVariables: ProximityVariable[] = listVariables
-  .slice(0, listVariables.length - 1)
-  .map((v) => ({
-    name: v,
+const isDemand = computed(() => {
+  return selectedTilesSource.value.name.includes("demand");
+});
+
+const defaultVariables: ProximityVariable[] = listVariables.map(
+  ({ id, name }) => ({
+    id,
+    name,
     weight: 1,
-    selected: v === "bike_health" || v === "bike_transit",
-  }));
+    selected: true,
+  })
+);
 
 const storageKeyVariables = "selectedVariables",
   storageItemVariables = sessionStorage.getItem(storageKeyVariables),
@@ -77,10 +103,29 @@ const storageKeyTilesSource = "selectedTilesSource",
 
 const selectedTilesSource = ref(savedTilesSource);
 
+const storageYearSource = "selectedYear",
+  storageItemYear = sessionStorage.getItem(storageYearSource),
+  savedYear = storageItemYear ? Number(storageItemYear) : listYears[0];
+
+const selectedYear = ref(savedYear);
+
+const storageDistanceSource = "selectedDistance",
+  storageItemDistance = sessionStorage.getItem(storageDistanceSource),
+  savedDistance = storageItemDistance
+    ? Number(storageItemDistance)
+    : listDistances[0];
+
+const selectedDistance = ref(savedDistance);
+
 watch(selectedTilesSource, (newTilesSource) =>
   sessionStorage.setItem(storageKeyTilesSource, JSON.stringify(newTilesSource))
 );
-
+watch(selectedDistance, (newDistance) =>
+  sessionStorage.setItem(storageDistanceSource, newDistance.toString())
+);
+watch(selectedYear, (newYear) =>
+  sessionStorage.setItem(storageYearSource, newYear.toString())
+);
 watch(selectedVariables, () =>
   sessionStorage.setItem(storageKeyVariables, JSON.stringify(variables.value))
 );
@@ -88,5 +133,7 @@ watch(selectedVariables, () =>
 function resetSessionStorage() {
   variables.value = JSON.parse(JSON.stringify(defaultVariables));
   selectedTilesSource.value = listTilesParams[0];
+  selectedDistance.value = listDistances[0];
+  selectedYear.value = listYears[0];
 }
 </script>

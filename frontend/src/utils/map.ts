@@ -1,16 +1,16 @@
 import type { ExpressionSpecification } from "maplibre-gl";
 import { LngLat, LngLatBounds } from "maplibre-gl";
-export const mapColors = [
-  "#1a9850",
-  "#66bd63",
-  "#a6d96a",
-  "#d9ef8b",
-  "#ffffbf",
-  "#fee08b",
-  "#fdae61",
-  "#f46d43",
-  "#d73027",
-];
+// export const mapColors = [
+//   "#1a9850",
+//   "#66bd63",
+//   "#a6d96a",
+//   "#d9ef8b",
+//   "#ffffbf",
+//   "#fee08b",
+//   "#fdae61",
+//   "#f46d43",
+//   "#d73027",
+// ];
 
 export const publicStopsColors = [
   "match",
@@ -78,10 +78,16 @@ export const scale = 61878;
 // I'm actually using this function to create the "maplibre" expression https://maplibre.org/maplibre-gl-js-docs/style-spec/expressions/#math to calculate the weighted mean of the variables in the map
 
 export function expressionMean(
-  attributes: { name: string; weight: number }[]
+  attributes: { id: string; weight: number }[],
+  year?: number,
+  distance?: number
 ): ExpressionSpecification | number {
   if (attributes.length == 0) return 0;
 
+  const yearProxString =
+    year !== undefined && distance !== undefined
+      ? "_" + distance.toString() + "_" + year.toString()
+      : "";
   // Calculate the sum of the weights
   const sumWeight = attributes.reduce(
     (partialSum, attribute) => partialSum + attribute.weight,
@@ -92,13 +98,13 @@ export function expressionMean(
   if (attributes.length == 1)
     return [
       "to-number",
-      ["get", attributes[0].name],
+      ["get", attributes[0].id + yearProxString],
     ] as ExpressionSpecification;
 
   // Otherwise, calculate the weighted mean of the attributes
-  const values = attributes.map(({ name, weight }) => [
+  const values = attributes.map(({ id, weight }) => [
     "*",
-    ["to-number", ["get", name]],
+    ["to-number", ["get", id + yearProxString]],
     weight,
   ]);
 
@@ -117,12 +123,12 @@ export function stepsColors(min: number, max: number, colors: string[]) {
   const diff = max - min,
     n = colors.length,
     step = diff / (n - 1);
-  const returnVal = [];
-  for (let i = 0; i < n; i++) {
+  const returnVal: (string | number)[] = [colors[0]];
+  for (let i = 1; i < n; i++) {
     returnVal.push(i * step + min);
     returnVal.push(colors[i]);
   }
-  return returnVal;
+  return returnVal as [string, ...ExpressionSpecification[]];
 }
 
 // Thoses coordinates create a bounding box around Switzerland, I use them to limit the search to Switzerland
