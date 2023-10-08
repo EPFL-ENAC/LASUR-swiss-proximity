@@ -13,144 +13,85 @@
     <v-main>
       <router-view></router-view>
       <simple-dialog v-model:open="open" button-text="Commencer">
-        <h1>Bienvenue sur Swiss Proximity ! __________________</h1>
-        <br />
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis id diam
-          nulla. Morbi id mauris in magna mattis ullamcorper. In id finibus
-          eros, at blandit neque. Duis sed erat porttitor, laoreet nisl nec,
-          sodales dui. Vivamus vitae ligula dignissim, venenatis enim eu,
-          maximus odio. Praesent semper sem sit amet lacus tincidunt, et
-          fringilla ipsum malesuada. Integer congue diam nulla. Vivamus in
-          egestas turpis. Praesent convallis tellus eget ipsum faucibus auctor.
-          Duis ipsum massa, vehicula ut dapibus a, viverra vel arcu. Fusce sit
-          amet commodo metus. Vestibulum tincidunt, ex congue malesuada
-          malesuada, quam lectus elementum velit, non gravida augue magna
-          convallis metus.
-        </p>
-        <h2>C’est quoi ?</h2>
-        <p>
-          Nullam consequat bibendum volutpat. Vivamus laoreet lectus consequat,
-          suscipit ipsum quis, auctor metus. Proin id neque turpis. Sed interdum
-          nulla sed eleifend convallis. Mauris tempor ut arcu quis tristique.
-          Phasellus et vestibulum eros. Praesent pellentesque orci vitae blandit
-          fermentum. Quisque vestibulum elit at eros finibus maximus. Fusce vel
-          massa quis ante sodales efficitur nec ullamcorper urna. Sed vitae
-          risus aliquam, placerat urna in, placerat massa. Suspendisse aliquam
-          ultricies mauris accumsan pharetra. La plateforme est divisée en
-          plusieurs chapitres :
-        </p>
-        <ul>
-          <li>
-            Le chapitre
-            <v-tooltip bottom max-width="512">
-              <template #activator="{ attrs }">
-                <span v-bind="attrs" class="d-inline-flex font-weight-bold">
-                  Cartographies affectives&nbsp;
-                  <v-icon color="primary" small>
-                    mdi-information-outline
-                  </v-icon>
-                </span>
-              </template>
-              <p class="text-justify">
-                Cras sit amet velit eget libero malesuada rutrum ut eget sapien.
-                Fusce a magna ullamcorper, bibendum tellus ac, semper lorem.
-                Proin porta consequat tellus. Donec metus mi, malesuada nec
-                efficitur a, placerat ac sem. Donec ac lacus efficitur, porta
-                lacus sit amet, mattis felis. Sed vitae interdum erat.
-                Vestibulum est mi, egestas id ante eu, eleifend tincidunt urna.
-                Nulla dictum fringilla lorem vel malesuada. Proin id porta
-                metus, ut fermentum nisi. Pellentesque ac lacus accumsan,
-                pharetra purus a, venenatis odio. Sed urna lorem, hendrerit eget
-                dignissim ac, dictum maximus erat.
-              </p>
-              <p class="purple--text">
-                À explorer et superposer sans modération !
-              </p>
-            </v-tooltip>
-          </li>
-          <li>
-            Le chapitre
-            <v-tooltip bottom max-width="512">
-              <template #activator="{ attrs }">
-                <span v-bind="attrs" class="d-inline-flex font-weight-bold">
-                  Atlas des paysages de mobilité&nbsp;
-                  <v-icon color="primary" small>
-                    mdi-information-outline
-                  </v-icon>
-                </span>
-              </template>
-              <p class="text-justify">
-                Vestibulum finibus, lectus a porta tristique, risus metus
-                finibus purus, interdum ullamcorper libero orci eu ipsum.
-                Praesent egestas eleifend ligula. Phasellus sollicitudin nec
-                mauris nec faucibus. Fusce quis odio vestibulum, bibendum nunc
-                a, maximus velit. Donec sed varius urna. Vestibulum iaculis
-                luctus sapien, et imperdiet eros sodales vel. Proin dictum sem
-                fringilla, dapibus ante in, ornare nulla. Ut aliquam erat id
-                bibendum feugiat. Proin non cursus diam, quis venenatis ligula.
-                Donec dignissim convallis suscipit. Nam sed facilisis lectus,
-                vitae dignissim lorem. Etiam euismod vestibulum magna eu
-                vehicula.
-              </p>
-              <p class="purple--text">
-                Soyez attentifs aux cercles, ils ont des choses à dire…
-              </p>
-            </v-tooltip>
-          </li>
-          <li>
-            Le chapitre
-            <v-tooltip bottom max-width="512">
-              <template #activator="{ attrs }">
-                <span v-bind="attrs" class="d-inline-flex font-weight-bold">
-                  Contexte et fonds de cartes&nbsp;
-                  <v-icon color="primary" small>
-                    mdi-information-outline
-                  </v-icon>
-                </span>
-              </template>
-              <p class="text-justify">
-                Ce chapitre contient des cartes plus classiques pour permettre
-                de se repérer facilement.
-              </p>
-            </v-tooltip>
-          </li>
-        </ul>
-        <br />
-        <h2>Navigation sur le site</h2>
-        <p>
-          Aenean hendrerit blandit metus, vitae tincidunt ligula tincidunt sed.
-          Vestibulum eu facilisis leo, ut bibendum quam. Mauris eu imperdiet
-          neque. Integer at ligula ex. Donec vulputate mi eu ex convallis
-          consequat. Aenean ornare accumsan congue. Donec fermentum massa neque,
-          sit amet fermentum urna consectetur vel. Mauris in mauris ut felis
-          consectetur ornare sed sed turpis. Praesent ac ipsum id ipsum
-          tincidunt scelerisque. Praesent vel gravida nulla, sit amet tempus
-          eros. In pretium pulvinar mi eu venenatis. In condimentum libero
-          magna, nec aliquet erat venenatis non. Lorem ipsum dolor sit amet,
-          consectetur adipiscing elit. Sed fermentum ipsum quis eros vestibulum,
-          ac dapibus libero dictum. Nulla at auctor urna, at pellentesque urna.
-          Vivamus varius arcu tortor, vel porttitor neque ultrices et.
-          <span class="font-weight-bold"
-            >On vous conseille d’accéder au site sur un ordinateur car celui-ci
-            n'a pas été optimisé sur téléphone.</span
-          >
-        </p>
-        <h2>Pourquoi ?</h2>
-        <p>
-          Suspendisse potenti. In et dolor faucibus, elementum est nec, lobortis
-          velit. Aenean blandit sapien sed urna pellentesque, at lacinia erat
-          facilisis. Morbi vestibulum, mauris id pellentesque iaculis, tellus
-          sapien varius quam, vel interdum tellus diam at velit. Donec lectus
-          dui, lobortis quis dapibus in, euismod id ex. Donec lorem justo,
-          elementum sit amet magna non, congue venenatis orci. Aenean eu
-          tristique urna. Quisque et fermentum nisl. Mauris sit amet tellus sed
-          nunc fermentum luctus a ac mauris. Cras tortor justo, blandit sed diam
-          eu, imperdiet tristique dui. Suspendisse consectetur mauris neque, ac
-          fringilla tortor auctor ac. Mauris vitae magna cursus, molestie ante
-          vitae, facilisis augue.
-        </p>
-        <h2>Bonne découverte !</h2>
+        <v-container>
+          <h1>Bienvenue sur <i>Swiss Proximity</i></h1>
+          <br />
+          <p>
+            <i>Swiss Proximity</i> est un outil de planification et d’aide à la
+            décision pour penser de manière plus durable nos territoires urbains
+            de demain. Cette interface a été développée par des chercheurs de
+            l'EPFL pour aider les usagers, praticiens, collectivités et
+            décideurs à mieux comprendre leurs territoires du point de vue des
+            "proximités urbaines".
+          </p>
+          <h2>Les <i>proximités urbaines</i>, c’est quoi?</h2>
+          <p>
+            Nous considérons qu’un territoire durable devrait non seulement
+            tendre vers la neutralité carbone, mais aussi favoriser
+            l’inclusivité et le progrès social. Ainsi, les proximités urbaines
+            doivent être pensées en terme de:
+          </p>
+          <ul>
+            <li>
+              densité (nombre de services, magasins, guichets, …) pour réduire
+              les distances de déplacement et les rendre accessibles en modes
+              doux;
+            </li>
+            <li>
+              diversité (diversité de services, magasins, guichets, …) pour
+              offrir une variété de choix dans une distance raisonnable;
+            </li>
+            <li>
+              nature et convivialité pour favoriser l’hospitalité urbaine et le
+              vivre-ensemble.
+            </li>
+          </ul>
+          <p>
+            Ainsi, nous proposons un outils qui permette aux utilisateur.ice.s
+            de visualiser les proximités urbaines dans les 80 agglomérations
+            suisses.
+          </p>
+          <h2>Un outil d’aide à la planification</h2>
+          <p>
+            L’interface s’organise en un outil comparatif comportant deux volets
+            principaux:
+          </p>
+          <ol>
+            <li>
+              <i>L’offre territoriale de proximité </i> : nous avons catégorisé
+              10 types de lieu, services, ou infrastructures qui composent nos
+              territoires urbains: apprendre, se cultiver, se soigner, s’aérer,
+              faire du sport, bien manger, faire ses courses, faire les
+              magasins, guichets, transports publics.
+            </li>
+            <li>
+              <i>La demande activité-déplacement de proximité </i>: permet de
+              visualiser où les gens se déplacent dans la proximité. En regard
+              de l’offre, l’étude de la demande permet d’identifier des poches
+              territoriales où territoire et usages sont discordants. La demande
+              de mobilité est basée sur le modèle voyageur développé par
+              l’Office Fédérale du Développement Territoriale (ARE).
+            </li>
+          </ol>
+          <p>
+            Un troisième volet permet de calculer les isochrones d’accessibilité
+            avec différents mode de transport à travers les agglomérations
+            suisses.
+          </p>
+          <h2>Navigation sur l’interface</h2>
+          <p>
+            L’interface est optimisée pour un usage sur ordinateur, et n’est pas
+            adapté aux smartphones.
+          </p>
+          <p>
+            La colonne de gauche vous permet de jouer avec les paramètres de la
+            demande et de l’offre de proximité. Vous trouverez plus
+            d’informations, notamment sur la méthode et les données, dans les
+            <i>infos</i> en haut à droite.
+          </p>
+
+          <h2>Bonne découverte !</h2>
+        </v-container>
       </simple-dialog>
     </v-main>
   </v-app>
@@ -170,5 +111,24 @@ const openDialog = () => {
 <style lang="scss" scoped>
 .v-toolbar__title {
   overflow: unset;
+}
+
+p {
+  padding-bottom: 0.2em;
+}
+
+h2 {
+  padding-top: 0.6em;
+  padding-bottom: 0.4em;
+}
+
+ul,
+ol {
+  margin-left: 2em;
+  padding-bottom: 0.2em;
+}
+
+li {
+  padding-bottom: 0.1em;
 }
 </style>
