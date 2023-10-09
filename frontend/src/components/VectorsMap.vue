@@ -48,7 +48,11 @@ import {
 } from "@/utils/map";
 
 import { cleanVariableString } from "@/utils/variables";
-import type { TileParams } from "@/utils/variables";
+import type {
+  DemandVariable,
+  SupplyVariable,
+  TileParams,
+} from "@/utils/variables";
 
 const loading = ref(true);
 
@@ -65,16 +69,10 @@ const errorMessage = ref<string | null>(null);
 
 const center: LngLatLike = [7.95, 46.74];
 
-type MapVariable = {
-  id: string;
-  name: string;
-  weight: number;
-  selected: boolean;
-};
-
 const props = withDefaults(
   defineProps<{
-    variables: MapVariable[];
+    demandVariables: DemandVariable[];
+    supplyVariables: SupplyVariable[];
     listTilesParams: TileParams[];
     colors: { color: string; label: string }[];
     selectedTilesName: string;
@@ -84,6 +82,8 @@ const props = withDefaults(
   }>(),
   { hasGeocoderSearch: true }
 );
+
+const isDemand = computed(() => props.selectedTilesName.includes("demand"));
 
 const mapColors = computed(() => props.colors.map((d) => d.color).reverse());
 
@@ -104,6 +104,9 @@ function onMove(e: MapLayerEventType["mousemove"]) {
   const feature = e.features[0],
     properties = feature.properties || {};
 
+  const variables = isDemand.value
+    ? props.demandVariables
+    : props.supplyVariables;
   const proxyYearDistance = "_" + props.distance + "_" + props.year;
   // Display a popup with the name of the county.
   popup.value
@@ -114,7 +117,7 @@ function onMove(e: MapLayerEventType["mousemove"]) {
           ? properties["Agglo" + proxyYearDistance]
           : properties.municipality_name + "-" + properties.id
       }</h3>
-</br>${props.variables.map(
+</br>${variables.map(
         (key) =>
           "<div>" +
             cleanVariableString(key.name) +
@@ -132,15 +135,22 @@ function onLeave() {
 }
 
 watch(
-  () => [props.variables, props.year, props.distance],
+  () => [
+    props.demandVariables,
+    props.supplyVariables,
+    props.year,
+    props.distance,
+  ],
   () => {
     // Change the paint property using new variables and weights
 
     const expression = [
       "step",
-      expressionMean(props.variables, props.year, props.distance),
+      isDemand.value
+        ? expressionMean(props.demandVariables, props.year, props.distance)
+        : expressionMean(props.supplyVariables),
       // Right now steps colors don't change, I will create a static value for them once the data are normalized
-      ...stepsColors(0, 1, mapColors.value),
+      ...stepsColors(0, isDemand.value ? 1 : 7000, mapColors.value),
     ];
 
     props.listTilesParams.forEach(({ name }) => {
@@ -172,7 +182,6 @@ watch(
 );
 
 function secureTilesName(name: string) {
-  // console.log(name, name.replace(/[^a-zA-Z0-9]/g, "_").toLowerCase());
   return name.replace(/[^a-zA-Z0-9]/g, "_").toLowerCase();
 }
 
@@ -220,8 +229,12 @@ onMounted(() => {
         paint: {
           "fill-color": [
             "step",
-            expressionMean(props.variables, props.year, props.distance),
-            ...stepsColors(0, 1, mapColors.value),
+            expressionMean(
+              isDemand.value ? props.demandVariables : props.supplyVariables,
+              props.year,
+              props.distance
+            ),
+            ...stepsColors(0, isDemand.value ? 1 : 7000, mapColors.value),
           ],
           "fill-opacity": 0.6,
         },

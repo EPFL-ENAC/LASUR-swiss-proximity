@@ -26,29 +26,22 @@
         hide-details
       />
     </v-card-text>
-    <v-divider></v-divider>
-    <v-card-actions>
-      <v-btn @click="onResetSessionStorage" variant="flat">
-        Reset parameters
-      </v-btn>
-    </v-card-actions>
   </v-card>
 </template>
 
 <script lang="ts" setup>
 import { ref, watch } from "vue";
-import type { TileParams, ProximityVariable } from "@/utils/variables";
+import type { TileParams, DemandVariable } from "@/utils/variables";
 
 import { listYears, listDistances } from "@/utils/variables";
 const props = defineProps<{
-  variables: ProximityVariable[];
+  variables: DemandVariable[];
   yearSelected: number;
   distanceSelected: number;
-  onResetSessionStorage: () => void;
 }>();
 
 const emits = defineEmits<{
-  (event: "update:variables", variables: ProximityVariable[]): void;
+  (event: "update:variables", variables: DemandVariable[]): void;
   (event: "update:yearSelected", yearSelected: number): void;
   (event: "update:distanceSelected", distanceSelected: number): void;
 }>();
