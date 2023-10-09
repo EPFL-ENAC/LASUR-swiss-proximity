@@ -29,6 +29,7 @@ const props = withDefaults(
     name?: string;
     width?: number;
     buttonText?: string;
+    storageKey?: string;
     open: boolean;
   }>(),
   { width: 1400 }
@@ -38,8 +39,14 @@ const emits = defineEmits<{
   (event: "update:open", value: boolean): void;
 }>();
 
-const storageItem = sessionStorage.getItem("dialogClosed"),
-  dialogClosed = storageItem ? JSON.parse(storageItem) : false;
+const storageItem = props.storageKey
+    ? sessionStorage.getItem(props.storageKey)
+    : null,
+  dialogClosed = props.storageKey
+    ? storageItem
+      ? JSON.parse(storageItem)
+      : false
+    : true;
 
 const dialog = ref(!dialogClosed);
 
@@ -51,7 +58,8 @@ watch(
 );
 
 watch(dialog, (value) => {
-  sessionStorage.setItem("dialogClosed", JSON.stringify(!value));
+  if (props.storageKey)
+    sessionStorage.setItem(props.storageKey, JSON.stringify(!value));
   emits("update:open", value);
 });
 </script>

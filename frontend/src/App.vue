@@ -13,10 +13,14 @@
     </v-toolbar>
     <v-main>
       <router-view></router-view>
-      <simple-dialog v-model:open="openedInfo" button-text="Commencer">
+      <simple-dialog v-model:open="openedInfo" button-text="Fermer">
         <info-dialog></info-dialog>
       </simple-dialog>
-      <simple-dialog v-model:open="openedWelcome" button-text="Commencer">
+      <simple-dialog
+        v-model:open="openedWelcome"
+        storageKey="welcomeDialog"
+        button-text="Commencer"
+      >
         <welcome-dialog></welcome-dialog>
       </simple-dialog>
     </v-main>
@@ -34,9 +38,11 @@ const openedWelcome = ref(false);
 
 const openInfos = () => {
   openedInfo.value = true;
+  openedWelcome.value = false;
 };
 const openWelcome = () => {
   openedWelcome.value = true;
+  openedInfo.value = false;
 };
 </script>
 
