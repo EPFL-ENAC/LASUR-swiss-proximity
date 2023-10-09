@@ -166,9 +166,8 @@ function onGeocodingSearchResult(e: { result: { center: LngLatLike } }) {
 onMounted(() => {
   map = new Map({
     container: container.value as HTMLDivElement,
-    // nginx will redirect to the correct maptiler url adding the API key
-    style:
-      "https://api.maptiler.com/maps/basic-v2-light/style.json?key=1RYHB5HXhtpj8qlO8hFi",
+    style: "/public/style.json",
+
     zoom: 7,
     center,
     maxBounds: mapBounds,
@@ -193,8 +192,7 @@ onMounted(() => {
       layout: { "fill-sort-key": ["*", ["to-number", ["get", "value"]], -1] },
       paint: {
         "fill-color": [
-          "interpolate",
-          ["linear"],
+          "step",
           ["get", "value"],
           ...stepsColors(15 * 60, 30 * 60, isochroneColors),
         ],
