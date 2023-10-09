@@ -161,6 +161,7 @@ watch(
     props.supplyVariables,
     props.year,
     props.distance,
+    props.selectedTilesName,
   ],
   () => {
     // Change the paint property using new variables and weights
