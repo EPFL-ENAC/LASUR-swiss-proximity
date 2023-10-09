@@ -1,5 +1,5 @@
 // List of variables available in data, this is not supposed to be modified
-export const listPossibleVariables = [
+export const listVariables = [
   "bike_barsresaurants",
   "bike_health",
   "bike_posts",
@@ -17,7 +17,7 @@ export const listPossibleVariables = [
   "walk_transit",
 ];
 
-export const listPossibleVariablesDemand = [
+export const listVariablesDemand = [
   { id: "Fuss", name: "A pied" },
   { id: "Velo", name: "A vélo" },
   { id: "Auto", name: "En voiture" },
@@ -29,12 +29,20 @@ export const listYears: number[] = [2017, 2050];
 
 export const listDistances: number[] = [1300, 3800, 7000];
 
-export type ProximityVariable = {
+export type DemandVariable = {
+  id: string;
+  name: string;
+  selected: boolean;
+};
+
+export type SupplyVariable = {
   id: string;
   name: string;
   weight: number;
+  diversity: number;
   selected: boolean;
 };
+
 export type TileParams = {
   name: string;
   url: string;
@@ -43,14 +51,6 @@ export type TileParams = {
 };
 
 export const listTilesParams: TileParams[] = [
-  // {
-  //   name: "demand_h3",
-  //   url: "https://enacit4r-tiles.epfl.ch/demand_h3",
-  // },
-  // {
-  //   name: "demand_polygon",
-  //   url: "https://enacit4r-tiles.epfl.ch/demand_polygon",
-  // },
   {
     name: "demand_h3_2",
     url: "https://enacit4r-tiles.epfl.ch/demand_h3_2",
@@ -59,18 +59,11 @@ export const listTilesParams: TileParams[] = [
     name: "demand_polygon_2",
     url: "https://enacit4r-tiles.epfl.ch/demand_polygon_2",
   },
-  // {
-  //   name: "supply_h3",
-  //   url: "https://enacit4r-tiles.epfl.ch/supply_h3",
-  // },
+
   {
     name: "supply_h3_2",
     url: "https://enacit4r-tiles.epfl.ch/supply_h3_2",
   },
-  // {
-  //   name: "supply_polygon",
-  //   url: "https://enacit4r-tiles.epfl.ch/supply_polygon",
-  // },
   {
     name: "supply_polygon_2",
     url: "https://enacit4r-tiles.epfl.ch/supply_polygon_2",
@@ -117,7 +110,144 @@ export const proximityTripColors = [
   { label: "Quantile 6/6", color: "#005A32", category: "A" },
 ];
 
+export const listVariablesSupply = [
+  {
+    name: "Guichets",
+    id: "Public",
+    tags: ["community_centre", "police", "post_box", "post_office", "bank"],
+    infos: ["Postes", "banques", "police", "…"],
+  },
+  {
+    name: "Se soigner",
+    id: "Care",
+    tags: [
+      "nursing_home",
+      "pharmacy",
+      "hospital",
+      "clinic",
+      "doctors",
+      "dentist",
+      "optician",
+      "hairdresser",
+      "beauty",
+    ],
+    infos: [
+      "Pharmacies",
+      "hôpitaux",
+      "dentistes",
+      "opticiens",
+      "coiffeurs",
+      "beauté",
+      "…",
+    ],
+  },
+  {
+    name: "Se cultiver",
+    id: "Culture",
+    tags: [
+      "arts_centre",
+      "library",
+      "theatre",
+      "nightclub",
+      "cinema",
+      "museum",
+      "events_venue",
+      "religion",
+    ],
+    infos: ["Bibliothèques", "théâtres", "cinémas", "lieux de culte", "…"],
+  },
+  {
+    name: "S’aérer",
+    id: "Outdoor",
+    tags: [
+      "park",
+      "playground",
+      "square",
+      "landuse_recreation_ground",
+      "water",
+      "fountain",
+      "riverbank",
+      "river",
+    ],
+    infos: ["Parcs", "places", "fontaines", "rives", "…"],
+  },
+  {
+    name: "Bien manger",
+    id: "Catering",
+    tags: [
+      "restaurant",
+      "fast_food",
+      "cafe",
+      "pub",
+      "bar",
+      "food_court",
+      "biergarten",
+    ],
+    infos: ["Restaurants", "cafés", "pubs", "…"],
+  },
+  {
+    name: "Faire du sport",
+    id: "Sport",
+    tags: [
+      "sports_centre",
+      "pitch",
+      "swimming_pool",
+      "swimming",
+      "water_park",
+      "fitness_centre",
+      "ice_rink",
+      "tennis",
+      "golf_course",
+      "stadium",
+    ],
+    infos: ["Piscines", "fitness", "stades", "patinoires", "tennis", "…"],
+  },
+  {
+    name: "Faire ses courses",
+    id: "Provision",
+    tags: [
+      "marketplace",
+      "supermarket",
+      "bakery",
+      "general",
+      "butcher",
+      "greengrocery",
+    ],
+    infos: ["Super-marchés", "boulangeries", "marchés", "…"],
+  },
+  {
+    name: "Faire les magasins",
+    id: "Shopping",
+    tags: [
+      "kiosk",
+      "mall",
+      "department_store",
+      "convenience",
+      "clothes",
+      "florist",
+      "chemist",
+      "books",
+      "shoes",
+      "furniture",
+    ],
+    infos: ["Kiosks", "fleuristes", "librairies", "bricolage", "…"],
+  },
+  {
+    name: "Apprendre",
+    id: "Education",
+    tags: ["university", "school", "college", "kindergarten"],
+    infos: ["Ecoles primaires", "secondaires", "universités", "garderies", "…"],
+  },
+  {
+    name: "Transports publics",
+    id: "Transport",
+    tags: ["bus_station", "taxi", "railway", "tram_stop", "bus_stop"],
+    infos: ["Gares", "arrêts de bus et tram", "zone taxi", "…"],
+  },
+];
+
 export type MapType = "demand" | "supply";
+export type TilingType = "h3" | "polygon";
 
 // Transforms underscores "_" and dashes "-" to spaces and capitalizes the first letter
 export function cleanVariableString(name: string) {
@@ -125,8 +255,8 @@ export function cleanVariableString(name: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-export const getVariableGroup = (variable: ProximityVariable) =>
-  variable.name.split("_")[0];
+// export const getVariableGroup = (variable: ProximityVariable) =>
+//   variable.name.split("_")[0];
 
-export const getVariableNameWithoutGroup = (variable: ProximityVariable) =>
-  variable.name.split("_").slice(1).join(" ");
+// export const getVariableNameWithoutGroup = (variable: ProximityVariable) =>
+//   variable.name.split("_").slice(1).join(" ");

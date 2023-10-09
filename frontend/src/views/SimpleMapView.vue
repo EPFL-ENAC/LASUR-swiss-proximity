@@ -9,31 +9,48 @@
       </v-col>
     </v-row>
     <v-row class="flex-grow-1" no-gutters>
-      <v-col cols="2">
-        <ProximityConfigColumn
+      <v-col cols="2" class="config-column">
+        <v-row>
+          <v-col cols="6" class="d-flex align-center">
+            <v-card-title>Découpage :</v-card-title>
+          </v-col>
+          <v-col cols="6">
+            <v-switch
+              v-model="isHexagon"
+              hide-details
+              :label="`${isHexagon ? 'Hexagon' : 'Polygon'}`"
+            ></v-switch>
+          </v-col>
+        </v-row>
+
+        <SupplyConfigColumn
           v-if="!isDemand"
-          v-model:variables="variables"
-          :tiles-sources="listTilesParams"
-          v-model:selected-tiles-source="selectedTilesSource"
+          v-model:variables="supplyVariables"
           :on-reset-session-storage="resetSessionStorage"
         >
-        </ProximityConfigColumn>
+        </SupplyConfigColumn>
         <DemandConfigColumn
           v-else
-          v-model:variables="variables"
-          :tiles-sources="listTilesParams"
+          v-model:variables="demandVariables"
           v-model:year-selected="selectedYear"
           v-model:distance-selected="selectedDistance"
           :on-reset-session-storage="resetSessionStorage"
         >
         </DemandConfigColumn>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-btn @click="resetSessionStorage" variant="flat">
+            Reset parameters
+          </v-btn>
+        </v-card-actions>
       </v-col>
 
       <v-divider vertical></v-divider>
 
       <v-col cols="10" class="pa-0">
         <VectorsMap
-          :variables="selectedVariables"
+          :demandVariables="selectedDemandVariables"
+          :supplyVariables="selectedSupplyVariables"
           :list-tiles-params="listTilesParams"
           :selected-tiles-name="selectedTilesSource.name"
           :colors="isDemand ? demandColors : proximityTripColors"
@@ -56,17 +73,24 @@
 
 <script lang="ts" setup>
 import VectorsMap from "@/components/VectorsMap.vue";
-import ProximityConfigColumn from "@/components/ProximityConfigColumn.vue";
+import SupplyConfigColumn from "@/components/SupplyConfigColumn.vue";
 import { ref, computed, watch } from "vue";
 import {
   demandColors,
   listDistances,
-  listPossibleVariablesDemand,
+  listVariablesDemand,
+  listVariablesSupply,
   listTilesParams,
   listYears,
   proximityTripColors,
 } from "@/utils/variables";
-import type { TileParams, ProximityVariable, MapType } from "@/utils/variables";
+import type {
+  TileParams,
+  MapType,
+  TilingType,
+  DemandVariable,
+  SupplyVariable,
+} from "@/utils/variables";
 import DemandConfigColumn from "@/components/DemandConfigColumn.vue";
 
 const storageMapTypeSource = "selectedMapType",
@@ -85,47 +109,80 @@ const isDemand = computed({
   },
 });
 
-const listVariables = listPossibleVariablesDemand;
+const storageTilingTypeSource = "selectedTilingType",
+  storageItemTilingType = sessionStorage.getItem(storageTilingTypeSource),
+  savedTilingType: TilingType = storageItemTilingType
+    ? (storageItemTilingType as TilingType)
+    : "h3";
 
-const defaultVariables: ProximityVariable[] = listVariables.map(
-  ({ id, name }) =>
-    isDemand
-      ? {
-          id,
-          name,
-          weight: 1,
-          selected: id == "All_modes",
-        }
-      : {
-          id,
-          name,
-          weight: 1,
-          selected: true,
-        }
+const selectedTilingType = ref(savedTilingType);
+const isHexagon = computed({
+  get() {
+    return selectedTilingType.value === "h3";
+  },
+  set(value) {
+    selectedTilingType.value = value ? "h3" : "polygon";
+  },
+});
+
+const defaultDemandVariables: DemandVariable[] = listVariablesDemand.map(
+  ({ id, name }) => ({
+    id,
+    name,
+    selected: id == "All_modes",
+  })
 );
 
-const storageKeyVariables = "selectedVariables",
-  storageItemVariables = sessionStorage.getItem(storageKeyVariables),
-  savedVariables = storageItemVariables
-    ? (JSON.parse(storageItemVariables) as ProximityVariable[])
-    : JSON.parse(JSON.stringify(defaultVariables));
+const storageKeyDemandVariables = "selectedDemandVariables",
+  storageItemDemandVariables = sessionStorage.getItem(
+    storageKeyDemandVariables
+  ),
+  savedDemandVariables = storageItemDemandVariables
+    ? (JSON.parse(storageItemDemandVariables) as DemandVariable[])
+    : JSON.parse(JSON.stringify(defaultDemandVariables));
 
-const variables = ref<ProximityVariable[]>(savedVariables);
+const demandVariables = ref<DemandVariable[]>(savedDemandVariables);
 
-const selectedVariables = computed(() => {
+const selectedDemandVariables = computed(() => {
   //I added weight so it update props when weight change
-  return variables.value.filter(
-    ({ selected, weight }) => selected && weight > 0
+  return demandVariables.value.filter(({ selected }) => selected);
+});
+
+const defaultSupplyVariables: SupplyVariable[] = listVariablesSupply.map(
+  ({ id, name }) => ({
+    id,
+    name,
+    weight: 1,
+    diversity: 5,
+    selected: id == "All_modes",
+  })
+);
+
+const storageKeySupplyVariables = "selectedSupplyVariables",
+  storageItemSupplyVariables = sessionStorage.getItem(
+    storageKeySupplyVariables
+  ),
+  savedSupplyVariables = storageItemSupplyVariables
+    ? (JSON.parse(storageItemSupplyVariables) as SupplyVariable[])
+    : JSON.parse(JSON.stringify(defaultSupplyVariables));
+
+const supplyVariables = ref<SupplyVariable[]>(savedSupplyVariables);
+
+const selectedSupplyVariables = computed(() => {
+  //I added weight so it update props when weight change
+  return supplyVariables.value.filter(
+    ({ selected, weight, diversity }) => selected && weight > 0 && diversity > 0
   );
 });
 
-const storageKeyTilesSource = "selectedTilesSource",
-  storageItemTilesSource = sessionStorage.getItem(storageKeyTilesSource),
-  savedTilesSource = storageItemTilesSource
-    ? (JSON.parse(storageItemTilesSource) as TileParams)
-    : listTilesParams[0];
-
-const selectedTilesSource = ref(savedTilesSource);
+const selectedTilesSource = computed(() => {
+  const filteredTiles = listTilesParams.filter(
+    ({ name }) =>
+      (isDemand.value ? name.includes("demand") : name.includes("supply")) &&
+      (isHexagon.value ? name.includes("h3") : name.includes("polygon"))
+  );
+  return filteredTiles[0] || null;
+});
 
 const storageYearSource = "selectedYear",
   storageItemYear = sessionStorage.getItem(storageYearSource),
@@ -137,27 +194,40 @@ const storageDistanceSource = "selectedDistance",
   storageItemDistance = sessionStorage.getItem(storageDistanceSource),
   savedDistance = storageItemDistance
     ? Number(storageItemDistance)
-    : listDistances[0];
+    : listDistances[listDistances.length - 1];
 
 const selectedDistance = ref(savedDistance);
 
-watch(selectedTilesSource, (newTilesSource) =>
-  sessionStorage.setItem(storageKeyTilesSource, JSON.stringify(newTilesSource))
-);
 watch(selectedDistance, (newDistance) =>
   sessionStorage.setItem(storageDistanceSource, newDistance.toString())
 );
 watch(selectedYear, (newYear) =>
   sessionStorage.setItem(storageYearSource, newYear.toString())
 );
-watch(selectedVariables, () =>
-  sessionStorage.setItem(storageKeyVariables, JSON.stringify(variables.value))
+watch(selectedDemandVariables, () =>
+  sessionStorage.setItem(
+    storageKeyDemandVariables,
+    JSON.stringify(demandVariables.value)
+  )
+);
+watch(selectedSupplyVariables, () =>
+  sessionStorage.setItem(
+    storageKeySupplyVariables,
+    JSON.stringify(supplyVariables.value)
+  )
+);
+watch(selectedMapType, () =>
+  sessionStorage.setItem(storageMapTypeSource, selectedMapType.value)
 );
 
+watch(selectedTilingType, () => {
+  sessionStorage.setItem(storageTilingTypeSource, selectedTilingType.value);
+});
+
 function resetSessionStorage() {
-  variables.value = JSON.parse(JSON.stringify(defaultVariables));
-  selectedTilesSource.value = listTilesParams[0];
-  selectedDistance.value = listDistances[0];
+  demandVariables.value = JSON.parse(JSON.stringify(defaultDemandVariables));
+  supplyVariables.value = JSON.parse(JSON.stringify(defaultSupplyVariables));
+  selectedDistance.value = listDistances[listDistances.length - 1];
   selectedYear.value = listYears[0];
 }
 </script>
@@ -173,5 +243,11 @@ function resetSessionStorage() {
   z-index: 1000;
   background-color: white;
   outline: solid 2px;
+}
+
+.config-column {
+  max-height: calc(100vh - 65px);
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 </style>

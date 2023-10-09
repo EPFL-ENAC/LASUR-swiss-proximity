@@ -78,7 +78,7 @@ export const scale = 61878;
 // I'm actually using this function to create the "maplibre" expression https://maplibre.org/maplibre-gl-js-docs/style-spec/expressions/#math to calculate the weighted mean of the variables in the map
 
 export function expressionMean(
-  attributes: { id: string; weight: number }[],
+  attributes: { id: string; weight?: number; diversity?: number }[],
   year?: number,
   distance?: number
 ): ExpressionSpecification | number {
@@ -90,7 +90,7 @@ export function expressionMean(
       : "";
   // Calculate the sum of the weights
   const sumWeight = attributes.reduce(
-    (partialSum, attribute) => partialSum + attribute.weight,
+    (partialSum, attribute) => partialSum + (attribute.weight ?? 1),
     0
   );
 
@@ -98,21 +98,28 @@ export function expressionMean(
   if (attributes.length == 1)
     return [
       "to-number",
-      ["get", attributes[0].id + yearProxString],
+      [
+        "get",
+        attributes[0].diversity
+          ? attributes[0].diversity + "_" + attributes[0].id
+          : attributes[0].id + yearProxString,
+      ],
     ] as ExpressionSpecification;
 
   // Otherwise, calculate the weighted mean of the attributes
-  const values = attributes.map(({ id, weight }) => [
+  const values = attributes.map(({ id, weight, diversity }) => [
     "*",
-    ["to-number", ["get", id + yearProxString]],
-    weight,
+    [
+      "to-number",
+      ["get", diversity ? diversity + "_" + id : id + yearProxString],
+    ],
+    weight ?? 1,
   ]);
 
   // Create an expression that calculates the sum of the weighted values
   const total = values.reduce(
     (acc, curr) => ["+", acc, curr] as (string | string[])[]
   );
-
   // Use the total and the sum of the weights to calculate the weighted mean
   return ["/", total, sumWeight] as ExpressionSpecification;
 }
