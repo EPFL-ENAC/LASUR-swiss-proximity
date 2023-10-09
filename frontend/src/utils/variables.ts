@@ -112,6 +112,12 @@ export const proximityTripColors = [
 
 export const listVariablesSupply = [
   {
+    name: "Tout",
+    id: "All",
+    tags: [],
+    infos: [],
+  },
+  {
     name: "Guichets",
     id: "Public",
     tags: ["community_centre", "police", "post_box", "post_office", "bank"],

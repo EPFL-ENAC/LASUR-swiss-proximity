@@ -152,7 +152,7 @@ const defaultSupplyVariables: SupplyVariable[] = listVariablesSupply.map(
     name,
     weight: 1,
     diversity: 5,
-    selected: id == "All_modes",
+    selected: id == "All",
   })
 );
 
