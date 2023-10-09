@@ -35,7 +35,11 @@ import {
   computed,
 } from "vue";
 import { Map, Popup, Marker } from "maplibre-gl";
-import type { LngLatLike, MapLayerEventType } from "maplibre-gl";
+import type {
+  ExpressionSpecification,
+  LngLatLike,
+  MapLayerEventType,
+} from "maplibre-gl";
 import "@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 import MaplibreGeocoder from "@maplibre/maplibre-gl-geocoder";
@@ -134,6 +138,23 @@ function onLeave() {
   popup.value.remove();
 }
 
+const currentExpression = computed(
+  () =>
+    [
+      "step",
+      isDemand.value
+        ? expressionMean(props.demandVariables, props.year, props.distance)
+        : expressionMean(props.supplyVariables),
+      // Right now steps colors don't change, I will create a static value for them once the data are normalized
+      ...stepsColors(0, isDemand.value ? 1 : 7000, mapColors.value),
+    ] as [
+      "step",
+      number | ExpressionSpecification,
+      string,
+      ...ExpressionSpecification[]
+    ]
+);
+
 watch(
   () => [
     props.demandVariables,
@@ -144,22 +165,13 @@ watch(
   () => {
     // Change the paint property using new variables and weights
 
-    const expression = [
-      "step",
-      isDemand.value
-        ? expressionMean(props.demandVariables, props.year, props.distance)
-        : expressionMean(props.supplyVariables),
-      // Right now steps colors don't change, I will create a static value for them once the data are normalized
-      ...stepsColors(0, isDemand.value ? 1 : 7000, mapColors.value),
-    ];
-
     props.listTilesParams.forEach(({ name }) => {
       if (map === null) return;
 
       map.setPaintProperty(
         "layer-" + secureTilesName(name),
         "fill-color",
-        expression
+        currentExpression.value
       );
     });
   }
@@ -227,15 +239,7 @@ onMounted(() => {
             props.selectedTilesName === tile.name ? "visible" : "none",
         },
         paint: {
-          "fill-color": [
-            "step",
-            expressionMean(
-              isDemand.value ? props.demandVariables : props.supplyVariables,
-              props.year,
-              props.distance
-            ),
-            ...stepsColors(0, isDemand.value ? 1 : 7000, mapColors.value),
-          ],
+          "fill-color": currentExpression.value,
           "fill-opacity": 0.6,
         },
       });
