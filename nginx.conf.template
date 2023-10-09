@@ -29,36 +29,6 @@ server {
 
   }
 
-  # Our proxy endpoint for the traveltime API
-  location /traveltimeapi/ {
-    proxy_pass https://api.traveltimeapp.com/;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection 'upgrade';
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-Host $host;
-    proxy_set_header X-Forwarded-Port $server_port;
-
-    # This is the API key for the traveltimeapp.com server
-    proxy_set_header X-Api-Key ${TRAVELTIME_API_KEY};  
-    proxy_set_header X-Application-Id ${TRAVELTIME_APP_ID};  
-
-  }
-
-  # Our proxy endpoint for Maptiler
-  location /maptiler/ {
-    set $delimeter "";
-
-    if ($is_args) {
-      set $delimeter "&";
-    }
-
-    set $args "$args${delimeter}key=${MAPTILER_API_KEY}";
-
-    proxy_pass https://api.maptiler.com/;
-    proxy_cache_key $scheme://$host$uri$is_args$query_string;
-    proxy_cache_valid 200 10m;
-
-  }
 
   error_page   500 502 503 504  /50x.html;
   location = /50x.html {
