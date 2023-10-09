@@ -15,7 +15,7 @@ export const listTransportModes = [
   { name: "Cycling", profile: "cycling-regular" },
   { name: "Walking", profile: "foot-walking" },
   { name: "Wheelchair", profile: "wheelchair" },
-  { name: "Public transport", profile: "public_transport" },
+  // { name: "Public transport", profile: "public_transport" },
 ];
 
 type ErrorTravelTime = {
