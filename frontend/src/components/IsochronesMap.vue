@@ -166,7 +166,7 @@ function onGeocodingSearchResult(e: { result: { center: LngLatLike } }) {
 onMounted(() => {
   map = new Map({
     container: container.value as HTMLDivElement,
-    style: "/public/style.json",
+    style: "/style.json",
 
     zoom: 7,
     center,
