@@ -14,7 +14,7 @@ type Color = {
   color: string;
   label: string;
   category: string;
-  distance?: number;
+  distance?: string;
 };
 
 const props = defineProps<{
@@ -30,6 +30,7 @@ const props = defineProps<{
   padding: 1em;
   border-radius: 1em;
   /* outline: solid 2px black; */
+  z-index: 1000;
   right: 2em;
   display: flex;
   justify-content: space-between;

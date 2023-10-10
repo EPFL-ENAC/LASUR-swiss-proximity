@@ -58,13 +58,15 @@
           :supplyVariables="selectedSupplyVariables"
           :list-tiles-params="listTilesParams"
           :selected-tiles-name="selectedTilesSource.demand"
-          :colors="supplyColors"
+          :colors="demandColors"
           :year="selectedYear"
           :distance="selectedDistance"
           :has-geocoder-search="false"
           @created:map="leftMap = $event"
-        ></VectorsMap>
+        >
+        </VectorsMap>
         <div class="overmap font-weight-medium">Demande</div>
+        <legend-map class="legend-left" :colors="demandColors.toReversed()" />
       </v-col>
       <v-divider vertical></v-divider>
 
@@ -75,12 +77,13 @@
           :supplyVariables="selectedSupplyVariables"
           :list-tiles-params="listTilesParams"
           :selected-tiles-name="selectedTilesSource.supply"
-          :colors="demandColors"
+          :colors="supplyColors"
           :year="selectedYear"
           :distance="selectedDistance"
           :has-geocoder-search="false"
           @created:map="rightMap = $event"
         ></VectorsMap>
+        <legend-map :colors="supplyColors" />
         <div class="overmap font-weight-medium">Offre</div>
       </v-col>
     </v-row>
@@ -91,6 +94,7 @@
 import type { Map as MaplibreMap } from "maplibre-gl";
 import { syncMaps } from "@/utils/syncmap";
 
+import LegendMap from "@/components/LegendMap.vue";
 import VectorsMap from "@/components/VectorsMap.vue";
 import SupplyConfigColumn from "@/components/SupplyConfigColumn.vue";
 import { ref, computed, watch } from "vue";
@@ -266,5 +270,9 @@ watch(
   color: rgba(var(--v-theme-primary), var(--v-medium-emphasis-opacity));
   outline: solid 2px black;
   width: fit-content;
+}
+
+.legend-left {
+  right: calc(2em + 41.5vw);
 }
 </style>
