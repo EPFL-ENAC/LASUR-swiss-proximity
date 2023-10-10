@@ -1,72 +1,83 @@
 <template>
-  <v-card class="py-2" flat>
-    <v-card-title
-      >Offre de proximité :
-      <info-tooltip
-        >Basée sur les données OSM (juin 2023)</info-tooltip
-      ></v-card-title
-    >
+  <v-card class="px-2 px-xl-3 px-xxl-6 py-2" flat>
+    <v-card-title class="my-2"
+      >Offre de proximité
+      <info-tooltip>Basée sur les données OSM (juin 2023)</info-tooltip>
+      <v-btn
+        :icon="show ? mdiChevronUp : mdiChevronDown"
+        @click="show = !show"
+        flat
+        density="compact"
+      ></v-btn>
+    </v-card-title>
+    <template v-if="show">
+      <v-card-text>
+        <div v-for="variable in variables" class="pb-2">
+          <v-checkbox
+            v-model="variable.selected"
+            :key="variable.id"
+            density="compact"
+            hide-details
+          >
+            <template v-slot:label>
+              <div class="pl-1 font-weight-medium">
+                {{ variable.name }}
+              </div>
+              <info-tooltip v-if="variable.infos.length > 0">{{
+                variable.infos.join(", ")
+              }}</info-tooltip>
+            </template>
+          </v-checkbox>
 
-    <v-card-text>
-      <div v-for="variable in variables" class="pb-2">
-        <v-checkbox
-          v-model="variable.selected"
-          :key="variable.id"
-          density="compact"
-          hide-details
-        >
-          <template v-slot:label>
-            <div class="pl-1 font-weight-medium">
-              {{ variable.name }}
-            </div>
-            <info-tooltip v-if="variable.infos.length > 0">{{
-              variable.infos.join(", ")
-            }}</info-tooltip>
-          </template>
-        </v-checkbox>
+          <v-row
+            v-if="variable.selected"
+            class="pl-7"
+            align="center"
+            no-gutters
+          >
+            <v-col cols="6"> <v-label>diversité</v-label> </v-col>
+            <v-col cols="6">
+              <v-slider
+                hide-details
+                density="compact"
+                track-size="1"
+                thumb-size="10"
+                :color="variable.selected ? 'black' : 'grey'"
+                min="1"
+                max="5"
+                step="1"
+                v-model="variable.diversity"
+                thumb-label
+              ></v-slider>
+            </v-col>
 
-        <v-row v-if="variable.selected" class="pl-7" align="center" no-gutters>
-          <v-col cols="6"> <v-label>diversité</v-label> </v-col>
-          <v-col cols="6">
-            <v-slider
-              hide-details
-              density="compact"
-              track-size="1"
-              thumb-size="10"
-              :color="variable.selected ? 'black' : 'grey'"
-              min="1"
-              max="5"
-              step="1"
-              v-model="variable.diversity"
-              thumb-label
-            ></v-slider>
-          </v-col>
-
-          <v-col cols="6"> <v-label>pondération</v-label> </v-col>
-          <v-col cols="6">
-            <v-slider
-              hide-details
-              density="compact"
-              track-size="1"
-              thumb-size="10"
-              :color="variable.selected ? 'black' : 'grey'"
-              min="0"
-              max="1"
-              step="0.25"
-              v-model="variable.weight"
-              thumb-label
-            ></v-slider>
-          </v-col>
-        </v-row>
-      </div>
-    </v-card-text>
+            <v-col cols="6"> <v-label>pondération</v-label> </v-col>
+            <v-col cols="6">
+              <v-slider
+                hide-details
+                density="compact"
+                track-size="1"
+                thumb-size="10"
+                :color="variable.selected ? 'black' : 'grey'"
+                min="0"
+                max="1"
+                step="0.25"
+                v-model="variable.weight"
+                thumb-label
+              ></v-slider>
+            </v-col>
+          </v-row>
+        </div>
+      </v-card-text>
+    </template>
   </v-card>
 </template>
 
 <script lang="ts" setup>
-import { watch } from "vue";
+import { watch, ref } from "vue";
 import InfoTooltip from "@/components/InfoTooltip.vue";
 import type { SupplyVariable } from "@/utils/variables";
+import { mdiChevronUp, mdiChevronDown } from "@mdi/js";
 
 const props = defineProps<{
   variables: SupplyVariable[];
@@ -76,6 +87,8 @@ const emits = defineEmits<{
   (event: "update:variables", variables: SupplyVariable[]): void;
 }>();
 
+const show = ref(true);
+
 watch(
   () => props.variables,
   (variables) => {
@@ -83,42 +96,3 @@ watch(
   }
 );
 </script>
-
-<!-- 
-<template v-for="[category, variables] in groupedVariables.entries()">
-    <v-card-title class="text-subtitle-1 px-0 pt-4 p">
-      {{ cleanVariableString(category) + " weights" }}
-    </v-card-title>
-
-    <template v-for="variable in variables">
-      <v-row align="center" class="my-1" no-gutters>
-        <v-col class="d-flex" cols="7">
-          <v-checkbox-btn
-            v-model="variable.selected"
-            hide-details
-            density="compact"
-            class="text-body-2"
-          >
-          </v-checkbox-btn>
-          <v-label>
-            {{ cleanVariableString(getVariableNameWithoutGroup(variable)) }}
-          </v-label>
-        </v-col>
-
-        <v-col cols="5">
-          <v-slider
-            hide-details
-            density="compact"
-            track-size="1"
-            thumb-size="10"
-            :color="variable.selected ? 'black' : 'grey'"
-            min="0"
-            max="1"
-            step="0.25"
-            v-model="variable.weight"
-            thumb-label
-          ></v-slider>
-        </v-col>
-      </v-row>
-    </template>
-  </template> -->
