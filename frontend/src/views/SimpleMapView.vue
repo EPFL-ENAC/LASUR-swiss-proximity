@@ -10,7 +10,7 @@
     </v-row>
     <v-row class="flex-grow-1" no-gutters>
       <v-col cols="2" class="config-column">
-        <v-row class="py-2">
+        <v-row class="py-2 px-2 px-xl-3 px-xxl-6">
           <v-col cols="6" class="d-flex align-center">
             <v-card-title>Découpage :</v-card-title>
           </v-col>
@@ -39,7 +39,7 @@
         >
         </DemandConfigColumn>
         <v-divider></v-divider>
-        <v-card-actions class="py-4">
+        <v-card-actions class="pt-4 px-2 px-xl-3 px-xxl-6">
           <v-btn @click="resetSessionStorage" variant="flat">
             Réinitialiser
           </v-btn>
