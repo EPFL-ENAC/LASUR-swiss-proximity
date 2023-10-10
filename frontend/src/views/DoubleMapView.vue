@@ -58,7 +58,7 @@
           :supplyVariables="selectedSupplyVariables"
           :list-tiles-params="listTilesParams"
           :selected-tiles-name="selectedTilesSource.demand"
-          :colors="demandColors"
+          :colors="supplyColors"
           :year="selectedYear"
           :distance="selectedDistance"
           :has-geocoder-search="false"
@@ -75,7 +75,7 @@
           :supplyVariables="selectedSupplyVariables"
           :list-tiles-params="listTilesParams"
           :selected-tiles-name="selectedTilesSource.supply"
-          :colors="proximityTripColors"
+          :colors="demandColors"
           :year="selectedYear"
           :distance="selectedDistance"
           :has-geocoder-search="false"
@@ -95,13 +95,13 @@ import VectorsMap from "@/components/VectorsMap.vue";
 import SupplyConfigColumn from "@/components/SupplyConfigColumn.vue";
 import { ref, computed, watch } from "vue";
 import {
-  demandColors,
+  supplyColors,
   listDistances,
   listVariablesDemand,
   listVariablesSupply,
   listTilesParams,
   listYears,
-  proximityTripColors,
+  demandColors,
 } from "@/utils/variables";
 import type {
   TileParams,

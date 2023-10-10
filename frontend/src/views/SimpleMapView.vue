@@ -54,7 +54,7 @@
           :supplyVariables="selectedSupplyVariables"
           :list-tiles-params="listTilesParams"
           :selected-tiles-name="selectedTilesSource.name"
-          :colors="isDemand ? demandColors : proximityTripColors"
+          :colors="isDemand ? demandColors : supplyColors"
           :year="selectedYear"
           :distance="selectedDistance"
           :has-geocoder-search="true"
@@ -67,6 +67,9 @@
           inset
           :label="`${isDemand ? 'Demande' : 'Offre'}`"
         ></v-switch>
+        <legend-map
+          :colors="isDemand ? demandColors.toReversed() : supplyColors"
+        ></legend-map>
       </v-col>
     </v-row>
   </v-container>
@@ -77,13 +80,13 @@ import VectorsMap from "@/components/VectorsMap.vue";
 import SupplyConfigColumn from "@/components/SupplyConfigColumn.vue";
 import { ref, computed, watch } from "vue";
 import {
-  demandColors,
+  supplyColors,
   listDistances,
   listVariablesDemand,
   listVariablesSupply,
   listTilesParams,
   listYears,
-  proximityTripColors,
+  demandColors,
 } from "@/utils/variables";
 import type {
   TileParams,
@@ -93,6 +96,8 @@ import type {
   SupplyVariable,
 } from "@/utils/variables";
 import DemandConfigColumn from "@/components/DemandConfigColumn.vue";
+
+import LegendMap from "@/components/LegendMap.vue";
 
 const storageMapTypeSource = "selectedMapType",
   storageItemMapType = sessionStorage.getItem(storageMapTypeSource),
