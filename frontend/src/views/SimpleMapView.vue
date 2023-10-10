@@ -10,7 +10,7 @@
     </v-row>
     <v-row class="flex-grow-1" no-gutters>
       <v-col cols="2" class="config-column">
-        <v-row>
+        <v-row class="py-2">
           <v-col cols="6" class="d-flex align-center">
             <v-card-title>Découpage :</v-card-title>
           </v-col>
@@ -18,11 +18,12 @@
             <v-switch
               v-model="isHexagon"
               hide-details
+              class="font-weight-medium"
               :label="`${isHexagon ? 'Hexagon' : 'Polygon'}`"
             ></v-switch>
           </v-col>
         </v-row>
-
+        <v-divider></v-divider>
         <SupplyConfigColumn
           v-if="!isDemand"
           v-model:variables="supplyVariables"
@@ -38,9 +39,9 @@
         >
         </DemandConfigColumn>
         <v-divider></v-divider>
-        <v-card-actions>
+        <v-card-actions class="py-4">
           <v-btn @click="resetSessionStorage" variant="flat">
-            Reset parameters
+            Réinitialiser
           </v-btn>
         </v-card-actions>
       </v-col>
@@ -61,7 +62,7 @@
 
         <v-switch
           v-model="isDemand"
-          class="overmap-switch"
+          class="overmap-switch font-weight-medium"
           hide-details
           inset
           :label="`${isDemand ? 'Demande' : 'Offre'}`"
@@ -149,11 +150,12 @@ const selectedDemandVariables = computed(() => {
 });
 
 const defaultSupplyVariables: SupplyVariable[] = listVariablesSupply.map(
-  ({ id, name }) => ({
+  ({ id, name, infos }) => ({
     id,
     name,
     weight: 1,
     diversity: 5,
+    infos,
     selected: id == "All",
   })
 );

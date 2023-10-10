@@ -18,8 +18,8 @@ export const listVariables = [
 ];
 
 export const listVariablesDemand = [
-  { id: "Fuss", name: "A pied" },
-  { id: "Velo", name: "A vélo" },
+  { id: "Fuss", name: "À pied" },
+  { id: "Velo", name: "À vélo" },
   { id: "Auto", name: "En voiture" },
   { id: "OeV", name: "En transport publics" },
   { id: "All_modes", name: "Tous" },
@@ -41,6 +41,7 @@ export type SupplyVariable = {
   weight: number;
   diversity: number;
   selected: boolean;
+  infos: string[];
 };
 
 export type TileParams = {
@@ -118,11 +119,27 @@ export const listVariablesSupply = [
     infos: [],
   },
   {
-    name: "Guichets",
-    id: "Public",
-    tags: ["community_centre", "police", "post_box", "post_office", "bank"],
-    infos: ["Postes", "banques", "police", "…"],
+    name: "Apprendre",
+    id: "Education",
+    tags: ["university", "school", "college", "kindergarten"],
+    infos: ["Ecoles primaires", "secondaires", "universités", "garderies", "…"],
   },
+  {
+    name: "Se cultiver",
+    id: "Culture",
+    tags: [
+      "arts_centre",
+      "library",
+      "theatre",
+      "nightclub",
+      "cinema",
+      "museum",
+      "events_venue",
+      "religion",
+    ],
+    infos: ["Bibliothèques", "théâtres", "cinémas", "lieux de culte", "…"],
+  },
+
   {
     name: "Se soigner",
     id: "Care",
@@ -147,21 +164,7 @@ export const listVariablesSupply = [
       "…",
     ],
   },
-  {
-    name: "Se cultiver",
-    id: "Culture",
-    tags: [
-      "arts_centre",
-      "library",
-      "theatre",
-      "nightclub",
-      "cinema",
-      "museum",
-      "events_venue",
-      "religion",
-    ],
-    infos: ["Bibliothèques", "théâtres", "cinémas", "lieux de culte", "…"],
-  },
+
   {
     name: "S’aérer",
     id: "Outdoor",
@@ -177,20 +180,7 @@ export const listVariablesSupply = [
     ],
     infos: ["Parcs", "places", "fontaines", "rives", "…"],
   },
-  {
-    name: "Bien manger",
-    id: "Catering",
-    tags: [
-      "restaurant",
-      "fast_food",
-      "cafe",
-      "pub",
-      "bar",
-      "food_court",
-      "biergarten",
-    ],
-    infos: ["Restaurants", "cafés", "pubs", "…"],
-  },
+
   {
     name: "Faire du sport",
     id: "Sport",
@@ -207,6 +197,20 @@ export const listVariablesSupply = [
       "stadium",
     ],
     infos: ["Piscines", "fitness", "stades", "patinoires", "tennis", "…"],
+  },
+  {
+    name: "Bien manger",
+    id: "Catering",
+    tags: [
+      "restaurant",
+      "fast_food",
+      "cafe",
+      "pub",
+      "bar",
+      "food_court",
+      "biergarten",
+    ],
+    infos: ["Restaurants", "cafés", "pubs", "…"],
   },
   {
     name: "Faire ses courses",
@@ -239,10 +243,10 @@ export const listVariablesSupply = [
     infos: ["Kiosks", "fleuristes", "librairies", "bricolage", "…"],
   },
   {
-    name: "Apprendre",
-    id: "Education",
-    tags: ["university", "school", "college", "kindergarten"],
-    infos: ["Ecoles primaires", "secondaires", "universités", "garderies", "…"],
+    name: "Guichets",
+    id: "Public",
+    tags: ["community_centre", "police", "post_box", "post_office", "bank"],
+    infos: ["Postes", "banques", "police", "…"],
   },
   {
     name: "Transports publics",
