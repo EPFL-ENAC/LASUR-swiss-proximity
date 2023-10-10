@@ -71,7 +71,7 @@ export const listTilesParams: TileParams[] = [
   },
 ];
 
-export const demandColors = [
+export const supplyColors = [
   { label: "15’ (walk)", distance: "1200m", color: "#005A32", category: "A" },
   { label: "20’ (walk)", distance: "1600m", color: "#238443", category: "B" },
   { label: "30’ (walk)", distance: "2400m", color: "#41AB5D", category: "C" },
@@ -101,8 +101,8 @@ export const demandColors = [
   },
 ];
 
-export const proximityTripColors = [
-  { label: "0 (No fill)", color: "#FFFFCC", category: "G" },
+export const demandColors = [
+  { label: "0 (No fill)", color: "#FFFFFF", category: "G" },
   { label: "Quantile 1/6", color: "#D9F0A3", category: "F" },
   { label: "Quantile 2/6", color: "#ADDD8E", category: "E" },
   { label: "Quantile 3/6", color: "#78C679", category: "D" },

@@ -89,7 +89,7 @@ const props = withDefaults(
 
 const isDemand = computed(() => props.selectedTilesName.includes("demand"));
 
-const mapColors = computed(() => props.colors.map((d) => d.color).reverse());
+const mapColors = computed(() => props.colors.map((d) => d.color));
 
 const emit = defineEmits<{
   (event: "created:map", value: Map): void;

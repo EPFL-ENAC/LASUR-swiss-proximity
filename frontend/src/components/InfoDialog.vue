@@ -1,5 +1,7 @@
 <template>
-  <info-markdown />
+  <v-container>
+    <info-markdown />
+  </v-container>
 </template>
 
 <script setup lang="ts">
