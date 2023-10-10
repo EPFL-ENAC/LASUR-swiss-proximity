@@ -69,7 +69,7 @@
         ></v-switch>
         <legend-map
           :colors="isDemand ? demandColors.toReversed() : supplyColors"
-        ></legend-map>
+        />
       </v-col>
     </v-row>
   </v-container>
