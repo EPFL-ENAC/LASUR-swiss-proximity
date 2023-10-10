@@ -10,7 +10,7 @@
     </v-row>
     <v-row class="flex-grow-1" no-gutters>
       <v-col class="config-column" cols="2">
-        <v-row>
+        <v-row class="py-2">
           <v-col cols="6" class="d-flex align-center">
             <v-card-title>Découpage :</v-card-title>
           </v-col>
@@ -18,10 +18,13 @@
             <v-switch
               v-model="isHexagon"
               hide-details
+              class="font-weight-medium"
               :label="`${isHexagon ? 'Hexagon' : 'Polygon'}`"
             ></v-switch>
           </v-col>
         </v-row>
+        <v-divider></v-divider>
+
         <DemandConfigColumn
           v-model:variables="demandVariables"
           v-model:year-selected="selectedYear"
@@ -39,9 +42,9 @@
 
         <v-divider></v-divider>
 
-        <v-card-actions>
+        <v-card-actions class="py-4">
           <v-btn @click="resetSessionStorage" variant="flat">
-            Reset parameters
+            Réinitialiser
           </v-btn>
         </v-card-actions>
 
@@ -61,6 +64,7 @@
           :has-geocoder-search="false"
           @created:map="leftMap = $event"
         ></VectorsMap>
+        <div class="overmap font-weight-medium">Demande</div>
       </v-col>
       <v-divider vertical></v-divider>
 
@@ -77,6 +81,7 @@
           :has-geocoder-search="false"
           @created:map="rightMap = $event"
         ></VectorsMap>
+        <div class="overmap font-weight-medium">Offre</div>
       </v-col>
     </v-row>
   </v-container>
@@ -147,11 +152,12 @@ const selectedDemandVariables = computed(() => {
 });
 
 const defaultSupplyVariables: SupplyVariable[] = listVariablesSupply.map(
-  ({ id, name }) => ({
+  ({ id, name, infos }) => ({
     id,
     name,
     weight: 1,
     diversity: 5,
+    infos,
     selected: id == "All",
   })
 );
@@ -247,5 +253,18 @@ watch(
   max-height: calc(100vh - 65px);
   overflow-y: scroll;
   overflow-x: hidden;
+}
+.overmap {
+  position: relative;
+  bottom: 3em;
+  padding: 0.6em 2em;
+  border-radius: 1em;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background-color: white;
+  color: rgba(var(--v-theme-primary), var(--v-medium-emphasis-opacity));
+  outline: solid 2px black;
+  width: fit-content;
 }
 </style>

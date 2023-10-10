@@ -1,16 +1,30 @@
 <template>
-  <v-card flat>
-    <v-card-title>Offre de proximité :</v-card-title>
+  <v-card class="py-2" flat>
+    <v-card-title
+      >Offre de proximité :
+      <info-tooltip
+        >Basée sur les données OSM (juin 2023)</info-tooltip
+      ></v-card-title
+    >
 
     <v-card-text>
       <div v-for="variable in variables" class="pb-2">
         <v-checkbox
           v-model="variable.selected"
-          :label="variable.name"
           :key="variable.id"
           density="compact"
           hide-details
-        />
+        >
+          <template v-slot:label>
+            <div class="pl-1 font-weight-medium">
+              {{ variable.name }}
+            </div>
+            <info-tooltip v-if="variable.infos.length > 0">{{
+              variable.infos.join(", ")
+            }}</info-tooltip>
+          </template>
+        </v-checkbox>
+
         <v-row v-if="variable.selected" class="pl-7" align="center" no-gutters>
           <v-col cols="6"> <v-label>diversité</v-label> </v-col>
           <v-col cols="6">
@@ -51,6 +65,7 @@
 
 <script lang="ts" setup>
 import { watch } from "vue";
+import InfoTooltip from "@/components/InfoTooltip.vue";
 import type { SupplyVariable } from "@/utils/variables";
 
 const props = defineProps<{
