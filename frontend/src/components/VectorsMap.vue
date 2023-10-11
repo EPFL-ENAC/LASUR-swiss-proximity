@@ -108,25 +108,31 @@ function onMove(e: MapLayerEventType["mousemove"]) {
   const feature = e.features[0],
     properties = feature.properties || {};
 
-  const variables = isDemand.value
+  const variables: DemandVariable[] | SupplyVariable[] = isDemand.value
     ? props.demandVariables
     : props.supplyVariables;
-  const proxyYearDistance = "_" + props.distance + "_" + props.year;
-  // Display a popup with the name of the county.
+  const proxyYearDistance = isDemand.value
+    ? "_" + props.distance + "_" + props.year
+    : "";
+
   popup.value
     .setLngLat(e.lngLat)
     .setHTML(
       `<h3>${
-        properties.h3index
+        isDemand.value
           ? properties["Agglo" + proxyYearDistance]
-          : properties.municipality_name + "-" + properties.id
+          : properties["agglo_All"]
       }</h3>
-</br>${variables.map(
+      </br>
+      ${variables.map(
         (key) =>
           "<div>" +
-            cleanVariableString(key.name) +
-            " : " +
-            properties[key.id + proxyYearDistance].toFixed(3) || null + "</div>"
+          cleanVariableString(key.name) +
+          " : " +
+          (isDemand.value
+            ? properties[key.id + proxyYearDistance].toFixed(3) || null
+            : properties[(key as SupplyVariable).diversity + "_" + key.id]) +
+          "</div>"
       )}`
     )
     .addTo(map);
