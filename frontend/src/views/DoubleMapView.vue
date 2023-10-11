@@ -66,7 +66,7 @@
         >
         </VectorsMap>
         <div class="overmap font-weight-medium">Demande</div>
-        <legend-map class="legend-left" :colors="demandColors.toReversed()" />
+        <legend-map class="legend-left" reverse :colors="demandColors" />
       </v-col>
       <v-divider vertical></v-divider>
 

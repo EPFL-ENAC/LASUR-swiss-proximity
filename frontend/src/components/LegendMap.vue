@@ -1,6 +1,6 @@
 <template>
   <div class="legend">
-    <div class="legend-item" v-for="item in props.colors" :key="item.label">
+    <div class="legend-item" v-for="item in colors" :key="item.label">
       <div class="color-box" :style="{ backgroundColor: item.color }"></div>
       <div class="label text-body-2">{{ item.distance }} {{ item.label }}</div>
       <v-spacer></v-spacer>
@@ -10,6 +10,8 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue";
+
 type Color = {
   color: string;
   label: string;
@@ -19,7 +21,12 @@ type Color = {
 
 const props = defineProps<{
   colors: Color[];
+  reverse?: boolean;
 }>();
+
+const colors = computed(() =>
+  props.reverse ? [...props.colors].reverse() : props.colors
+);
 </script>
 
 <style scoped>
