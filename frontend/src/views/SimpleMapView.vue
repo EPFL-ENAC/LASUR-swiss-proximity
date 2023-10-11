@@ -68,7 +68,8 @@
           :label="`${isDemand ? 'Demande' : 'Offre'}`"
         ></v-switch>
         <legend-map
-          :colors="isDemand ? demandColors.toReversed() : supplyColors"
+          :reverse="isDemand"
+          :colors="isDemand ? demandColors : supplyColors"
         />
       </v-col>
     </v-row>
