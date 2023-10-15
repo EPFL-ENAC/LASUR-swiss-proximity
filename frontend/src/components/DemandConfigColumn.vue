@@ -52,6 +52,7 @@
           :key="variable.id"
           density="compact"
           hide-details
+          :disabled="isAllSelected && variable.id !== 'All_modes'"
         >
           <template v-slot:label>
             <div class="pl-1 font-weight-medium">{{ variable.name }}</div>
@@ -63,7 +64,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from "vue";
+import { ref, watch, computed } from "vue";
 import type { DemandVariable } from "@/utils/variables";
 import { mdiChevronUp, mdiChevronDown } from "@mdi/js";
 
@@ -82,6 +83,11 @@ const emits = defineEmits<{
 }>();
 
 const show = ref(true);
+
+const isAllSelected = computed(
+  () =>
+    props.variables.find((variable) => variable.id === "All_modes")?.selected
+);
 
 watch(
   () => props.yearSelected,
