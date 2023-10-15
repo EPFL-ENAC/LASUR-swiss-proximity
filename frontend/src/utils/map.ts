@@ -1,16 +1,5 @@
 import type { ExpressionSpecification } from "maplibre-gl";
 import { LngLat, LngLatBounds } from "maplibre-gl";
-// export const mapColors = [
-//   "#1a9850",
-//   "#66bd63",
-//   "#a6d96a",
-//   "#d9ef8b",
-//   "#ffffbf",
-//   "#fee08b",
-//   "#fdae61",
-//   "#f46d43",
-//   "#d73027",
-// ];
 
 export const publicStopsColors = [
   "match",
@@ -57,7 +46,11 @@ export const publicStopsColors = [
   /* other */ "black",
 ];
 
-export const isochroneColors = ["#ffffe5", "#bbe395", "#389d55"];
+export const isochroneColors = [
+  { label: "15 min", color: "#bbe395" }, // Green light
+  { label: "20 min", color: "#389d55" }, // Green
+  { label: "30 min", color: "#005e2d" }, // Dark green
+];
 
 export const hexagonsResolutions = [6, 7, 8];
 
@@ -69,13 +62,7 @@ export const mapBounds = new LngLatBounds(sw, ne);
 export const center = [-837, 9380];
 export const scale = 61878;
 
-// This function calculates the weighted mean of a set of attributes in an object. It takes an array of objects with name and weight properties, and returns either a number or an expression specification.
-// If the input array is empty, the function returns 0. If the array has only one element, it returns an expression specification for the attribute specified in the element.
-// Otherwise, it returns an expression specification that calculates the mean of the attributes.
-
-// Thanks ChatGPT ;)
-
-// I'm actually using this function to create the "maplibre" expression https://maplibre.org/maplibre-gl-js-docs/style-spec/expressions/#math to calculate the weighted mean of the variables in the map
+// Create the "maplibre" expression https://maplibre.org/maplibre-gl-js-docs/style-spec/expressions/#math to calculate the weighted mean of the variables in the map
 
 export function expressionMean(
   attributes: { id: string; weight?: number; diversity?: number }[],
