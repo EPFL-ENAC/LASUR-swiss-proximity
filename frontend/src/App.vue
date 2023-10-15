@@ -3,8 +3,9 @@
     <v-toolbar flat color="white" app>
       <v-toolbar-title max-width="300px">SWISS PROXIMITY</v-toolbar-title>
       <v-tabs class="flex-grow-1 flex-shrink-0 px-10" align-tabs="center" grow>
-        <v-tab to="/simplemap">Simple</v-tab>
-        <v-tab to="/doublemap">Double</v-tab>
+        <v-tab to="/offre">Offre de proximité</v-tab>
+        <v-tab to="/demande">Demande de proximité</v-tab>
+        <v-tab to="/comparaison">Comparaison</v-tab>
         <v-tab to="/isochrones">Isochrones</v-tab>
       </v-tabs>
       <v-spacer></v-spacer>

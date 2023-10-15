@@ -60,13 +60,6 @@
           :has-geocoder-search="true"
         ></VectorsMap>
 
-        <v-switch
-          v-model="isDemand"
-          class="overmap-switch font-weight-medium"
-          hide-details
-          inset
-          :label="`${isDemand ? 'Demande' : 'Offre'}`"
-        ></v-switch>
         <legend-map
           :reverse="isDemand"
           :colors="isDemand ? demandColors : supplyColors"
@@ -100,21 +93,11 @@ import DemandConfigColumn from "@/components/DemandConfigColumn.vue";
 
 import LegendMap from "@/components/LegendMap.vue";
 
-const storageMapTypeSource = "selectedMapType",
-  storageItemMapType = sessionStorage.getItem(storageMapTypeSource),
-  savedMapType: MapType = storageItemMapType
-    ? (storageItemMapType as MapType)
-    : "demand";
+const props = defineProps<{
+  mapType: MapType;
+}>();
 
-const selectedMapType = ref(savedMapType);
-const isDemand = computed({
-  get() {
-    return selectedMapType.value === "demand";
-  },
-  set(value) {
-    selectedMapType.value = value ? "demand" : "supply";
-  },
-});
+const isDemand = computed(() => props.mapType === "demand");
 
 const storageTilingTypeSource = "selectedTilingType",
   storageItemTilingType = sessionStorage.getItem(storageTilingTypeSource),
@@ -223,9 +206,6 @@ watch(selectedSupplyVariables, () =>
     storageKeySupplyVariables,
     JSON.stringify(supplyVariables.value)
   )
-);
-watch(selectedMapType, () =>
-  sessionStorage.setItem(storageMapTypeSource, selectedMapType.value)
 );
 
 watch(selectedTilingType, () => {
