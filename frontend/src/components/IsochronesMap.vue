@@ -139,7 +139,7 @@ function fetchIsochrone(location: LngLatLike) {
   getIsochrone(
     LngLat.convert(location).toArray() as [number, number],
     props.selectedTransportMode,
-    [15, 20, 25, 30].map((minutes) => minutes * 60)
+    [15, 20, 25].map((minutes) => minutes * 60)
   )
     .then((data: Feature<Polygon, GeoJsonProperties>[]) => {
       if (map === null) return;
@@ -194,7 +194,11 @@ onMounted(() => {
         "fill-color": [
           "step",
           ["get", "value"],
-          ...stepsColors(15 * 60, 30 * 60, isochroneColors),
+          ...stepsColors(
+            15 * 60,
+            25 * 60,
+            isochroneColors.map((d) => d.color)
+          ),
         ],
         "fill-opacity": 0.5,
         "fill-outline-color": "rgba(0,0,0,0.1)",
