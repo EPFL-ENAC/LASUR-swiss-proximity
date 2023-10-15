@@ -72,29 +72,29 @@ export const listTilesParams: TileParams[] = [
 ];
 
 export const supplyColors = [
-  { label: "15’ (walk)", distance: "1200m", color: "#005A32", category: "A" },
-  { label: "20’ (walk)", distance: "1600m", color: "#238443", category: "B" },
-  { label: "30’ (walk)", distance: "2400m", color: "#41AB5D", category: "C" },
+  { label: "15’ (marche)", distance: "1200m", color: "#005A32", category: "A" },
+  { label: "20’ (marche)", distance: "1600m", color: "#238443", category: "B" },
+  { label: "30’ (marche)", distance: "2400m", color: "#41AB5D", category: "C" },
   {
-    label: "15’ (bicycle)",
+    label: "15’ (vélo)",
     distance: "3700m",
     color: "#78C679",
     category: "D",
   },
   {
-    label: "20’ (bicycle)",
+    label: "20’ (vélo)",
     distance: "5000m",
     color: "#ADDD8E",
     category: "E",
   },
   {
-    label: "30’ (bicycle)",
+    label: "30’ (vélo)",
     distance: "7000m",
     color: "#D9F0A3",
     category: "F",
   },
   {
-    label: "> 30’ (bicycle)",
+    label: "> 30’ (vélo)",
     distance: "> 7000m",
     color: "#FFFFCC",
     category: "G",
