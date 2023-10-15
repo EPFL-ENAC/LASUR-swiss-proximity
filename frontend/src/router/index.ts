@@ -1,19 +1,27 @@
 // Composables
 import { createRouter, createWebHistory } from "vue-router";
+import type { MapType } from "@/utils/variables";
 
 const routes = [
   {
     path: "/",
-    redirect: "/doublemap",
+    redirect: "/demande",
   },
   {
-    path: "/simplemap",
-    name: "Simple map",
+    path: "/offre",
+    name: "Offre de proximité",
     component: () => import("@/views/SimpleMapView.vue"),
+    props: { mapType: "supply" as MapType },
   },
   {
-    path: "/doublemap",
-    name: "Double map",
+    path: "/demande",
+    name: "Demande de proximité",
+    component: () => import("@/views/SimpleMapView.vue"),
+    props: { mapType: "demand" as MapType },
+  },
+  {
+    path: "/comparaison",
+    name: "Comparaison",
     component: () => import("@/views/DoubleMapView.vue"),
   },
   {
