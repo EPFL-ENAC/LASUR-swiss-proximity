@@ -111,6 +111,32 @@ export function expressionMean(
   return ["/", total, sumWeight] as ExpressionSpecification;
 }
 
+export function expressionMax(
+  attributes: { id: string; weight: number; diversity: number }[]
+): ExpressionSpecification | number {
+  if (attributes.length == 0) return 0;
+
+  // If there is only one attribute, return an expression that gets the value of the attribute
+  if (attributes.length == 1)
+    return [
+      "to-number",
+      ["get", attributes[0].diversity + "_" + attributes[0].id],
+    ] as ExpressionSpecification;
+  else if (attributes.length > 1) {
+    const values: [ExpressionSpecification, ...ExpressionSpecification[]] =
+      attributes.map(
+        ({ id, weight, diversity }) =>
+          [
+            "*",
+            ["to-number", ["get", diversity + "_" + id]],
+            weight ?? 1,
+          ] as ExpressionSpecification
+      ) as [ExpressionSpecification, ...ExpressionSpecification[]];
+
+    return ["max", ...values];
+  } else return 0;
+}
+
 // This function returns an array of colors and values to be used in the map legend. It takes the minimum and maximum values of the variable, and an array of colors.
 // It returns an array of values and colors, where the values are the values of the variable that correspond to the colors in the legend.
 export function stepsColors(min: number, max: number, colors: string[]) {
