@@ -9,7 +9,7 @@
       </v-col>
     </v-row>
     <v-row class="flex-grow-1" no-gutters>
-      <v-col class="config-column" cols="2">
+      <v-col class="config-column" cols="3">
         <v-row class="py-2 px-2 px-xl-3 px-xxl-6">
           <v-col cols="6" class="d-flex align-center">
             <v-card-title>Découpage :</v-card-title>
@@ -51,40 +51,44 @@
         <v-divider vertical></v-divider>
       </v-col>
 
-      <v-col cols="5" class="pa-0">
-        <VectorsMap
-          class="left-map"
-          :demandVariables="selectedDemandVariables"
-          :supplyVariables="selectedSupplyVariables"
-          :list-tiles-params="listTilesParams"
-          :selected-tiles-name="selectedTilesSource.demand"
-          :colors="demandColors"
-          :year="selectedYear"
-          :distance="selectedDistance"
-          :has-geocoder-search="false"
-          @created:map="leftMap = $event"
-        >
-        </VectorsMap>
-        <div class="overmap font-weight-medium">Demande</div>
-        <legend-map class="legend-left" reverse :colors="demandColors" />
-      </v-col>
-      <v-divider vertical></v-divider>
+      <v-col cols="9" class="map-column">
+        <v-row class="fill-height" no-gutters>
+          <v-col cols="6" class="pa-0">
+            <VectorsMap
+              class="left-map"
+              :demandVariables="selectedDemandVariables"
+              :supplyVariables="selectedSupplyVariables"
+              :list-tiles-params="listTilesParams"
+              :selected-tiles-name="selectedTilesSource.demand"
+              :colors="demandColors"
+              :year="selectedYear"
+              :distance="selectedDistance"
+              :has-geocoder-search="false"
+              @created:map="leftMap = $event"
+            >
+            </VectorsMap>
+            <div class="overmap font-weight-medium">Demande</div>
+            <legend-map class="legend-left" reverse :colors="demandColors" />
+          </v-col>
+          <v-divider vertical></v-divider>
 
-      <v-col cols="5" class="pa-0">
-        <VectorsMap
-          class="right-map"
-          :demandVariables="selectedDemandVariables"
-          :supplyVariables="selectedSupplyVariables"
-          :list-tiles-params="listTilesParams"
-          :selected-tiles-name="selectedTilesSource.supply"
-          :colors="supplyColors"
-          :year="selectedYear"
-          :distance="selectedDistance"
-          :has-geocoder-search="false"
-          @created:map="rightMap = $event"
-        ></VectorsMap>
-        <legend-map :colors="supplyColors" />
-        <div class="overmap font-weight-medium">Offre</div>
+          <v-col cols="6" class="pa-0">
+            <VectorsMap
+              class="right-map"
+              :demandVariables="selectedDemandVariables"
+              :supplyVariables="selectedSupplyVariables"
+              :list-tiles-params="listTilesParams"
+              :selected-tiles-name="selectedTilesSource.supply"
+              :colors="supplyColors"
+              :year="selectedYear"
+              :distance="selectedDistance"
+              :has-geocoder-search="false"
+              @created:map="rightMap = $event"
+            ></VectorsMap>
+            <legend-map :colors="supplyColors" />
+            <div class="overmap font-weight-medium">Offre</div>
+          </v-col>
+        </v-row>
       </v-col>
     </v-row>
   </v-container>
@@ -253,11 +257,6 @@ watch(
 </script>
 
 <style scoped>
-.config-column {
-  max-height: calc(100vh - 65px);
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
 .overmap {
   position: relative;
   bottom: 3em;
@@ -274,5 +273,19 @@ watch(
 
 .legend-left {
   right: calc(2em + 41.5vw);
+}
+
+.config-column {
+  max-height: calc(100vh - 65px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-width: 340px;
+  min-width: 290px;
+  flex: 1 1;
+}
+
+.map-column {
+  max-width: none;
+  flex: 1 1;
 }
 </style>
