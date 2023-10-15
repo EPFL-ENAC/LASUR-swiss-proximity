@@ -17,6 +17,7 @@
             v-model="variable.selected"
             :key="variable.id"
             density="compact"
+            :disabled="isVariableDisabled(variable)"
             hide-details
           >
             <template v-slot:label>
@@ -30,7 +31,7 @@
           </v-checkbox>
 
           <v-row
-            v-if="variable.selected"
+            v-if="variable.selected && !isVariableDisabled(variable)"
             class="pl-7"
             align="center"
             no-gutters
@@ -51,7 +52,7 @@
               ></v-slider>
             </v-col>
 
-            <v-col cols="6"> <v-label>pondération</v-label> </v-col>
+            <v-col cols="6"> <v-label>poids</v-label> </v-col>
             <v-col cols="6">
               <v-slider
                 hide-details
@@ -74,7 +75,7 @@
 </template>
 
 <script lang="ts" setup>
-import { watch, ref } from "vue";
+import { watch, ref, computed } from "vue";
 import InfoTooltip from "@/components/InfoTooltip.vue";
 import type { SupplyVariable } from "@/utils/variables";
 import { mdiChevronUp, mdiChevronDown } from "@mdi/js";
@@ -88,6 +89,13 @@ const emits = defineEmits<{
 }>();
 
 const show = ref(true);
+
+const isAllSelected = computed(
+  () => props.variables.find((variable) => variable.id === "All")?.selected
+);
+
+const isVariableDisabled = (variable: SupplyVariable) =>
+  isAllSelected.value && variable.id !== "All";
 
 watch(
   () => props.variables,
