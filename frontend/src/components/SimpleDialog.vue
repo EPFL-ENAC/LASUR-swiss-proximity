@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" :width="width" scrollable>
+  <v-dialog v-model="dialog" :style="`width: ${props.width}px`" scrollable>
     <template #activator="{ on, attrs }">
       <slot name="activator" :on="on" :attrs="attrs"></slot>
     </template>
@@ -32,7 +32,7 @@ const props = withDefaults(
     storageKey?: string;
     open: boolean;
   }>(),
-  { width: 1400 }
+  { width: 1000 }
 );
 
 const emits = defineEmits<{
