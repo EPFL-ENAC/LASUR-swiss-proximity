@@ -9,7 +9,7 @@
       </v-col>
     </v-row>
     <v-row class="flex-grow-1" no-gutters>
-      <v-col cols="2" class="config-column">
+      <v-col cols="3" class="config-column">
         <v-row class="py-2 px-2 px-xl-3 px-xxl-6">
           <v-col cols="6" class="d-flex align-center">
             <v-card-title>Découpage :</v-card-title>
@@ -48,7 +48,7 @@
 
       <v-divider vertical></v-divider>
 
-      <v-col cols="10" class="pa-0">
+      <v-col cols="9" class="pa-0 map-column">
         <VectorsMap
           :demandVariables="selectedDemandVariables"
           :supplyVariables="selectedSupplyVariables"
@@ -257,5 +257,13 @@ function resetSessionStorage() {
   max-height: calc(100vh - 65px);
   overflow-y: scroll;
   overflow-x: hidden;
+  max-width: 380px;
+  min-width: 290px;
+  flex: 1 1;
+}
+
+.map-column {
+  max-width: none;
+  flex: 1 1;
 }
 </style>

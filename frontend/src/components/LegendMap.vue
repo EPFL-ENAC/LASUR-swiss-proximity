@@ -1,16 +1,32 @@
 <template>
   <div class="legend">
-    <div class="legend-item" v-for="item in colors" :key="item.label">
-      <div class="color-box" :style="{ backgroundColor: item.color }"></div>
-      <div class="label text-body-2">{{ item.distance }} {{ item.label }}</div>
-      <v-spacer></v-spacer>
-      <div class="code text-body-1 font-weight-medium">{{ item.category }}</div>
+    <h4>
+      Légende
+      <v-btn
+        :icon="show ? mdiChevronDown : mdiChevronUp"
+        @click="show = !show"
+        flat
+        density="compact"
+      ></v-btn>
+    </h4>
+    <div v-if="show" class="mt-2">
+      <div class="legend-item" v-for="item in colors" :key="item.label">
+        <div class="color-box" :style="{ backgroundColor: item.color }"></div>
+        <div class="label text-body-2">
+          {{ item.distance }} {{ item.label }}
+        </div>
+        <v-spacer></v-spacer>
+        <div class="code text-body-1 font-weight-medium">
+          {{ item.category }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref } from "vue";
+import { mdiChevronUp, mdiChevronDown } from "@mdi/js";
 
 type Color = {
   color: string;
@@ -23,6 +39,7 @@ const props = defineProps<{
   colors: Color[];
   reverse?: boolean;
 }>();
+const show = ref(true);
 
 const colors = computed(() =>
   props.reverse ? [...props.colors].reverse() : props.colors
@@ -34,7 +51,7 @@ const colors = computed(() =>
   position: absolute;
   bottom: 1em;
   background-color: white;
-  padding: 1em;
+  padding: 0.5em 1.4em;
   border-radius: 1em;
   /* outline: solid 2px black; */
   z-index: 1000;

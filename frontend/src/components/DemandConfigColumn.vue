@@ -1,5 +1,5 @@
 <template>
-  <v-card class="px-2 px-xl-3 px-xxl-6 py-2" flat>
+  <v-card class="px-2 px-xl-3 px-xxl-6 py-2 demand-config" flat>
     <v-card-title class="my-2">
       Demande de proximité
       <info-tooltip>
