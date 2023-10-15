@@ -11,10 +11,10 @@ import difference from "@turf/difference";
 export type TransportMode = { name: string; profile: string };
 // List of transport mode, with ORS or TravelTime corresponding terminology
 export const listTransportModes = [
-  { name: "Driving", profile: "driving-car" },
-  { name: "Cycling", profile: "cycling-regular" },
-  { name: "Walking", profile: "foot-walking" },
-  { name: "Wheelchair", profile: "wheelchair" },
+  { name: "Voiture", profile: "driving-car" },
+  { name: "Vélo", profile: "cycling-regular" },
+  { name: "Marche", profile: "foot-walking" },
+
   // { name: "Public transport", profile: "public_transport" },
 ];
 

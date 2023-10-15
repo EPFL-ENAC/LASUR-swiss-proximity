@@ -16,7 +16,7 @@
           {{ item.distance }} {{ item.label }}
         </div>
         <v-spacer></v-spacer>
-        <div class="code text-body-1 font-weight-medium">
+        <div v-if="item.category" class="code text-body-1 font-weight-medium">
           {{ item.category }}
         </div>
       </div>
@@ -31,7 +31,7 @@ import { mdiChevronUp, mdiChevronDown } from "@mdi/js";
 type Color = {
   color: string;
   label: string;
-  category: string;
+  category?: string;
   distance?: string;
 };
 

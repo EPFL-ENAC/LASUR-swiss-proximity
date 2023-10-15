@@ -5,20 +5,19 @@
   >
     <v-row class="flex-shrink-1 flex-grow-0">
       <v-col>
-        <v-card flat>
-          <v-card-title>Isochrones de mobilité en Suisse</v-card-title>
-          <v-card-text>
-            Choissisez le type de transport puis déplacez le marqueur ou lancez
-            une recherche avec une adresse. L'application vous montrera les
-            zones accessibles en fonction du temps de trajet.
-          </v-card-text>
-        </v-card>
         <v-divider></v-divider>
       </v-col>
     </v-row>
     <v-row class="flex-grow-1 no-gutters ma-0">
       <v-col cols="3">
         <v-card flat>
+          <v-card-title>Carte des isochrones</v-card-title>
+          <v-card-text>
+            (En cours de développement) Visualiser le temps nécessaire pour se
+            déplacer depuis un point donné en fonction du mode de transport, que
+            ce soit à pied, en voiture, à vélo (et bientôt en transport
+            public!). La carte affiche aussi les arrêts de transport public.
+          </v-card-text>
           <v-card-title>Type de transport</v-card-title>
           <v-card-text>
             <v-radio-group v-model="selectedTransportMode">
@@ -37,38 +36,10 @@
       <v-divider vertical></v-divider>
 
       <v-col cols="9" class="pa-0">
-        <v-container
-          class="pb-4 pa-0 fill-height align-stretch flex-column"
-          fluid
-        >
-          <v-row class="flex-grow-1">
-            <v-col cols="12">
-              <IsochronesMap
-                :selected-transport-mode="selectedTransportMode.profile"
-              ></IsochronesMap>
-            </v-col>
-          </v-row>
-          <v-divider></v-divider>
-          <v-row class="flex-grow-0">
-            <v-col cols="12">
-              <v-container fluid>
-                <h4>Légende</h4>
-                Suspendisse potenti. In et dolor faucibus, elementum est nec,
-                lobortis velit. Aenean blandit sapien sed urna pellentesque, at
-                lacinia erat facilisis. Morbi vestibulum, mauris id pellentesque
-                iaculis, tellus sapien varius quam, vel interdum tellus diam at
-                velit. Donec lectus dui, lobortis quis dapibus in, euismod id
-                ex. Donec lorem justo, elementum sit amet magna non, congue
-                venenatis orci. Aenean eu tristique urna. Quisque et fermentum
-                nisl. Mauris sit amet tellus sed nunc fermentum luctus a ac
-                mauris. Cras tortor justo, blandit sed diam eu, imperdiet
-                tristique dui. Suspendisse consectetur mauris neque, ac
-                fringilla tortor auctor ac. Mauris vitae magna cursus, molestie
-                ante vitae, facilisis augue.
-              </v-container>
-            </v-col>
-          </v-row>
-        </v-container>
+        <IsochronesMap
+          :selected-transport-mode="selectedTransportMode.profile"
+        ></IsochronesMap>
+        <legend-map :colors="isochroneColors" />
       </v-col>
     </v-row>
   </v-container>
@@ -80,6 +51,9 @@ import { ref, watch } from "vue";
 
 import { listTransportModes } from "@/utils/isochrone";
 import type { TransportMode } from "@/utils/isochrone";
+import LegendMap from "@/components/LegendMap.vue";
+import { isochroneColors } from "@/utils/map";
+
 const storageKeyTransportMode = "selectedTransportMode";
 
 const storageItem = sessionStorage.getItem(storageKeyTransportMode),

@@ -1,22 +1,3 @@
-// List of variables available in data, this is not supposed to be modified
-export const listVariables = [
-  "bike_barsresaurants",
-  "bike_health",
-  "bike_posts",
-  "bike_schools",
-  "bike_transit",
-  "transit_barsresaurants",
-  "transit_health",
-  "transit_posts",
-  "transit_schools",
-  "transit_transit",
-  "walk_barsresaurants",
-  "walk_health",
-  "walk_posts",
-  "walk_schools",
-  "walk_transit",
-];
-
 export const listVariablesDemand = [
   { id: "Fuss", name: "À pied" },
   { id: "Velo", name: "À vélo" },
