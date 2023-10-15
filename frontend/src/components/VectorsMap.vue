@@ -65,6 +65,7 @@ const container = ref<HTMLDivElement>();
 const popup = ref<Popup>(
   new Popup({
     closeButton: false,
+    maxWidth: "800px",
   })
 );
 
@@ -108,34 +109,59 @@ function onMove(e: MapLayerEventType["mousemove"]) {
   const feature = e.features[0],
     properties = feature.properties || {};
 
-  const variables: DemandVariable[] | SupplyVariable[] = isDemand.value
-    ? props.demandVariables
-    : props.supplyVariables;
-  const proxyYearDistance = isDemand.value
-    ? "_" + props.distance + "_" + props.year
-    : "";
+  if (isDemand.value) {
+    const variables: DemandVariable[] = props.demandVariables;
+    const proxyYearDistance = isDemand.value
+      ? "_" + props.distance + "_" + props.year
+      : "";
 
-  popup.value
-    .setLngLat(e.lngLat)
-    .setHTML(
-      `<h3>${
-        isDemand.value
-          ? properties["Agglo" + proxyYearDistance]
-          : properties["agglo_All"]
-      }</h3>
+    const sumWeight = variables.length,
+      sumVariables = variables.reduce(
+        (partialSum, attribute) =>
+          partialSum + (properties[attribute.id + proxyYearDistance] || 0),
+        0
+      );
+    // POPUP DEMANDE
+    popup.value
+      .setLngLat(e.lngLat)
+      .setHTML(
+        `<h3>${properties["Agglo" + proxyYearDistance]}</h3>
       </br>
-      ${variables.map(
-        (key) =>
-          "<div>" +
-          cleanVariableString(key.name) +
-          " : " +
-          (isDemand.value
-            ? properties[key.id + proxyYearDistance].toFixed(3) || null
-            : properties[(key as SupplyVariable).diversity + "_" + key.id]) +
-          "</div>"
-      )}`
-    )
-    .addTo(map);
+      <div>
+        Part des déplacements < ${props.distance} mètres : <strong>${~~(
+          (100 * sumVariables) /
+          sumWeight
+        )}%</strong> (mode.s: ${variables.map(({ name }) => name).join(", ")})
+
+      </div>
+     `
+      )
+      .addTo(map);
+  } else {
+    const variables: SupplyVariable[] = props.supplyVariables;
+    // POPUP OFFRE
+    popup.value
+      .setLngLat(e.lngLat)
+      .setHTML(
+        `<h3>${properties["agglo_All"]}</h3>
+      </br>
+      ${variables
+        .map(
+          ({ diversity, name, id, weight }) =>
+            "<div>" +
+            diversity +
+            (diversity > 1 ? " lieux où " : " lieu où ") +
+            cleanVariableString(name) +
+            " à moins de <strong>" +
+            properties[diversity + "_" + id] +
+            "</strong> mètres " +
+            ` (poids= ${weight})` +
+            "</div>"
+        )
+        .join("\n")}`
+      )
+      .addTo(map);
+  }
 }
 
 function onLeave() {
