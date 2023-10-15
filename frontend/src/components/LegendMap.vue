@@ -9,7 +9,7 @@
         density="compact"
       ></v-btn>
     </h4>
-    <div v-if="show" class="mt-2">
+    <div v-if="show" class="my-2">
       <div class="legend-item" v-for="item in colors" :key="item.label">
         <div class="color-box" :style="{ backgroundColor: item.color }"></div>
         <div class="label text-body-2">
@@ -51,8 +51,8 @@ const colors = computed(() =>
   position: absolute;
   bottom: 1em;
   background-color: white;
-  padding: 0.5em 1.4em;
-  border-radius: 1em;
+  padding: 0.6em 1.4em;
+  border-radius: 0.3em;
   /* outline: solid 2px black; */
   z-index: 1000;
   right: 2em;

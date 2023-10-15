@@ -53,7 +53,7 @@
 
       <v-col cols="9" class="map-column">
         <v-row class="fill-height" no-gutters>
-          <v-col cols="6" class="pa-0">
+          <v-col cols="6" class="relative pa-0">
             <VectorsMap
               class="left-map"
               :demandVariables="selectedDemandVariables"
@@ -67,12 +67,14 @@
               @created:map="leftMap = $event"
             >
             </VectorsMap>
-            <div class="overmap font-weight-medium">Demande</div>
+            <v-card-title class="overmap font-weight-medium"
+              >Demande</v-card-title
+            >
             <legend-map class="legend-left" reverse :colors="demandColors" />
           </v-col>
           <v-divider vertical></v-divider>
 
-          <v-col cols="6" class="pa-0">
+          <v-col cols="6" class="relative pa-0">
             <VectorsMap
               class="right-map"
               :demandVariables="selectedDemandVariables"
@@ -86,7 +88,9 @@
               @created:map="rightMap = $event"
             ></VectorsMap>
             <legend-map :colors="supplyColors" />
-            <div class="overmap font-weight-medium">Offre</div>
+            <v-card-title class="overmap font-weight-medium"
+              >Offre</v-card-title
+            >
           </v-col>
         </v-row>
       </v-col>
@@ -209,8 +213,7 @@ const storageDistanceSource = "selectedDistance",
   storageItemDistance = sessionStorage.getItem(storageDistanceSource),
   savedDistance = storageItemDistance
     ? Number(storageItemDistance)
-    : listDistances[0];
-
+    : listDistances[listDistances.length - 1];
 const selectedDistance = ref(savedDistance);
 
 watch(selectedDistance, (newDistance) =>
@@ -257,22 +260,19 @@ watch(
 </script>
 
 <style scoped>
-.overmap {
+.relative {
   position: relative;
-  bottom: 3em;
+}
+.overmap {
+  position: absolute;
+  top: 2.5em;
   padding: 0.6em 2em;
-  border-radius: 1em;
+  border-radius: 0.3em;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1000;
-  background-color: white;
-  color: rgba(var(--v-theme-primary), var(--v-medium-emphasis-opacity));
-  outline: solid 2px black;
+  background-color: rgba(255, 255, 255, 0.95);
   width: fit-content;
-}
-
-.legend-left {
-  right: calc(2em + 41.5vw);
 }
 
 .config-column {

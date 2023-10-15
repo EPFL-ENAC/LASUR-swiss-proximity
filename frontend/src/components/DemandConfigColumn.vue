@@ -27,6 +27,8 @@
           :model-value="yearSelected"
           @update:model-value="emits('update:yearSelected', $event)"
           :items="listYears"
+          hint="Données tirées du modèle voyageur ARE"
+          persistent-hint
       /></v-card-text>
       <v-card-title
         >Seuil de proximité
@@ -43,6 +45,8 @@
           :model-value="distanceSelected"
           @update:model-value="emits('update:distanceSelected', $event)"
           :items="listDistances"
+          hint="Cette distance (en m) correspond à votre seuil de proximité"
+          persistent-hint
       /></v-card-text>
       <v-card-title>Mode de déplacement</v-card-title>
       <v-card-text>
