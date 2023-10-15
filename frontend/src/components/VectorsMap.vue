@@ -49,6 +49,7 @@ import {
   expressionMean,
   geocoderAPI,
   mapBounds,
+  expressionMax,
 } from "@/utils/map";
 
 import { cleanVariableString } from "@/utils/variables";
@@ -176,7 +177,7 @@ const currentExpression = computed(
       "step",
       isDemand.value
         ? expressionMean(props.demandVariables, props.year, props.distance)
-        : expressionMean(props.supplyVariables),
+        : expressionMax(props.supplyVariables),
       // Right now steps colors don't change, I will create a static value for them once the data are normalized
       ...stepsColors(0, isDemand.value ? 1 : 7000, mapColors.value),
     ] as [
