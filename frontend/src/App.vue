@@ -1,14 +1,23 @@
 <template>
   <v-app>
     <v-toolbar flat color="white" app>
-      <v-toolbar-title max-width="300px">SWISS PROXIMITY</v-toolbar-title>
-      <v-tabs class="flex-grow-1 flex-shrink-0 px-10" align-tabs="center" grow>
+      <v-toolbar-title text="SWISS PROXIMITY" />
+      <v-spacer />
+      <v-tabs
+        class="flex-grow-1 flex-shrink-0 px-10 text-grey-darken-3"
+        color="black"
+        hide-slider
+        background="light-grey"
+        selected-class="tab-selected"
+        align-tabs="center"
+        grow
+      >
         <v-tab to="/offre">Offre de proximité</v-tab>
         <v-tab to="/demande">Demande de proximité</v-tab>
         <v-tab to="/comparaison">Comparaison</v-tab>
         <v-tab to="/isochrones">Isochrones</v-tab>
       </v-tabs>
-      <v-spacer></v-spacer>
+      <v-spacer />
       <v-btn @click="openInfos"> Infos </v-btn>
       <v-btn @click="openWelcome"> Welcome </v-btn>
     </v-toolbar>
@@ -50,5 +59,9 @@ const openWelcome = () => {
 <style lang="scss" scoped>
 .v-toolbar__title {
   overflow: unset;
+}
+
+.tab-selected {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 </style>

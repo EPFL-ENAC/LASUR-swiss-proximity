@@ -1,8 +1,16 @@
 <template>
   <v-container class="pa-0 fill-height" fluid>
-    <v-progress-linear :active="loading" indeterminate></v-progress-linear>
+    <div ref="container" class="map fill-height">
+      <v-progress-circular
+        v-if="loading"
+        :size="50"
+        :width="5"
+        class="progress-circular"
+        color="white"
+        indeterminate
+      ></v-progress-circular>
+    </div>
 
-    <div ref="container" class="map fill-height" />
     <v-snackbar
       elevation="0"
       color="transparent"
@@ -327,5 +335,13 @@ onUnmounted(() => {
 .map {
   width: 100%;
   position: relative;
+}
+
+.progress-circular {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
 }
 </style>
