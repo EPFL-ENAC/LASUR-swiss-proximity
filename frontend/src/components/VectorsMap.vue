@@ -1,14 +1,7 @@
 <template>
   <v-container class="pa-0 fill-height" fluid>
     <div ref="container" class="map fill-height">
-      <v-progress-circular
-        v-if="loading"
-        :size="50"
-        :width="5"
-        class="progress-circular"
-        color="white"
-        indeterminate
-      ></v-progress-circular>
+      <loading-circle :loading="loading" />
     </div>
 
     <v-snackbar
@@ -69,6 +62,7 @@ import type {
   SupplyVariable,
   TileParams,
 } from "@/utils/variables";
+import LoadingCircle from "./LoadingCircle.vue";
 
 const loading = ref(true);
 const loadingTilesIDs = ref<Set<number>>(new Set());
@@ -335,13 +329,5 @@ onUnmounted(() => {
 .map {
   width: 100%;
   position: relative;
-}
-
-.progress-circular {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10000;
 }
 </style>

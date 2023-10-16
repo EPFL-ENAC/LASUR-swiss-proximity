@@ -1,8 +1,8 @@
 <template>
   <v-container class="pa-0 fill-height" fluid>
-    <v-progress-linear :active="loading" indeterminate></v-progress-linear>
-
-    <div ref="container" class="map fill-height" />
+    <div ref="container" class="map fill-height">
+      <loading-circle :loading="loading" />
+    </div>
     <v-snackbar
       elevation="0"
       color="transparent"
@@ -59,6 +59,7 @@ import type {
   Polygon,
 } from "geojson";
 import type { AxiosError } from "axios";
+import LoadingCircle from "./LoadingCircle.vue";
 
 const loading = ref(true);
 
