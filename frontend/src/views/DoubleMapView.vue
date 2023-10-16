@@ -84,7 +84,7 @@
               :colors="supplyColors"
               :year="selectedYear"
               :distance="selectedDistance"
-              :has-geocoder-search="false"
+              :has-geocoder-search="true"
               @created:map="rightMap = $event"
             ></VectorsMap>
             <legend-map :colors="supplyColors" />
