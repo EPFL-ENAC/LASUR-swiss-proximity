@@ -38,7 +38,10 @@ import { Map, Popup, Marker } from "maplibre-gl";
 import type {
   ExpressionSpecification,
   LngLatLike,
+  MapDataEvent,
+  MapEventType,
   MapLayerEventType,
+  MapSourceDataEvent,
 } from "maplibre-gl";
 import "@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -60,7 +63,7 @@ import type {
 } from "@/utils/variables";
 
 const loading = ref(true);
-
+const loadingTilesIDs = ref<Set<number>>(new Set());
 const container = ref<HTMLDivElement>();
 
 const popup = ref<Popup>(
@@ -261,6 +264,14 @@ onMounted(() => {
       map.addSource(secureTilesName(tile.name), {
         type: "vector",
         url: tile.url,
+      });
+
+      map.on("sourcedata", (e: MapSourceDataEvent) => {
+        if (e.isSourceLoaded) loading.value = false;
+      });
+
+      map.on("sourcedataloading", (e) => {
+        loading.value = true;
       });
 
       map.addLayer({
