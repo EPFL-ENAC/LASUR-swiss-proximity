@@ -9,47 +9,50 @@ import InfoMarkdown from "@/components/InfoMarkdown.md";
 </script>
 
 <style scoped>
-::v-deep.markdown-body p {
-  padding-bottom: 0.4em;
+.markdown-body :deep(p) {
+  padding-bottom: 0.8em;
 }
 
-::v-deep.markdown-body h3 {
-  padding-top: 0.6em;
-  padding-bottom: 0.4em;
+.markdown-body :deep(h3:not(:first-child)) {
+  padding-top: 1.2em;
 }
 
-::v-deep.markdown-body ul,
-::v-deep.markdown-body ol {
+.markdown-body :deep(h3) {
+  padding-bottom: 0.8em;
+}
+.markdown-body :deep(ul),
+.markdown-body :deep(ol) {
   margin-left: 2em;
   padding-bottom: 0.2em;
 }
 
-::v-deep.markdown-body li {
+.markdown-body :deep(li) {
   padding-bottom: 0.1em;
 }
 
-::v-deep.markdown-body table {
+.markdown-body :deep(table) {
   display: block;
   width: 100%;
   overflow: auto;
+  padding-bottom: 2em;
 }
 
-::v-deep.markdown-body table th {
+.markdown-body :deep(table) th {
   font-weight: 600;
 }
 
-::v-deep.markdown-body table td,
-::v-deep.markdown-body table th {
+.markdown-body :deep(table) td,
+.markdown-body :deep(table) th {
   padding: 6px 13px;
   border: 1px solid #dfe2e5;
 }
 
-::v-deep.markdown-body table tr {
+.markdown-body :deep(table) tr {
   background-color: #fff;
   border-top: 1px solid #c6cbd1;
 }
 
-.markdown-body table tr:nth-child(2n) {
+.markdown-body :deep(table) tr:nth-child(2n) {
   background-color: #f6f8fa;
 }
 </style>
