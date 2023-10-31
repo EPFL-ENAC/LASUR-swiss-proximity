@@ -91,16 +91,21 @@ const emits = defineEmits<{
 const show = ref(true);
 
 const isAllSelected = computed(
-  () => props.variables.find((variable) => variable.id === "All")?.selected
+  () => props.variables.find((variable) => variable.id === "All")?.selected,
 );
 
 const isVariableDisabled = (variable: SupplyVariable) =>
   isAllSelected.value && variable.id !== "All";
 
+watch(isAllSelected, (isAllSelected) => {
+  if (isAllSelected)
+    props.variables.forEach((v) => (v.selected = v.id === "All"));
+});
+
 watch(
   () => props.variables,
   (variables) => {
     emits("update:variables", variables);
-  }
+  },
 );
 </script>

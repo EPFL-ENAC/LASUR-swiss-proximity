@@ -90,24 +90,29 @@ const show = ref(true);
 
 const isAllSelected = computed(
   () =>
-    props.variables.find((variable) => variable.id === "All_modes")?.selected
+    props.variables.find((variable) => variable.id === "All_modes")?.selected,
 );
+
+watch(isAllSelected, (isAllSelected) => {
+  if (isAllSelected)
+    props.variables.forEach((v) => (v.selected = v.id === "All_modes"));
+});
 
 watch(
   () => props.yearSelected,
-  (yearSelected) => emits("update:yearSelected", Number(yearSelected))
+  (yearSelected) => emits("update:yearSelected", Number(yearSelected)),
 );
 
 watch(
   () => props.distanceSelected,
   (distanceSelected) =>
-    emits("update:distanceSelected", Number(distanceSelected))
+    emits("update:distanceSelected", Number(distanceSelected)),
 );
 
 watch(
   () => props.variables,
   (variables) => {
     emits("update:variables", variables);
-  }
+  },
 );
 </script>

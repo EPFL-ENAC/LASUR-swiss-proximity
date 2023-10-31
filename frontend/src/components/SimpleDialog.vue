@@ -1,8 +1,5 @@
 <template>
   <v-dialog v-model="dialog" :style="`width: ${props.width}px`" scrollable>
-    <template #activator="{ on, attrs }">
-      <slot name="activator" :on="on" :attrs="attrs"></slot>
-    </template>
     <v-card>
       <v-card-title v-if="name">{{ name }}</v-card-title>
       <v-card-text>
@@ -10,7 +7,7 @@
         <slot></slot>
       </v-card-text>
       <v-card-actions class="justify-end">
-        <v-btn v-if="buttonText" text @click="dialog = false">
+        <v-btn v-if="buttonText" @click="dialog = false">
           {{ buttonText }}
         </v-btn>
         <v-btn v-else icon @click="dialog = false">
@@ -32,7 +29,7 @@ const props = withDefaults(
     storageKey?: string;
     open: boolean;
   }>(),
-  { width: 1000 }
+  { width: 1000 },
 );
 
 const emits = defineEmits<{
@@ -54,7 +51,7 @@ watch(
   () => props.open,
   (value) => {
     dialog.value = value;
-  }
+  },
 );
 
 watch(dialog, (value) => {

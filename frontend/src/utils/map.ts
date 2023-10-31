@@ -67,7 +67,7 @@ export const scale = 61878;
 export function expressionMean(
   attributes: { id: string; weight?: number; diversity?: number }[],
   year?: number,
-  distance?: number
+  distance?: number,
 ): ExpressionSpecification | number {
   if (attributes.length == 0) return 0;
 
@@ -78,7 +78,7 @@ export function expressionMean(
   // Calculate the sum of the weights
   const sumWeight = attributes.reduce(
     (partialSum, attribute) => partialSum + (attribute.weight ?? 1),
-    0
+    0,
   );
 
   // If there is only one attribute, return an expression that gets the value of the attribute
@@ -105,14 +105,14 @@ export function expressionMean(
 
   // Create an expression that calculates the sum of the weighted values
   const total = values.reduce(
-    (acc, curr) => ["+", acc, curr] as (string | string[])[]
+    (acc, curr) => ["+", acc, curr] as (string | string[])[],
   );
   // Use the total and the sum of the weights to calculate the weighted mean
   return ["/", total, sumWeight] as ExpressionSpecification;
 }
 
 export function expressionMax(
-  attributes: { id: string; weight: number; diversity: number }[]
+  attributes: { id: string; weight: number; diversity: number }[],
 ): ExpressionSpecification | number {
   if (attributes.length == 0) return 0;
 
@@ -130,11 +130,43 @@ export function expressionMax(
             "*",
             ["to-number", ["get", diversity + "_" + id]],
             weight ?? 1,
-          ] as ExpressionSpecification
+          ] as ExpressionSpecification,
       ) as [ExpressionSpecification, ...ExpressionSpecification[]];
 
     return ["max", ...values];
   } else return 0;
+}
+
+export function expressionSum(
+  attributes: { id: string }[],
+  year?: number,
+  distance?: number,
+): ExpressionSpecification | number {
+  if (attributes.length == 0) return 0;
+
+  const yearProxString =
+    year !== undefined && distance !== undefined
+      ? "_" + distance.toString() + "_" + year.toString()
+      : "";
+
+  // If there is only one attribute, return an expression that gets the value of the attribute
+  if (attributes.length == 1)
+    return [
+      "to-number",
+      ["get", attributes[0].id + yearProxString],
+    ] as ExpressionSpecification;
+
+  const values = attributes.map(({ id }) => [
+    "to-number",
+    ["get", id + yearProxString],
+  ]);
+
+  // Create an expression that calculates the sum of the weighted values
+  const total = values.reduce(
+    (acc, curr) => ["+", acc, curr] as (string | string[])[],
+  );
+
+  return total as ExpressionSpecification;
 }
 
 // This function returns an array of colors and values to be used in the map legend. It takes the minimum and maximum values of the variable, and an array of colors.

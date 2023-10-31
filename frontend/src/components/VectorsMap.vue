@@ -50,7 +50,7 @@ import MaplibreGeocoder from "@maplibre/maplibre-gl-geocoder";
 
 import {
   stepsColors,
-  expressionMean,
+  expressionSum,
   geocoderAPI,
   mapBounds,
   expressionMax,
@@ -72,7 +72,7 @@ const popup = ref<Popup>(
   new Popup({
     closeButton: false,
     maxWidth: "800px",
-  })
+  }),
 );
 
 const error = ref(false);
@@ -91,7 +91,7 @@ const props = withDefaults(
     year: number;
     distance: number;
   }>(),
-  { hasGeocoderSearch: true }
+  { hasGeocoderSearch: true },
 );
 
 const isDemand = computed(() => props.selectedTilesName.includes("demand"));
@@ -117,16 +117,16 @@ function onMove(e: MapLayerEventType["mousemove"]) {
 
   if (isDemand.value) {
     const variables: DemandVariable[] = props.demandVariables;
+
     const proxyYearDistance = isDemand.value
       ? "_" + props.distance + "_" + props.year
       : "";
 
-    const sumWeight = variables.length,
-      sumVariables = variables.reduce(
-        (partialSum, attribute) =>
-          partialSum + (properties[attribute.id + proxyYearDistance] || 0),
-        0
-      );
+    const sumVariables = variables.reduce(
+      (partialSum, attribute) =>
+        partialSum + (properties[attribute.id + proxyYearDistance] || 0),
+      0,
+    );
     // POPUP DEMANDE
     popup.value
       .setLngLat(e.lngLat)
@@ -135,12 +135,11 @@ function onMove(e: MapLayerEventType["mousemove"]) {
       </br>
       <div>
         Part des déplacements < ${props.distance} mètres : <strong>${~~(
-          (100 * sumVariables) /
-          sumWeight
+          100 * sumVariables
         )}%</strong> (mode.s: ${variables.map(({ name }) => name).join(", ")})
 
       </div>
-     `
+     `,
       )
       .addTo(map);
   } else {
@@ -162,9 +161,9 @@ function onMove(e: MapLayerEventType["mousemove"]) {
             properties[diversity + "_" + id] +
             "</strong> mètres " +
             ` (poids= ${weight})` +
-            "</div>"
+            "</div>",
         )
-        .join("\n")}`
+        .join("\n")}`,
       )
       .addTo(map);
   }
@@ -181,7 +180,7 @@ const currentExpression = computed(
     [
       "step",
       isDemand.value
-        ? expressionMean(props.demandVariables, props.year, props.distance)
+        ? expressionSum(props.demandVariables, props.year, props.distance)
         : expressionMax(props.supplyVariables),
       // Right now steps colors don't change, I will create a static value for them once the data are normalized
       ...stepsColors(0, isDemand.value ? 1 : 7000, mapColors.value),
@@ -189,8 +188,8 @@ const currentExpression = computed(
       "step",
       number | ExpressionSpecification,
       string,
-      ...ExpressionSpecification[]
-    ]
+      ...ExpressionSpecification[],
+    ],
 );
 
 watch(
@@ -210,10 +209,10 @@ watch(
       map.setPaintProperty(
         "layer-" + secureTilesName(name),
         "fill-color",
-        currentExpression.value
+        currentExpression.value,
       );
     });
-  }
+  },
 );
 
 watch(
@@ -226,10 +225,10 @@ watch(
       map.setLayoutProperty(
         "layer-" + secureTilesName(name),
         "visibility",
-        name === newSelectedTileName ? "visible" : "none"
+        name === newSelectedTileName ? "visible" : "none",
       );
     });
-  }
+  },
 );
 
 function secureTilesName(name: string) {
@@ -256,7 +255,6 @@ onMounted(() => {
 
   map.on("load", function () {
     loading.value = false;
-
     if (map == null) return;
 
     // We add all the vector tiles sources to the map (polygons & h3)
@@ -295,23 +293,24 @@ onMounted(() => {
         .on("mousemove", "layer-" + secureTilesName(tile.name), onMove)
         .on("mouseleave", "layer-" + secureTilesName(tile.name), onLeave);
     });
-
-    if (props.hasGeocoderSearch) {
-      // This control is used to search for a location
-      map.addControl(
-        new MaplibreGeocoder(geocoderAPI, {
-          showResultsWhileTyping: true,
-          showResultMarkers: false,
-          marker: true,
-          maplibregl: { Marker, Popup },
-        }).on("result", onGeocodingSearchResult)
-      );
-    }
-    map.on("error", (e) => {
-      // Hide those annoying 404/403 errors
-      if (e && e.error.message !== "Failed to fetch") console.error(e);
-    });
   });
+
+  if (props.hasGeocoderSearch) {
+    // This control is used to search for a location
+    map.addControl(
+      new MaplibreGeocoder(geocoderAPI, {
+        showResultsWhileTyping: true,
+        showResultMarkers: false,
+        marker: true,
+        maplibregl: { Marker, Popup },
+      }).on("result", onGeocodingSearchResult),
+    );
+  }
+  map.on("error", (e) => {
+    // Hide those annoying 404/403 errors
+    if (e && e.error.message !== "Failed to fetch") console.error(e);
+  });
+
   emit("created:map", map);
 });
 
