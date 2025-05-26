@@ -26,10 +26,16 @@ $(OUTPUT_DIR)/%_h3.pmtiles: $(GEOJSON_DIR)/%_h3_6.pmtiles $(GEOJSON_DIR)/%_h3_7.
 	tile-join --force -o $@ $^ -pk
 
 # Polygon tiles
-tiles-polygon: $(OUTPUT_DIR)/demand_polygon.pmtiles
+demand-tiles-polygon: $(OUTPUT_DIR)/demand_polygon.pmtiles
 
 $(OUTPUT_DIR)/demand_polygon.pmtiles: $(GEOJSON_DIR)/demand_polygon.geojson
 	tippecanoe -zg -Z0 -o $@ --layer=demand_polygon $(TIPPECANOE_BASE) -pk $<
+
+# Polygon tiles
+supply-tiles-polygon: $(OUTPUT_DIR)/supply_polygon.pmtiles
+
+$(OUTPUT_DIR)/supply_polygon.pmtiles: $(GEOJSON_DIR)/supply_polygon.geojson
+	tippecanoe -zg -Z0 -o $@ --layer=supply_polygon $(TIPPECANOE_BASE) -pk $<
 
 # Clean
 clean:
@@ -39,4 +45,4 @@ clean:
 push-cdn: all
 	s3cmd put --recursive --acl-public --guess-mime-type $(OUTPUT_DIR) s3://${ENACIT_CDN_BUCKET}/lasur-swiss-proximity/
 
-.PHONY: all tiles-polygon clean push-cdn
+.PHONY: all demand-tiles-polygon supply-tiles-polygon clean push-cdn

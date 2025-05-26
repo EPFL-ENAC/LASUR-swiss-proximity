@@ -291,29 +291,32 @@ with open(os.path.join("geojson", "demand_polygon.geojson"), "w") as f:
 # %%
 # load the demand data
 df_supply_polygon = pd.read_pickle(path_supply_polygon, compression="gzip")
+df_supply_polygon.set_index("taz_id", inplace=True)
+
+# %%
 df_supply_polygon
 
 # %%
-# Add the verkehrszonen polygons dataframe to the demand dataframe
-print(len(df_supply_polygon))
-
-df_supply_with_geom = df_supply_polygon.join(df_verkehrszonen, on="taz_id", how="left")
-print(len(df_supply_with_geom))
-
-# select where taz_id is null
-df_supply_with_geom
+df_combined = df_supply_polygon.pivot_table(
+    index="taz_id",
+    columns=["poi_kind"],
+    values=["1", "2", "3", "4", "5"],
+    aggfunc="first",  # Use 'first' since there should be only one value per combination
+)
+df_combined.columns = [f"{col[0]}_{col[1]}" for col in df_combined.columns]
+df_combined["Agglo"] = df_supply_polygon.groupby("taz_id")["agglo"].first()
 
 
 # %%
-gdf = gpd.GeoDataFrame(df_supply_with_geom, geometry="geometry")
-conn_string = (
-    f"postgresql://postgres:{postgresql_password}@enacit4r-tiles.epfl.ch:25432/db"
+
+df_supply_polygon = df_combined.merge(
+    df_verkehrszonen[["geometry"]], left_on="taz_id", right_index=True, how="left"
 )
-engine = create_engine(conn_string)
-gdf.to_postgis(
-    name="supply_polygon_2",
-    schema="swiss_mobility",
-    con=engine,
-    if_exists="replace",
-    index=False,
-)
+
+
+# %%
+gdf = gpd.GeoDataFrame(df_supply_polygon)
+geojson_str = gdf.to_json(drop_id=True)
+
+with open(os.path.join("geojson", "supply_polygon.geojson"), "w") as f:
+    f.write(geojson_str)

@@ -47,8 +47,8 @@ export const listTilesParams: TileParams[] = [
     url: "pmtiles://https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/output/supply_h3.pmtiles",
   },
   {
-    name: "supply_polygon_2",
-    url: "https://enacit4r-tiles.epfl.ch/supply_polygon_2",
+    name: "supply_polygon",
+    url: "pmtiles://https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/output/supply_polygon.pmtiles",
   },
 ];
 
