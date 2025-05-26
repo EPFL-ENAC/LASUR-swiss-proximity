@@ -35,7 +35,7 @@ import {
   onUnmounted,
   computed,
 } from "vue";
-import { Map, Popup, Marker } from "maplibre-gl";
+import { Map, Popup, Marker, addProtocol } from "maplibre-gl";
 import type {
   ExpressionSpecification,
   LngLatLike,
@@ -44,6 +44,8 @@ import type {
   MapLayerEventType,
   MapSourceDataEvent,
 } from "maplibre-gl";
+import { Protocol } from "pmtiles";
+
 import "@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 import MaplibreGeocoder from "@maplibre/maplibre-gl-geocoder";
@@ -75,6 +77,9 @@ const popup = ref<Popup>(
   }),
 );
 
+const protocol = new Protocol();
+addProtocol("pmtiles", protocol.tile);
+
 const error = ref(false);
 const errorMessage = ref<string | null>(null);
 
@@ -97,6 +102,14 @@ const props = withDefaults(
 const isDemand = computed(() => props.selectedTilesName.includes("demand"));
 
 const mapColors = computed(() => props.colors.map((d) => d.color));
+
+watch(
+  () => props.selectedTilesName,
+  (newSelectedTileName) => {
+    console.debug("Selected tile changed to: ", newSelectedTileName);
+  },
+  { immediate: true },
+);
 
 const emit = defineEmits<{
   (event: "created:map", value: Map): void;
@@ -131,7 +144,7 @@ function onMove(e: MapLayerEventType["mousemove"]) {
     popup.value
       .setLngLat(e.lngLat)
       .setHTML(
-        `<h3>${properties["Agglo" + proxyYearDistance]}</h3>
+        `<h3>${properties["Agglo"]}</h3>
       </br>
       <div>
         Part des déplacements < ${props.distance} mètres : <strong>${~~(
@@ -205,7 +218,7 @@ watch(
 
     props.listTilesParams.forEach(({ name }) => {
       if (map === null) return;
-
+      console.debug("Updating layer: ", "layer-" + secureTilesName(name));
       map.setPaintProperty(
         "layer-" + secureTilesName(name),
         "fill-color",

@@ -34,8 +34,8 @@ export type TileParams = {
 
 export const listTilesParams: TileParams[] = [
   {
-    name: "demand_h3_2",
-    url: "https://enacit4r-tiles.epfl.ch/demand_h3_2",
+    name: "demand_h3",
+    url: "pmtiles://https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/output/demand_h3.pmtiles",
   },
   {
     name: "demand_polygon_2",

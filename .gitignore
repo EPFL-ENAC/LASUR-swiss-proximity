@@ -8,6 +8,7 @@ tiles/
 data_processing/output/
 data_processing/source_data_new/
 data_processing/source_data/
+data_processing/geojson/
 
 /venv/
 .env
