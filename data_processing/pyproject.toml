@@ -27,9 +27,9 @@ dependencies = [
 	"jupyterlab",
 	"h3pandas",
 	"sqlalchemy",
-	"psycopg2",
-	"geoalchemy2"
-
+	"geoalchemy2",
+	"psycopg2-binary>=2.9.10",
+	"pydeck>=0.9.1",
 ]
 dynamic = ["version"]
 

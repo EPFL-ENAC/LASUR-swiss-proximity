@@ -5,6 +5,9 @@ leaflet/*
 tiles/
 .env
 
+data_processing/output/
+data_processing/source_data_new/
+data_processing/source_data/
 
 /venv/
 .env
