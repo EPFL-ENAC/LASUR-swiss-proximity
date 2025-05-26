@@ -161,7 +161,7 @@ function onMove(e: MapLayerEventType["mousemove"]) {
     popup.value
       .setLngLat(e.lngLat)
       .setHTML(
-        `<h3>${properties["agglo_All"]}</h3>
+        `<h3>${properties["Agglo"]}</h3>
       </br>
       ${variables
         .map(

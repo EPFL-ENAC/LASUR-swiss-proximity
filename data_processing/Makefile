@@ -1,84 +1,42 @@
-
-
-# Directory variables
+# Directories
 OUTPUT_DIR = output
 GEOJSON_DIR = geojson
 
-# Input GeoJSON files
-GEOJSON_6 = $(GEOJSON_DIR)/demand_h3_level_6.geojson
-GEOJSON_7 = $(GEOJSON_DIR)/demand_h3_level_7.geojson
-GEOJSON_8 = $(GEOJSON_DIR)/demand_h3_level_8.geojson
-GEOJSON_9 = $(GEOJSON_DIR)/demand_h3_level_9.geojson
-
-# Output PMTiles files
-PMTILES_6 = $(GEOJSON_DIR)/demand_h3_6.pmtiles
-PMTILES_7 = $(GEOJSON_DIR)/demand_h3_7.pmtiles
-PMTILES_8 = $(GEOJSON_DIR)/demand_h3_8.pmtiles
-PMTILES_9 = $(GEOJSON_DIR)/demand_h3_9.pmtiles
-PMTILES_COMPLETE = $(OUTPUT_DIR)/demand_h3.pmtiles
+# Common tippecanoe options
+TIPPECANOE_BASE = --coalesce-densest-as-needed --force
 
 # Default target
-all: $(PMTILES_COMPLETE)
+all: $(OUTPUT_DIR)/demand_h3.pmtiles $(OUTPUT_DIR)/supply_h3.pmtiles
 
-# Generate level 6 tiles (zoom 0-5)
-$(PMTILES_6): $(GEOJSON_6)
-	tippecanoe -z5 -Z0 -o $@ \
-		--layer=demand_h3 \
-		--coalesce-densest-as-needed \
-		--force \
-		--no-tiny-polygon-reduction \
-		$<
+# Pattern rule for H3 tiles
+$(GEOJSON_DIR)/%_h3_6.pmtiles: $(GEOJSON_DIR)/%_h3_level_6.geojson
+	tippecanoe -z5 -Z0 -o $@ --layer=$*_h3 $(TIPPECANOE_BASE) --no-tiny-polygon-reduction $<
 
-# Generate level 7 tiles (zoom 6-7)
-$(PMTILES_7): $(GEOJSON_7)
-	tippecanoe -z7 -Z6 -o $@ \
-		--layer=demand_h3 \
-		--coalesce-densest-as-needed \
-		--force \
-		-pk \
-		$<
+$(GEOJSON_DIR)/%_h3_7.pmtiles: $(GEOJSON_DIR)/%_h3_level_7.geojson
+	tippecanoe -z7 -Z6 -o $@ --layer=$*_h3 $(TIPPECANOE_BASE) -pk $<
 
-# Generate level 8 tiles (zoom 8-9)
-$(PMTILES_8): $(GEOJSON_8)
-	tippecanoe -z9 -Z8 -o $@ \
-		--layer=demand_h3 \
-		--coalesce-densest-as-needed \
-		--force \
-		-pk \
-		$<
+$(GEOJSON_DIR)/%_h3_8.pmtiles: $(GEOJSON_DIR)/%_h3_level_8.geojson
+	tippecanoe -z9 -Z8 -o $@ --layer=$*_h3 $(TIPPECANOE_BASE) -pk $<
 
-# Generate level 9 tiles (zoom 10+, auto-detect max zoom)
-$(PMTILES_9): $(GEOJSON_9)
-	tippecanoe -zg -Z10 -P -o $@ \
-		--layer=demand_h3 \
-		--coalesce-densest-as-needed \
-		--force \
-		-pk \
-		$<
+$(GEOJSON_DIR)/%_h3_9.pmtiles: $(GEOJSON_DIR)/%_h3_level_9.geojson
+	tippecanoe -z10 -Z10 -P -o $@ --layer=$*_h3 $(TIPPECANOE_BASE) -pk $<
 
-# Combine all tiles into final PMTiles file
-$(PMTILES_COMPLETE): $(PMTILES_6) $(PMTILES_7) $(PMTILES_8) $(PMTILES_9)
-	tile-join --force -o $@ \
-		$(PMTILES_6) \
-		$(PMTILES_7) \
-		$(PMTILES_8) \
-		$(PMTILES_9) \
-		-pk
+# Combine tiles
+$(OUTPUT_DIR)/%_h3.pmtiles: $(GEOJSON_DIR)/%_h3_6.pmtiles $(GEOJSON_DIR)/%_h3_7.pmtiles $(GEOJSON_DIR)/%_h3_8.pmtiles $(GEOJSON_DIR)/%_h3_9.pmtiles
+	tile-join --force -o $@ $^ -pk
 
-# Individual targets
-tiles-6: $(PMTILES_6)
-tiles-7: $(PMTILES_7)
-tiles-8: $(PMTILES_8)
-tiles-9: $(PMTILES_9)
+# Polygon tiles
+tiles-polygon: $(OUTPUT_DIR)/demand_polygon.pmtiles
 
-# Clean generated tiles
+$(OUTPUT_DIR)/demand_polygon.pmtiles: $(GEOJSON_DIR)/demand_polygon.geojson
+	tippecanoe -zg -Z0 -o $@ --layer=demand_polygon $(TIPPECANOE_BASE) -pk $<
+
+# Clean
 clean:
-	rm -f $(PMTILES_6) $(PMTILES_7) $(PMTILES_8) $(PMTILES_9) $(PMTILES_COMPLETE)
+	rm -f $(GEOJSON_DIR)/*_h3_*.pmtiles $(OUTPUT_DIR)/*.pmtiles
 
-# Force rebuild
-rebuild: clean all
+# Push to CDN
+push-cdn: all
+	s3cmd put --recursive --acl-public --guess-mime-type $(OUTPUT_DIR) s3://${ENACIT_CDN_BUCKET}/lasur-swiss-proximity/
 
-push-cdn:
-	s3cmd put --recursive --acl-public --guess-mime-type output s3://${ENACIT_CDN_BUCKET}/lasur-swiss-proximity/
-
-.PHONY: all tiles-6 tiles-7 tiles-8 tiles-9 clean rebuild push-cdn
+.PHONY: all tiles-polygon clean push-cdn

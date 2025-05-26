@@ -38,13 +38,13 @@ export const listTilesParams: TileParams[] = [
     url: "pmtiles://https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/output/demand_h3.pmtiles",
   },
   {
-    name: "demand_polygon_2",
-    url: "https://enacit4r-tiles.epfl.ch/demand_polygon_2",
+    name: "demand_polygon",
+    url: "pmtiles://https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/output/demand_polygon.pmtiles",
   },
 
   {
-    name: "supply_h3_2",
-    url: "https://enacit4r-tiles.epfl.ch/supply_h3_2",
+    name: "supply_h3",
+    url: "pmtiles://https://enacit4r-cdn.epfl.ch/lasur-swiss-proximity/output/supply_h3.pmtiles",
   },
   {
     name: "supply_polygon_2",
