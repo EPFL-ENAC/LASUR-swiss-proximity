@@ -19,7 +19,7 @@ export default createVuetify({
     defaultSet: "mdi",
     aliases,
     sets: {
-      mdi,
+      mdi: mdi as any,
     },
   },
   theme: {

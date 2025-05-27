@@ -78,7 +78,7 @@ const geocoder = new MaplibreGeocoder(geocoderAPI, {
 const popup = ref<Popup>(
   new Popup({
     closeButton: false,
-  })
+  }),
 );
 
 const center: LngLatLike = [7.95, 46.74];
@@ -107,7 +107,7 @@ function onMove(e: MapLayerEventType["mousemove"]) {
     .setHTML(
       `<h3>${properties.stop_name}</h3>
       <p>${properties.description}</p>
-      </br>`
+      </br>`,
     )
     .addTo(map);
 }
@@ -122,7 +122,7 @@ watch(
   () => props.selectedTransportMode,
   () => {
     fetchIsochrone(isochroneMarker.getLngLat());
-  }
+  },
 );
 
 type SourceNewAPI = {
@@ -140,7 +140,7 @@ function fetchIsochrone(location: LngLatLike) {
   getIsochrone(
     LngLat.convert(location).toArray() as [number, number],
     props.selectedTransportMode,
-    [15, 20, 25].map((minutes) => minutes * 60)
+    [15, 20, 25].map((minutes) => minutes * 60),
   )
     .then((data: Feature<Polygon, GeoJsonProperties>[]) => {
       if (map === null) return;
@@ -181,7 +181,11 @@ onMounted(() => {
 
     map.addSource("isochrone", {
       type: "geojson",
-      data: { type: "Feature", geometry: { type: "Polygon", coordinates: [] } },
+      data: {
+        type: "Feature",
+        geometry: { type: "Polygon", coordinates: [] },
+        properties: {},
+      },
     });
 
     // Add layer for isochrone feature
@@ -198,7 +202,7 @@ onMounted(() => {
           ...stepsColors(
             15 * 60,
             25 * 60,
-            isochroneColors.map((d) => d.color)
+            isochroneColors.map((d) => d.color),
           ),
         ],
         "fill-opacity": 0.5,
