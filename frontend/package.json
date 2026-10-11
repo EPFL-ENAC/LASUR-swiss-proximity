@@ -22,7 +22,7 @@
     "pmtiles": "^4.3.0",
     "roboto-fontface": "*",
     "unplugin-vue-markdown": "^0.24.3",
-    "vue": "^3.2.13",
+    "vue": "^3.5.43",
     "vue-router": "^4.0.0",
     "vuetify": "^3.3.20",
     "webfontloader": "^1.0.0"
